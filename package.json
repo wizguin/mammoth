@@ -1,0 +1,28 @@
+{
+    "name": "vanilla",
+    "version": "1.0.0-beta",
+    "description": "Pre-CPIP Club Penguin server emulator",
+    "scripts": {
+        "dev": "tsx watch --clear-screen=false ./src/World.ts Blizzard",
+        "build": "rimraf ./dist && tsc",
+        "start": "node ./dist/World.js",
+        "eslint": "eslint ./src --fix"
+    },
+    "author": "wizguin",
+    "license": "MIT",
+    "devDependencies": {
+        "@prisma/client": "^4.15.0",
+        "@types/elementtree": "^0.1.1",
+        "@types/node": "^20.2.5",
+        "@typescript-eslint/eslint-plugin": "^5.59.7",
+        "@typescript-eslint/parser": "^5.59.7",
+        "elementtree": "^0.1.7",
+        "eslint": "^8.41.0",
+        "eslint-plugin-import": "^2.27.5",
+        "mysql2": "^3.3.3",
+        "prisma": "^4.15.0",
+        "rimraf": "^5.0.1",
+        "tsx": "^3.12.7",
+        "typescript": "^5.0.4"
+    }
+}
