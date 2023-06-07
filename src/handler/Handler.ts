@@ -66,11 +66,14 @@ export default class Handler {
     }
 
     handleXt(data: string, user: User) {
-        console.log('handle xt', data)
-    }
+        const parsed = parseXt(data)
 
-    error(error: Error) {
-        console.error(error)
+        if (!parsed) {
+            Logger.warn(`Invalid XT data: ${data}`)
+            return
+        }
+
+        this.events.emit(parsed.action, parsed.args, user)
     }
 
 }
