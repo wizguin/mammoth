@@ -23,6 +23,7 @@
         "prisma": "^4.15.0",
         "rimraf": "^5.0.1",
         "tsx": "^3.12.7",
-        "typescript": "^5.0.4"
+        "typescript": "^5.0.4",
+        "winston": "^3.9.0"
     }
 }
