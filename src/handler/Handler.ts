@@ -1,10 +1,12 @@
 import Delimiter from './packet/Delimiter'
-import { parseXml, parseXt, makeXt } from './packet/Packet'
+import Logger from '@Logger'
+import { parseXml, parseXt } from './packet/Packet'
 import PluginLoader from '../plugin/PluginLoader'
-import type User from '../objects/user/User'
-import type World from '../World'
 
 import EventEmitter from 'events'
+
+import type User from '@objects/user/User'
+import type World from '../World'
 
 
 export default class Handler {

@@ -1,3 +1,5 @@
+import Logger from '../logger/Logger'
+
 import { PrismaClient } from '@prisma/client'
 
 

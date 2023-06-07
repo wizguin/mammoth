@@ -1,9 +1,11 @@
-import type EventEmitter from 'events'
-import type Handler from '../handler/Handler'
-import BasePlugin from './BasePlugin'
+import Logger from '@Logger'
 
 import { readdir } from 'fs/promises'
 import { join, parse } from 'path'
+
+import type BasePlugin from './BasePlugin'
+import type EventEmitter from 'events'
+import type Handler from '../handler/Handler'
 
 
 export default class PluginLoader {

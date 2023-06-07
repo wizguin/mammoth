@@ -1,5 +1,5 @@
 import type Handler from '../handler/Handler'
-import type User from '../objects/user/User'
+import type User from '@objects/user/User'
 
 
 export default class BasePlugin {

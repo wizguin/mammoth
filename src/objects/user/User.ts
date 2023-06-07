@@ -1,7 +1,9 @@
 import Database from '@Database'
 import Delimiter from '../../handler/packet/Delimiter'
+import Logger from '@Logger'
+import { makeXt } from '../../handler/packet/Packet'
 
-import type { User as PrismaUser } from '@prisma/client'
+import type { Prisma, User as PrismaUser } from '@prisma/client'
 import type { Socket } from 'net'
 
 

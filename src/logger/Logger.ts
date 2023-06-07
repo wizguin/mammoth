@@ -1,8 +1,8 @@
 import { logLevel } from '@config'
-import { addColors, createLogger, transports } from 'winston'
-
 import { defaultFormat, formatConsole, formatFile } from './LoggerFormats'
 import { colors, CustomLogger, levels } from './LoggerLevels'
+
+import { addColors, createLogger, transports } from 'winston'
 
 
 const id = process.argv[2]
