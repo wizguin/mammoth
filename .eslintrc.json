@@ -8,7 +8,6 @@
     ],
     "parser": "@typescript-eslint/parser",
     "plugins": [
-        "import",
         "@typescript-eslint"
     ],
     "rules": {
