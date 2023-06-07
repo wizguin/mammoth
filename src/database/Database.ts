@@ -15,10 +15,10 @@ class Database extends PrismaClient {
         try {
             await this.$queryRaw`SELECT 1`
 
-            console.log('Sucessfully connected to database')
+            Logger.success('Sucessfully connected to database')
 
         } catch (error) {
-            console.log(`${error}`)
+            if (error instanceof Error) Logger.error(error.toString())
         }
     }
 

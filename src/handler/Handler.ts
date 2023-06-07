@@ -24,21 +24,21 @@ export default class Handler {
         this.events = new EventEmitter({ captureRejections: true })
         this.plugins = new PluginLoader(this)
 
-        this.events.on('error', (error) => this.error(error))
+        this.events.on('error', (error) => Logger.error(error))
     }
 
     handle(data: string, user: User) {
         try {
             data = data.split(Delimiter)[0]
 
-            console.log(`Received data: ${data}`)
+            Logger.info(`Received: ${data}`)
 
             if (data.startsWith('<')) this.handleXml(data, user)
 
             if (data.startsWith('%')) this.handleXt(data, user)
 
         } catch (error) {
-            if (error instanceof Error) this.error(error)
+            if (error instanceof Error) Logger.error(error.stack)
         }
     }
 
@@ -46,7 +46,7 @@ export default class Handler {
         const parsed = parseXml(data)
 
         if (!parsed) {
-            this.error(new Error('Invalid XML data'))
+            Logger.warn(`Invalid XML data: ${data}`)
             return
         }
 

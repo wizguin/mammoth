@@ -42,7 +42,8 @@ export default class User implements PrismaUser {
     }
 
     write(data: string) {
-        console.log('sending', data)
+        Logger.debug(`Sending: ${data}`)
+
         this.socket.write(`${data}${Delimiter}`)
     }
 

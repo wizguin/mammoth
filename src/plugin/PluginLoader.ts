@@ -28,7 +28,7 @@ export default class PluginLoader {
 
         await Promise.all(files.map(file => this.loadPlugin(file)))
 
-        console.log(`Loaded ${Object.keys(this.plugins).length} plugins`)
+        Logger.success(`Loaded ${Object.keys(this.plugins).length} plugins`)
     }
 
     async loadPlugin(file: string) {
