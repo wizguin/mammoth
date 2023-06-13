@@ -30,6 +30,7 @@ export default class User implements PrismaUser {
     color!: number
     photo!: number
     flag!: number
+    inventory!: { itemId: number }[]
 
     constructor(socket: Socket) {
         this.socket = socket
