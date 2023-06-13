@@ -4,7 +4,7 @@
     "description": "Pre-CPIP Club Penguin server emulator",
     "scripts": {
         "dev": "tsx watch --clear-screen=false ./src/World.ts Blizzard",
-        "build": "rimraf ./dist && tsc",
+        "build": "rimraf ./dist && tsc && tsc-alias",
         "start": "node ./dist/src/World.js Blizzard",
         "eslint": "eslint ./src --fix"
     },
@@ -21,6 +21,7 @@
         "mysql2": "^3.3.3",
         "prisma": "^4.15.0",
         "rimraf": "^5.0.1",
+        "tsc-alias": "^1.8.6",
         "tsx": "^3.12.7",
         "typescript": "^5.0.4",
         "winston": "^3.9.0"
