@@ -6,7 +6,7 @@ export default class BasePlugin {
 
     handler: Handler
     users: User[]
-    events!: Record<string, (args: any[], user: User) => void>
+    events!: Record<string, (args: any, user: User) => void>
 
     constructor(handler: Handler) {
         this.handler = handler
