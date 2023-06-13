@@ -1,0 +1,13 @@
+{
+    "allowedVersions": [
+        "097",
+        "130"
+    ],
+    "logLevel": "debug",
+    "worlds": {
+        "Blizzard": {
+            "port": 6114,
+            "maxUsers": 300
+        }
+    }
+}
