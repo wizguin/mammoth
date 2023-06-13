@@ -68,4 +68,13 @@ export default class User implements PrismaUser {
         return true
     }
 
+    async update(data: Prisma.UserUpdateInput) {
+        await Database.user.update({
+            where: {
+                id: this.id
+            },
+            data: data
+        })
+    }
+
 }
