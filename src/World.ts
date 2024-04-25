@@ -1,9 +1,9 @@
-import config from '@config'
-import IWorlds from './config/IWorlds'
+import './utils/Setup'
 
 import Handler from './handler/Handler'
 import Logger from '@Logger'
 import User from '@objects/user/User'
+import { worlds } from '@Config'
 
 import { Server, Socket } from 'net'
 
@@ -49,7 +49,6 @@ export default class World extends Server {
 
 }
 
-const worlds: IWorlds = config.worlds
 const id = process.argv[2]
 
 if (id in worlds) new World()

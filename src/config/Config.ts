@@ -1,8 +1,12 @@
+import Logger from '@Logger'
+import { levels } from '../logger/LoggerLevels'
 import loadJson from '../utils/LoadJson'
+
+import { Assert } from 'ts-runtime-checks'
 
 interface Config {
     allowedVersions: string[],
-    logLevel: string,
+    logLevel: keyof typeof levels,
     worlds: Worlds
 }
 
@@ -13,8 +17,9 @@ interface Worlds {
     }
 }
 
-const config: Config = loadJson('config/config')
+const config: Config = loadJson('config/config') as Assert<Config>
+
+Logger.level = config.logLevel
 
 export const allowedVersions = config.allowedVersions
-export const logLevel = config.logLevel
 export const worlds = config.worlds

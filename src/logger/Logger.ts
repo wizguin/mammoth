@@ -1,4 +1,3 @@
-import { logLevel } from '@config'
 import { defaultFormat, formatConsole, formatFile } from './LoggerFormats'
 import { colors, CustomLogger, levels } from './LoggerLevels'
 
@@ -8,7 +7,7 @@ const id = process.argv[2]
 
 const options = {
     levels: levels,
-    level: logLevel,
+    level: 'info',
     format: defaultFormat,
 
     transports: [
