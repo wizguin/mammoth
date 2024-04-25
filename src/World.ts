@@ -38,7 +38,10 @@ export default class World extends Server {
         this.users.push(user)
 
         socket.setEncoding('utf8')
+
         socket.on('data', (data: string) => this.onData(data, user))
+        socket.on('end', () => Logger.debug('end'))
+        socket.on('error', error => Logger.error(error))
     }
 
     onData(data: string, user: User) {
