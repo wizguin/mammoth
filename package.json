@@ -3,7 +3,7 @@
     "version": "1.0.0-beta",
     "description": "Pre-CPIP Club Penguin server emulator",
     "scripts": {
-        "dev": "tsnd --watch src -r tsconfig-paths/register src/World.ts Blizzard",
+        "dev": "tsnd --watch src,config,data -r tsconfig-paths/register src/World.ts Blizzard",
         "build": "rimraf dist && tsc && tsc-alias",
         "start": "node dist/World.js Blizzard",
         "eslint": "eslint src --fix",
