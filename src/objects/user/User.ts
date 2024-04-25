@@ -59,6 +59,18 @@ export default class User implements Partial<PrismaUser> {
         this.socket.write(`${data}${Delimiter}`)
     }
 
+    joinRoom(room: Room, x = 0, y = 0) {
+        if (!room) return
+
+        if (this.room) this.room.remove(this)
+
+        this.x = x
+        this.y = y
+        this.room = room
+
+        this.room.add(this)
+    }
+
     async load(username: string) {
         const user = await Database.user.findFirst({
             where: {
