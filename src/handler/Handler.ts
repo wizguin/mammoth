@@ -1,7 +1,9 @@
+import * as Data from '../data/Data'
 import Delimiter from './packet/Delimiter'
 import Logger from '@Logger'
 import { parseXml, parseXt } from './packet/Packet'
 import PluginLoader from '../plugin/PluginLoader'
+import Room from '@objects/room/Room'
 
 import EventEmitter from 'events'
 
@@ -11,6 +13,7 @@ import type World from '../World'
 export default class Handler {
 
     users: User[]
+    rooms: Record<number, Room>
     policy: string
     events: EventEmitter
     plugins: PluginLoader
@@ -18,12 +21,24 @@ export default class Handler {
     constructor(world: World) {
         this.users = world.users
 
+        this.rooms = this.setRooms()
+
         this.policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
 
         this.events = new EventEmitter({ captureRejections: true })
         this.plugins = new PluginLoader(this)
 
-        this.events.on('error', (error) => Logger.error(error))
+        this.events.on('error', error => Logger.error(error))
+    }
+
+    setRooms() {
+        const rooms: Record<number, Room> = {}
+
+        for (const room of Data.rooms) {
+            rooms[room.id] = new Room(room)
+        }
+
+        return rooms
     }
 
     handle(data: string, user: User) {
