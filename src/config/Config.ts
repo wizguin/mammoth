@@ -5,7 +5,7 @@ import loadJson from '../utils/LoadJson'
 import { Assert } from 'ts-runtime-checks'
 
 interface Config {
-    allowedVersions: ('097' | '130')[],
+    allowedVersions: string[],
     logLevel: keyof typeof levels,
     worlds: Worlds
 }
