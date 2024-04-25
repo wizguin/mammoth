@@ -1,9 +1,9 @@
 import './utils/Setup'
+import { worlds } from '@Config'
 
 import Handler from './handler/Handler'
 import Logger from '@Logger'
 import User from '@objects/user/User'
-import { worlds } from '@Config'
 
 import { Server, Socket } from 'net'
 
