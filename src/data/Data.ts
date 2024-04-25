@@ -1,6 +1,8 @@
 import { loadData } from './LoadData'
 
-interface Room {
+import { Assert } from 'ts-runtime-checks'
+
+export interface Room {
     id: number
     name: string
     member: number
@@ -9,4 +11,4 @@ interface Room {
     spawn: number
 }
 
-export const rooms: Room[] = loadData('rooms')
+export const rooms: Room[] = loadData('rooms') as Assert<Room[]>
