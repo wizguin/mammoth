@@ -1,4 +1,6 @@
-import BasePlugin from '../BasePlugin'
+import BasePlugin, { type Num } from '../BasePlugin'
+
+import { handleOnce } from '@Decorators'
 
 import type User from '@objects/user/User'
 
@@ -6,17 +8,41 @@ export default class Join extends BasePlugin {
 
     events = {
         js: this.joinServer,
-        jr: this.joinRoom
+        bl: this.getBuddyList,
+        nl: this.getIgnoreList,
+        il: this.getItemList,
+        jr: this.joinRoom,
+        jp: this.joinPlayerRoom
     }
 
-    joinServer(args: any[], user: User) {
+    @handleOnce
+    joinServer(user: User) {
         user.send('js')
-        user.send('gi', user.inventory.map(i => i.itemId).join('%'))
-        user.send('jr', 100)
+        user.joinRoom(this.rooms[100])
     }
 
-    joinRoom(args: any[], user: User) {
-        user.send('jr', args[1])
+    @handleOnce
+    getBuddyList(user: User) {
+        user.send('gb')
+    }
+
+    @handleOnce
+    getIgnoreList(user: User) {
+        user.send('gn')
+    }
+
+    @handleOnce
+    getItemList(user: User) {
+        user.send('gi', user.inventory.map(i => i.itemId).join('%'))
+    }
+
+    joinRoom(user: User, roomId: Num, x: Num, y: Num) {
+        user.joinRoom(this.rooms[roomId], x, y)
+    }
+
+    joinPlayerRoom(user: User) {
+        user.send('jp', 1, 8)
+        user.send('jr', 10001)
     }
 
 }
