@@ -1,6 +1,6 @@
 import BasePlugin from '../BasePlugin'
 
-import { allowedVersions } from '@config'
+import { handleOnce } from '@Decorators'
 
 import type { Element } from 'elementtree'
 import type User from '@objects/user/User'
@@ -13,8 +13,9 @@ export default class Login extends BasePlugin {
         login: this.login
     }
 
-    verChk(args: Element, user: User) {
-        const ver = args.find('ver')
+    @handleOnce
+    verChk(user: User, body: Element) {
+        const ver = body.find('ver')
 
         if (!ver) return
 
@@ -25,8 +26,9 @@ export default class Login extends BasePlugin {
         }
     }
 
-    async login(args: Element, user: User) {
-        const login = args.find('login')
+    @handleOnce
+    async login(user: User, body: Element) {
+        const login = body.find('login')
 
         if (!login) return
 
