@@ -3,10 +3,10 @@
     "version": "1.0.0-beta",
     "description": "Pre-CPIP Club Penguin server emulator",
     "scripts": {
-        "dev": "tsx watch --clear-screen=false ./src/World.ts Blizzard",
-        "build": "rimraf ./dist && tsc && tsc-alias",
-        "start": "node ./dist/src/World.js Blizzard",
-        "eslint": "eslint ./src --fix"
+        "build": "rimraf dist && tsc && tsc-alias",
+        "start": "node dist/World.js Blizzard",
+        "eslint": "eslint src --fix",
+        "prepare": "ts-patch install"
     },
     "author": "wizguin",
     "license": "MIT",
@@ -21,6 +21,8 @@
         "mysql2": "^3.3.3",
         "prisma": "^4.15.0",
         "rimraf": "^5.0.1",
+        "ts-patch": "^3.1.2",
+        "ts-runtime-checks": "^0.5.1",
         "tsc-alias": "^1.8.6",
         "tsx": "^3.12.7",
         "typescript": "^5.0.4",
