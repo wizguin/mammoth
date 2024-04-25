@@ -1,5 +1,6 @@
 import BasePlugin from '../BasePlugin'
 
+import { allowedVersions } from '@Config'
 import { handleOnce } from '@Decorators'
 
 import type { Element } from 'elementtree'
