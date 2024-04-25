@@ -23,6 +23,12 @@
             "never"
         ],
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "@typescript-eslint/type-annotation-spacing": "error",
         "arrow-spacing": "error",
         "block-spacing": "error",
@@ -53,6 +59,12 @@
             }
         ],
         "no-extra-parens": "error",
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
+        ],
         "no-multi-spaces": "error",
         "no-return-await": "error",
         "no-tabs": "error",
