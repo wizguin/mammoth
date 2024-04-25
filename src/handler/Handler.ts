@@ -61,7 +61,7 @@ export default class Handler {
                 const action = body.get('action')
 
                 if (action) {
-                    this.events.emit(action, body, user)
+                    this.events.emit(action, user, body)
                 }
             }
         }
@@ -75,7 +75,9 @@ export default class Handler {
             return
         }
 
-        this.events.emit(parsed.action, parsed.args, user)
+        Logger.debug('Parsed args: %O', parsed)
+
+        this.events.emit(parsed.action, user, ...parsed.args)
     }
 
 }
