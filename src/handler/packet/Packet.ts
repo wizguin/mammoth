@@ -19,7 +19,8 @@ export function parseXt(data: string) {
 
         return {
             action: parsed[2],
-            args: parsed.slice(3)
+            smartId: parseType(parsed[3]),
+            args: getArgs(parsed)
         }
 
     } catch {
@@ -27,15 +28,29 @@ export function parseXt(data: string) {
     }
 }
 
-export function makeXt(args: (string | number | boolean)[]) {
+export function makeXt(args: (number | string)[]) {
     const handlerId = args.shift()
-    const internalId = -1
+    const smartId = -1
 
-    const xt = ['xt', handlerId, internalId]
+    const xt = ['xt', handlerId, smartId]
 
     if (args.length) {
         xt.push(args.join('%'))
     }
 
     return `%${xt.join('%')}%`
+}
+
+function getArgs(parsed: string[]) {
+    return parsed.slice(4).map(arg => parseType(arg))
+}
+
+function parseType(value: number | string) {
+    if (typeof value === 'number') {
+        return value
+    }
+
+    const stringToNum = parseInt(value)
+
+    return isNaN(stringToNum) ? value : stringToNum
 }
