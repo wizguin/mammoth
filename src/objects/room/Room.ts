@@ -18,15 +18,11 @@ export default class Room implements IRoom {
         this.users = []
     }
 
-    get userStrings() {
-        return this.users.map(u => u.string)
-    }
-
     add(user: User) {
         this.users.push(user)
 
-        user.send('jr', this.id, ...this.userStrings)
-        this.send('ap', user.string)
+        user.send('jr', this.id, ...this.users)
+        this.send('ap', user)
     }
 
     remove(user: User) {

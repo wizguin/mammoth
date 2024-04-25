@@ -108,7 +108,7 @@ export default class User implements Partial<PrismaUser> {
         }
     }
 
-    get string() {
+    toString() {
         return [
             this.id,
             this.username,
