@@ -4,12 +4,16 @@ import Logger from '@Logger'
 import { makeXt } from '../../handler/packet/Packet'
 
 import type { Prisma, User as PrismaUser } from '@prisma/client'
+import type Room from '@objects/room/Room'
 import type { Socket } from 'net'
 
 export default class User implements Partial<PrismaUser> {
 
     socket: Socket
     address: Socket['remoteAddress']
+    room: Room | null
+    x: number
+    y: number
 
     id!: number
     username!: string
@@ -35,6 +39,10 @@ export default class User implements Partial<PrismaUser> {
         this.socket = socket
 
         this.address = socket.remoteAddress
+
+        this.room = null
+        this.x = 0
+        this.y = 0
     }
 
     send(...args: (number | string)[]) {
@@ -69,12 +77,44 @@ export default class User implements Partial<PrismaUser> {
     }
 
     async update(data: Prisma.UserUpdateInput) {
-        await Database.user.update({
-            where: {
-                id: this.id
-            },
-            data: data
-        })
+        try {
+            await Database.user.update({
+                where: {
+                    id: this.id
+                },
+                data: data
+            })
+
+            Object.assign(this, data)
+
+            Logger.debug(`Updated User: ${this.username}, Data: %O`, data)
+
+        } catch (error) {
+            if (error instanceof Error) {
+                Logger.error(`Could not update User: ${this.username}, Data: %O, Error: ${error.stack}`, data)
+            }
+        }
+    }
+
+    get string() {
+        return [
+            this.id,
+            this.username,
+            this.color,
+            this.head,
+            this.face,
+            this.neck,
+            this.body,
+            this.hand,
+            this.feet,
+            this.flag,
+            this.photo,
+            this.x,
+            this.y,
+            0,
+            1,
+            0
+        ].join('|')
     }
 
 }
