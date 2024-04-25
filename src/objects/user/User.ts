@@ -6,8 +6,7 @@ import { makeXt } from '../../handler/packet/Packet'
 import type { Prisma, User as PrismaUser } from '@prisma/client'
 import type { Socket } from 'net'
 
-
-export default class User implements PrismaUser {
+export default class User implements Partial<PrismaUser> {
 
     socket: Socket
     address: Socket['remoteAddress']

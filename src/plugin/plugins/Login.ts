@@ -5,7 +5,6 @@ import { handleOnce } from '@Decorators'
 import type { Element } from 'elementtree'
 import type User from '@objects/user/User'
 
-
 export default class Login extends BasePlugin {
 
     events = {

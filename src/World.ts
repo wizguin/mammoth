@@ -7,7 +7,6 @@ import User from '@objects/user/User'
 
 import { Server, Socket } from 'net'
 
-
 export default class World extends Server {
 
     port: number

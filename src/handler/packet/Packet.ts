@@ -1,6 +1,5 @@
 import { parse } from 'elementtree'
 
-
 export function parseXml(data: string) {
     try {
         const elementTree = parse(data)

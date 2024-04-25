@@ -8,7 +8,6 @@ import EventEmitter from 'events'
 import type User from '@objects/user/User'
 import type World from '../World'
 
-
 export default class Handler {
 
     users: User[]

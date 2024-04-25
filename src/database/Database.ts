@@ -2,7 +2,6 @@ import Logger from '../logger/Logger'
 
 import { PrismaClient } from '@prisma/client'
 
-
 class Database extends PrismaClient {
 
     constructor() {

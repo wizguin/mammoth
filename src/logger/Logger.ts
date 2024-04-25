@@ -4,7 +4,6 @@ import { colors, CustomLogger, levels } from './LoggerLevels'
 
 import { addColors, createLogger, transports } from 'winston'
 
-
 const id = process.argv[2]
 
 const options = {

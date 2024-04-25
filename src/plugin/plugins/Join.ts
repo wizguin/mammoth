@@ -2,7 +2,6 @@ import BasePlugin from '../BasePlugin'
 
 import type User from '@objects/user/User'
 
-
 export default class Join extends BasePlugin {
 
     events = {

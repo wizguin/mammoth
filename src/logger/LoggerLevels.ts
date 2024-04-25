@@ -1,6 +1,5 @@
 import { LeveledLogMethod, Logger } from 'winston'
 
-
 export const levels = {
     error: 0,
     warn: 1,
