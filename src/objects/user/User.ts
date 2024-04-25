@@ -45,7 +45,7 @@ export default class User implements Partial<PrismaUser> {
         this.y = 0
     }
 
-    send(...args: (number | string)[]) {
+    send(...args: (number | string | object)[]) {
         this.write(makeXt(args))
     }
 

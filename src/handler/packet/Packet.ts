@@ -27,14 +27,14 @@ export function parseXt(data: string) {
     }
 }
 
-export function makeXt(args: (number | string)[]) {
+export function makeXt(args: (number | string | object)[]) {
     const handlerId = args.shift()
     const smartId = -1
 
     const xt = ['xt', handlerId, smartId]
 
     if (args.length) {
-        xt.push(args.join('%'))
+        xt.push(args.map(arg => arg.toString()).join('%'))
     }
 
     return `%${xt.join('%')}%`

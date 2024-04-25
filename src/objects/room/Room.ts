@@ -36,7 +36,7 @@ export default class Room implements IRoom {
 
     }
 
-    send(...args: (number | string)[]) {
+    send(...args: (number | string | object)[]) {
         this.users.forEach(user => user.send(...args))
     }
 
