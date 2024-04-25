@@ -1,7 +1,6 @@
 import { format } from 'winston'
 
-
-const { colorize, combine, printf, timestamp } = format
+const { colorize, combine, printf, timestamp, splat } = format
 
 const id = process.argv[2]
 
@@ -9,6 +8,7 @@ export const defaultFormat = combine(
     timestamp({
         format: 'HH:mm:ss'
     }),
+    splat(),
     printf(message => {
         return `${message.timestamp} [${id}] ${message.message}`
     })
