@@ -29,13 +29,15 @@ export default class Handler {
 
     handle(data: string, user: User) {
         try {
-            data = data.split(Delimiter)[0]
+            const packets = data.split(Delimiter).filter(Boolean)
 
-            Logger.info(`Received: ${data}`)
+            for (const packet of packets) {
+                Logger.info(`Received: ${packet}`)
 
-            if (data.startsWith('<')) this.handleXml(data, user)
+                if (packet.startsWith('<')) this.handleXml(packet, user)
 
-            if (data.startsWith('%')) this.handleXt(data, user)
+                if (packet.startsWith('%')) this.handleXt(packet, user)
+            }
 
         } catch (error) {
             if (error instanceof Error) Logger.error(error.stack)
