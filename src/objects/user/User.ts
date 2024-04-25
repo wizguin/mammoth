@@ -38,7 +38,7 @@ export default class User implements PrismaUser {
         this.address = socket.remoteAddress
     }
 
-    send(...args: any[]) {
+    send(...args: (number | string)[]) {
         this.write(makeXt(args))
     }
 
