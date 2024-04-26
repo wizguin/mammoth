@@ -94,4 +94,11 @@ export default class Handler {
         this.events.emit(parsed.action, user, ...parsed.args)
     }
 
+    close(user: User) {
+        user.close()
+
+        this.users = this.users.filter(u => u !== user)
+
+    }
+
 }

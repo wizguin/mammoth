@@ -108,6 +108,10 @@ export default class User implements Partial<PrismaUser> {
         }
     }
 
+    close() {
+        if (this.room) this.room.remove(this)
+    }
+
     toString() {
         return [
             this.id,

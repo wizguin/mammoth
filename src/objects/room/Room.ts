@@ -26,10 +26,9 @@ export default class Room implements IRoom {
     }
 
     remove(user: User) {
-        if (!this.game) this.send('rp', user.id)
-
         this.users = this.users.filter(u => u !== user)
 
+        if (!this.game) this.send('rp', user.id)
     }
 
     send(...args: (number | string | object)[]) {
