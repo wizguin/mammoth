@@ -7,7 +7,6 @@ import type BasePlugin from './BasePlugin'
 import type EventEmitter from 'events'
 import type Handler from '../handler/Handler'
 
-
 export default class PluginLoader {
 
     handler: Handler

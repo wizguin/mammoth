@@ -30,6 +30,10 @@
             }
         ],
         "@typescript-eslint/type-annotation-spacing": "error",
+        "arrow-parens": [
+            "error",
+            "as-needed"
+        ],
         "arrow-spacing": "error",
         "block-spacing": "error",
         "brace-style": "error",
