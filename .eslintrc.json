@@ -8,42 +8,13 @@
     ],
     "parser": "@typescript-eslint/parser",
     "plugins": [
+        "@stylistic",
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/indent": [
-            "error",
-            4,
-            {
-                "SwitchCase": 1
-            }
-        ],
-        "@typescript-eslint/semi": [
-            "error",
-            "never"
-        ],
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-unused-vars": [
-            "error",
-            {
-                "argsIgnorePattern": "^_"
-            }
-        ],
-        "@typescript-eslint/type-annotation-spacing": "error",
-        "arrow-parens": [
-            "error",
-            "as-needed"
-        ],
-        "arrow-spacing": "error",
-        "block-spacing": "error",
-        "brace-style": "error",
         "camelcase": "error",
-        "comma-dangle": "error",
-        "comma-spacing": "error",
-        "comma-style": "error",
         "consistent-return": "error",
         "dot-notation": "error",
-        "eol-last": "error",
         "eqeqeq": [
             "error",
             "always",
@@ -51,50 +22,80 @@
                 "null": "ignore"
             }
         ],
-        "indent": "off",
-        "key-spacing": "error",
-        "keyword-spacing": "error",
-        "linebreak-style": "error",
-        "lines-between-class-members": [
+        "no-return-await": "error",
+
+        "@stylistic/arrow-parens": [
+            "error",
+            "as-needed"
+        ],
+        "@stylistic/arrow-spacing": "error",
+        "@stylistic/block-spacing": "error",
+        "@stylistic/brace-style": "error",
+        "@stylistic/comma-dangle": "error",
+        "@stylistic/comma-spacing": "error",
+        "@stylistic/comma-style": "error",
+        "@stylistic/eol-last": "error",
+        "@stylistic/indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "@stylistic/key-spacing": "error",
+        "@stylistic/keyword-spacing": "error",
+        "@stylistic/linebreak-style": "error",
+        "@stylistic/lines-between-class-members": [
             "error",
             "always",
             {
                 "exceptAfterSingleLine": true
             }
         ],
-        "no-extra-parens": "error",
-        "no-multiple-empty-lines": [
+        "@stylistic/no-extra-parens": "error",
+        "@stylistic/no-multiple-empty-lines": [
             "error",
             {
                 "max": 1
             }
         ],
-        "no-multi-spaces": "error",
-        "no-return-await": "error",
-        "no-tabs": "error",
-        "no-trailing-spaces": "error",
-        "no-whitespace-before-property": "error",
-        "nonblock-statement-body-position": "error",
-        "object-curly-spacing": [
+        "@stylistic/no-multi-spaces": "error",
+        "@stylistic/no-tabs": "error",
+        "@stylistic/no-trailing-spaces": "error",
+        "@stylistic/no-whitespace-before-property": "error",
+        "@stylistic/nonblock-statement-body-position": "error",
+        "@stylistic/object-curly-spacing": [
             "error",
             "always"
         ],
-        "padded-blocks": [
+        "@stylistic/padded-blocks": [
             "error",
             {
                 "classes": "always"
             }
         ],
-        "quotes": [
+        "@stylistic/quotes": [
             "error",
             "single"
         ],
-        "semi": "off",
-        "space-before-blocks": "error",
-        "space-before-function-paren": [
+        "@stylistic/semi": [
             "error",
             "never"
         ],
-        "space-infix-ops": "error"
+        "@stylistic/space-before-blocks": "error",
+        "@stylistic/space-before-function-paren": [
+            "error",
+            "never"
+        ],
+        "@stylistic/space-infix-ops": "error",
+        "@stylistic/type-annotation-spacing": "error",
+
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ]
     }
 }
