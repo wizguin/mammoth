@@ -8,11 +8,12 @@ import type World from '../World'
 
 import EventEmitter from 'events'
 
+const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
+
 export default class Handler {
 
     users: User[]
     rooms: Record<number, Room>
-    policy: string
     events: EventEmitter
     plugins: PluginLoader
 
@@ -20,8 +21,6 @@ export default class Handler {
         this.users = world.users
 
         this.rooms = this.setRooms()
-
-        this.policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
 
         this.events = new EventEmitter({ captureRejections: true })
         this.plugins = new PluginLoader(this)
@@ -64,7 +63,7 @@ export default class Handler {
             return
         }
 
-        if (parsed.tag === 'policy-file-request') user.sendXml(this.policy)
+        if (parsed.tag === 'policy-file-request') user.sendXml(policy)
 
         if (parsed.tag === 'msg') {
             const body = parsed.find('body')
