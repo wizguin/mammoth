@@ -1,4 +1,4 @@
-import { LeveledLogMethod, Logger } from 'winston'
+import type { LeveledLogMethod, Logger } from 'winston'
 
 export const levels = {
     error: 0,

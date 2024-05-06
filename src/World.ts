@@ -1,11 +1,11 @@
+import { Server, type Socket } from 'net'
+
 import './utils/Setup'
-import { worlds } from '@Config'
 
 import Handler from './handler/Handler'
 import Logger from '@Logger'
 import User from '@objects/user/User'
-
-import { Server, Socket } from 'net'
+import { worlds } from '@Config'
 
 export default class World extends Server {
 

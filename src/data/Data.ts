@@ -1,6 +1,6 @@
 import { loadData } from './LoadData'
 
-import { Assert } from 'ts-runtime-checks'
+import type { Assert } from 'ts-runtime-checks'
 
 export interface Room {
     id: number

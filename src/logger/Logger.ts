@@ -1,5 +1,5 @@
+import { colors, type CustomLogger, levels } from './LoggerLevels'
 import { defaultFormat, formatConsole, formatFile } from './LoggerFormats'
-import { colors, CustomLogger, levels } from './LoggerLevels'
 
 import { addColors, createLogger, transports } from 'winston'
 

@@ -1,8 +1,8 @@
-import Logger from '@Logger'
-import { levels } from '../logger/LoggerLevels'
+import type { levels } from '../logger/LoggerLevels'
 import loadJson from '../utils/LoadJson'
+import Logger from '@Logger'
 
-import { Assert } from 'ts-runtime-checks'
+import type { Assert } from 'ts-runtime-checks'
 
 interface Config {
     allowedVersions: string[],

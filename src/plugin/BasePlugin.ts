@@ -2,7 +2,7 @@ import type Handler from '../handler/Handler'
 import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'
 
-import { Assert } from 'ts-runtime-checks'
+import type { Assert } from 'ts-runtime-checks'
 
 export type Num = Assert<number>
 export type NumArray = Assert<number[]>
