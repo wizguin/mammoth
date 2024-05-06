@@ -1,11 +1,11 @@
 import { delimiter, makeXt } from '../../handler/packet/Packet'
-import type { Prisma, User as PrismaUser } from '@prisma/client'
 import Database from '@Database'
 import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 
 import InventoryCollection from '../../database/collection/collections/InventoryCollection'
 
+import type { Prisma, User as PrismaUser } from '@prisma/client'
 import type { Socket } from 'net'
 
 export default class User implements Partial<PrismaUser> {

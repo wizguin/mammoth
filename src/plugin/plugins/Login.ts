@@ -2,9 +2,9 @@ import BasePlugin from '../BasePlugin'
 
 import { allowedVersions } from '@Config'
 import { handleOnce } from '@Decorators'
+import type User from '@objects/user/User'
 
 import type { Element } from 'elementtree'
-import type User from '@objects/user/User'
 
 export default class Login extends BasePlugin {
 

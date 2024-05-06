@@ -1,7 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
 import { handleOnce } from '@Decorators'
-
 import type User from '@objects/user/User'
 
 export default class Join extends BasePlugin {
