@@ -6,7 +6,8 @@
         "dev": "tsnd --watch src,config,data -r tsconfig-paths/register src/World.ts Blizzard",
         "build": "rimraf dist && tsc && tsc-alias",
         "start": "node dist/World.js Blizzard",
-        "eslint": "eslint src --fix",
+        "eslint": "eslint src",
+        "eslint:fix": "eslint src --fix",
         "prepare": "ts-patch install"
     },
     "author": "wizguin",
