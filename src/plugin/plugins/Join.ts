@@ -33,7 +33,7 @@ export default class Join extends BasePlugin {
 
     @handleOnce
     getItemList(user: User) {
-        user.send('gi', user.inventory.map(i => i.itemId).join('%'))
+        user.send('gi', user.inventory)
     }
 
     joinRoom(user: User, roomId: Num, x: Num, y: Num) {

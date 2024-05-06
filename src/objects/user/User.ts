@@ -1,10 +1,10 @@
 import Database from '@Database'
 import Delimiter from '../../handler/packet/Delimiter'
 import Logger from '@Logger'
-import { makeXt } from '../../handler/packet/Packet'
-
-import type { Prisma, User as PrismaUser } from '@prisma/client'
 import type Room from '@objects/room/Room'
+
+import InventoryCollection from '../../database/collection/collections/InventoryCollection'
+
 import type { Socket } from 'net'
 
 export default class User implements Partial<PrismaUser> {
@@ -33,7 +33,7 @@ export default class User implements Partial<PrismaUser> {
     color!: number
     photo!: number
     flag!: number
-    inventory!: { itemId: number }[]
+    inventory!: InventoryCollection
 
     constructor(socket: Socket) {
         this.socket = socket
@@ -83,7 +83,11 @@ export default class User implements Partial<PrismaUser> {
 
         if (!user) return false
 
-        Object.assign(this, user)
+        const { inventory, ...rest } = user
+
+        Object.assign(this, rest)
+
+        this.inventory = new InventoryCollection(this, inventory)
 
         return true
     }
