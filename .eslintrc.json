@@ -23,6 +23,13 @@
             }
         ],
         "no-return-await": "error",
+        "sort-imports": [
+            "error",
+            {
+                "allowSeparatedGroups": true,
+                "ignoreCase": true
+            }
+        ],
 
         "@stylistic/arrow-parens": [
             "error",
@@ -90,6 +97,7 @@
         "@stylistic/space-infix-ops": "error",
         "@stylistic/type-annotation-spacing": "error",
 
+        "@typescript-eslint/consistent-type-imports": "error",
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-unused-vars": [
             "error",
