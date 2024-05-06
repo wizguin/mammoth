@@ -1,14 +1,12 @@
 import * as Data from '../data/Data'
-import Delimiter from './packet/Delimiter'
+import { delimiter, parseXml, parseXt } from './packet/Packet'
 import Logger from '@Logger'
-import { parseXml, parseXt } from './packet/Packet'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
-
-import EventEmitter from 'events'
-
 import type User from '@objects/user/User'
 import type World from '../World'
+
+import EventEmitter from 'events'
 
 export default class Handler {
 
@@ -43,7 +41,7 @@ export default class Handler {
 
     handle(data: string, user: User) {
         try {
-            const packets = data.split(Delimiter).filter(Boolean)
+            const packets = data.split(delimiter).filter(Boolean)
 
             for (const packet of packets) {
                 Logger.info(`Received: ${packet}`)

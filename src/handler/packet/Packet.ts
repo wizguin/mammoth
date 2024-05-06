@@ -1,5 +1,7 @@
 import { parse } from 'elementtree'
 
+export const delimiter = '\x00'
+
 export function parseXml(data: string) {
     try {
         const elementTree = parse(data)

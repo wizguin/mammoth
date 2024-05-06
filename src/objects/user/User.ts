@@ -1,5 +1,6 @@
+import { delimiter, makeXt } from '../../handler/packet/Packet'
+import type { Prisma, User as PrismaUser } from '@prisma/client'
 import Database from '@Database'
-import Delimiter from '../../handler/packet/Delimiter'
 import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 
@@ -56,7 +57,7 @@ export default class User implements Partial<PrismaUser> {
     write(data: string) {
         Logger.debug(`Sending: ${data}`)
 
-        this.socket.write(`${data}${Delimiter}`)
+        this.socket.write(`${data}${delimiter}`)
     }
 
     joinRoom(room: Room, x = 0, y = 0) {
