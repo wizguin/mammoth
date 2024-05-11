@@ -39,7 +39,15 @@ export default class Login extends BasePlugin {
 
         const load = await user.load(nick.toString())
 
-        if (load) user.send('l')
+        if (!load) return
+
+        if (user.id in this.usersById) {
+            this.usersById[user.id].disconnect()
+        }
+
+        this.usersById[user.id] = user
+
+        user.send('l')
     }
 
 }

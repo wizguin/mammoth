@@ -21,6 +21,7 @@ export default class Handler {
     constructor(world: World) {
         this.users = world.users
 
+        this.usersById = {}
         this.rooms = this.setRooms()
 
         this.events = new EventEmitter({ captureRejections: true })
