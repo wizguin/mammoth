@@ -13,6 +13,7 @@ const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" 
 export default class Handler {
 
     users: User[]
+    usersById: { [key: string]: User }
     rooms: Record<number, Room>
     events: EventEmitter
     plugins: PluginLoader
@@ -94,8 +95,11 @@ export default class Handler {
     close(user: User) {
         user.close()
 
-        this.users = this.users.filter(u => u !== user)
+        if (this.usersById[user.id] === user) {
+            delete this.usersById[user.id]
+        }
 
+        this.users = this.users.filter(u => u !== user)
     }
 
 }

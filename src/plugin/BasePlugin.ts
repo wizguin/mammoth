@@ -14,6 +14,7 @@ export default class BasePlugin {
 
     handler: Handler
     users: User[]
+    usersById: { [key: string]: User }
     rooms: Record<number, Room>
     events!: Record<string, EventHandler>
 
@@ -21,6 +22,7 @@ export default class BasePlugin {
         this.handler = handler
 
         this.users = handler.users
+        this.usersById = handler.usersById
         this.rooms = handler.rooms
     }
 
