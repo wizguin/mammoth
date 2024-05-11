@@ -15,6 +15,7 @@ export default class User implements Partial<PrismaUser> {
     room: Room | null
     x: number
     y: number
+    frame: number
 
     id!: number
     username!: string
@@ -44,6 +45,7 @@ export default class User implements Partial<PrismaUser> {
         this.room = null
         this.x = 0
         this.y = 0
+        this.frame = 0
     }
 
     send(...args: (number | string | object)[]) {
@@ -136,7 +138,7 @@ export default class User implements Partial<PrismaUser> {
             this.photo,
             this.x,
             this.y,
-            0,
+            this.frame,
             1,
             0
         ].join('|')
