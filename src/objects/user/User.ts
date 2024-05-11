@@ -67,11 +67,16 @@ export default class User implements Partial<PrismaUser> {
 
         if (this.room) this.room.remove(this)
 
+        this.setPosition(x, y)
+
+        this.room = room
+        this.room.add(this)
+    }
+
+    setPosition(x: number, y: number) {
         this.x = x
         this.y = y
-        this.room = room
-
-        this.room.add(this)
+        this.frame = 1
     }
 
     async load(username: string) {
