@@ -5,10 +5,10 @@ import type { Assert } from 'ts-runtime-checks'
 export interface Room {
     id: number
     name: string
-    member: number
-    maxUsers: number
-    game: number
-    spawn: number
+    member: boolean
+    maxUsers?: number
+    game: boolean
+    spawn: boolean
 }
 
 export const rooms: Room[] = loadData('rooms') as Assert<Room[]>

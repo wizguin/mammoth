@@ -7,10 +7,10 @@ export default class Room implements IRoom {
 
     id!: number
     name!: string
-    member!: number
-    maxUsers!: number
-    game!: number
-    spawn!: number
+    member!: boolean
+    maxUsers?: number
+    game!: boolean
+    spawn!: boolean
 
     constructor(data: IRoom) {
         Object.assign(this, data)
