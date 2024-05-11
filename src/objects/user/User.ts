@@ -113,6 +113,10 @@ export default class User implements Partial<PrismaUser> {
         }
     }
 
+    disconnect() {
+        this.socket.destroy()
+    }
+
     close() {
         if (this.room) this.room.remove(this)
     }
