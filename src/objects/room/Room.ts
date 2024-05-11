@@ -21,8 +21,13 @@ export default class Room implements IRoom {
     add(user: User) {
         this.users.push(user)
 
-        user.send('jr', this.id, ...this.users)
-        this.send('ap', user)
+        if (this.game) {
+            user.send('jg', this.id)
+
+        } else {
+            user.send('jr', this.id, ...this.users)
+            this.send('ap', user)
+        }
     }
 
     remove(user: User) {
