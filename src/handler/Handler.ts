@@ -6,6 +6,7 @@ import Room from '@objects/room/Room'
 import type User from '@objects/user/User'
 import type World from '../World'
 
+import type { Element } from 'elementtree'
 import EventEmitter from 'events'
 
 const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
@@ -65,18 +66,26 @@ export default class Handler {
             return
         }
 
-        if (parsed.tag === 'policy-file-request') user.sendXml(policy)
+        switch (parsed.tag) {
+            case 'policy-file-request':
+                user.sendXml(policy)
+                break
 
-        if (parsed.tag === 'msg') {
-            const body = parsed.find('body')
+            case 'msg':
+                this.handleXmlMsg(parsed, user)
+                break
+        }
+    }
 
-            if (body) {
-                const action = body.get('action')
+    handleXmlMsg(parsed: Element, user: User) {
+        const body = parsed.find('body')
 
-                if (action) {
-                    this.events.emit(action, user, body)
-                }
-            }
+        if (!body) return
+
+        const action = body.get('action')
+
+        if (action) {
+            this.events.emit(action, user, body)
         }
     }
 
