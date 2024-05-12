@@ -6,12 +6,13 @@ import type Room from '@objects/room/Room'
 import InventoryCollection from '../../database/collection/collections/InventoryCollection'
 
 import type { Prisma, User as PrismaUser } from '@prisma/client'
+import { nanoid } from 'nanoid'
 import type { Socket } from 'net'
 
 export default class User implements Partial<PrismaUser> {
 
     socket: Socket
-    address: Socket['remoteAddress']
+    rateLimitKey: string
     room: Room | null
     x: number
     y: number
@@ -40,7 +41,7 @@ export default class User implements Partial<PrismaUser> {
     constructor(socket: Socket) {
         this.socket = socket
 
-        this.address = socket.remoteAddress
+        this.rateLimitKey = nanoid()
 
         this.room = null
         this.x = 0

@@ -4,6 +4,12 @@
         "130"
     ],
     "logLevel": "debug",
+    "rateLimit": {
+        "enabled": true,
+        "addressConnectsPerSecond": 5,
+        "addressEventsPerSecond": 50,
+        "userEventsPerSecond": 10
+    },
     "worlds": {
         "Blizzard": {
             "port": 6114,
