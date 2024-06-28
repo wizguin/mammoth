@@ -57,6 +57,12 @@ export default class User implements Partial<PrismaUser> {
         this.write(data)
     }
 
+    sendRoom(...args: (number | string | object)[]) {
+        if (this.room) {
+            this.room.send(...args)
+        }
+    }
+
     write(data: string) {
         Logger.debug(`Sending: ${data}`)
 
