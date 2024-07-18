@@ -40,6 +40,8 @@ export default class World extends Server {
     async onConnection(socket: Socket) {
         if (!socket.remoteAddress) return
 
+        Logger.info(`New connection from: ${socket.remoteAddress}`)
+
         try {
             if (this.rateLimiter) {
                 await this.rateLimiter.addressConnects.consume(socket.remoteAddress)
@@ -47,7 +49,9 @@ export default class World extends Server {
 
             this.createUser(socket)
 
-        } catch {
+        } catch (res) {
+            Logger.warn(`Rate limiting connection from: ${socket.remoteAddress}, response: ${res}`)
+
             socket.destroy()
         }
     }
@@ -75,8 +79,8 @@ export default class World extends Server {
 
             this.handler.handle(data, user)
 
-        } catch (error) {
-            Logger.debug(`Rate limiting User: ${user.username}`)
+        } catch (res) {
+            Logger.warn(`Rate limiting data from: ${user.socket.remoteAddress}, response: ${res}`)
         }
     }
 

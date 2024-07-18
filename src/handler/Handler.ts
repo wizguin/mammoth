@@ -103,6 +103,8 @@ export default class Handler {
     }
 
     close(user: User) {
+        Logger.info(`Closing: ${user.socket.remoteAddress}`)
+
         user.close()
 
         if (this.usersById[user.id] === user) {
