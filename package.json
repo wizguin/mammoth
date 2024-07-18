@@ -1,7 +1,7 @@
 {
     "name": "vanilla",
     "version": "1.0.0-beta",
-    "description": "Pre-CPIP Club Penguin server emulator",
+    "description": "Pre-CPIP server emulator",
     "scripts": {
         "dev": "tsnd --watch src,config,data -r tsconfig-paths/register src/World.ts Blizzard",
         "build": "rimraf dist && tsc && tsc-alias",
