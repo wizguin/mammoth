@@ -2,11 +2,21 @@ import type Handler from '../handler/Handler'
 import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'
 
-import type { Assert } from 'ts-runtime-checks'
+import type { Assert, Max, MaxLen, Min, MinLen } from 'ts-runtime-checks'
 
 export type Num = Assert<number>
 export type NumArray = Assert<number[]>
+export type NumBetween<
+    min extends number,
+    max extends number
+> = Assert<number & Min<min> & Max<max>>
+
 export type Str = Assert<string>
+export type StrArray = Assert<string[]>
+export type StrBetween<
+    min extends number,
+    max extends number
+> = Assert<string & MinLen<min> & MaxLen<max>>
 
 type EventHandler = (user: User, ...args: any[]) => void | Promise<void>
 
