@@ -35,7 +35,9 @@ export default class Handler {
         const rooms: Record<number, Room> = {}
 
         for (const room of Data.rooms) {
-            rooms[room.id] = new Room(room)
+            const { id, name, member, maxUsers, game, spawn } = room
+
+            rooms[room.id] = new Room(id, name, member, maxUsers, game, spawn)
         }
 
         return rooms

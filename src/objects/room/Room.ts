@@ -1,20 +1,17 @@
-import type { Room as IRoom } from '../../data/Data'
 import type User from '@objects/user/User'
 
-export default class Room implements IRoom {
+export default class Room {
 
     users: User[]
 
-    id!: number
-    name!: string
-    member!: boolean
-    maxUsers?: number
-    game!: boolean
-    spawn!: boolean
-
-    constructor(data: IRoom) {
-        Object.assign(this, data)
-
+    constructor(
+        public id: number,
+        public name: string = '',
+        public member: boolean = false,
+        public maxUsers: number = 80,
+        public game: boolean = false,
+        public spawn: boolean = false
+    ) {
         this.users = []
     }
 
