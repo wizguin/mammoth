@@ -1,6 +1,7 @@
 import * as Data from '../data/Data'
 import { delimiter, parseXml, parseXt } from './packet/Packet'
 import Logger from '@Logger'
+import type PlayerRoom from '@objects/room/PlayerRoom'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
 import type User from '@objects/user/User'
@@ -16,6 +17,7 @@ export default class Handler {
     users: User[]
     usersById: { [key: string]: User }
     rooms: Record<number, Room>
+    playerRooms: Record<number, PlayerRoom>
     events: EventEmitter
     plugins: PluginLoader
 
@@ -24,6 +26,7 @@ export default class Handler {
 
         this.usersById = {}
         this.rooms = this.setRooms()
+        this.playerRooms = {}
 
         this.events = new EventEmitter({ captureRejections: true })
         this.plugins = new PluginLoader(this)

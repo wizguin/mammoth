@@ -1,4 +1,5 @@
 import type Handler from '../handler/Handler'
+import type PlayerRoom from '@objects/room/PlayerRoom'
 import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'
 
@@ -26,6 +27,7 @@ export default class BasePlugin {
     users: User[]
     usersById: { [key: string]: User }
     rooms: Record<number, Room>
+    playerRooms: Record<number, PlayerRoom>
     events!: Record<string, EventHandler>
 
     constructor(handler: Handler) {
@@ -34,6 +36,7 @@ export default class BasePlugin {
         this.users = handler.users
         this.usersById = handler.usersById
         this.rooms = handler.rooms
+        this.playerRooms = handler.playerRooms
     }
 
 }
