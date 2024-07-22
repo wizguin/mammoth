@@ -8,7 +8,9 @@ export default class Actions extends BasePlugin {
         sa: this.sendAction,
         sf: this.sendFrame,
         sp: this.sendPosition,
-        sb: this.sendSnowball
+        sb: this.sendSnowball,
+        at: this.addToy,
+        rt: this.removeToy
     }
 
     sendAction(user: User, actionId: Num) {
@@ -34,6 +36,14 @@ export default class Actions extends BasePlugin {
 
     sendSnowball(user: User, x: Num, y: Num) {
         user.sendRoom('sb', user.id, x, y)
+    }
+
+    addToy(user: User, toyId: Num, frame: Num) {
+        user.sendRoom('at', user.id, toyId, frame)
+    }
+
+    removeToy(user: User) {
+        user.sendRoom('rt', user.id)
     }
 
 }
