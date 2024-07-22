@@ -116,6 +116,8 @@ export default class Handler {
 
         user.close()
 
+        this.playerRooms.closeRoom(user)
+
         if (this.usersById[user.id] === user) {
             delete this.usersById[user.id]
         }
