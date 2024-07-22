@@ -31,6 +31,7 @@
             }
         ],
 
+        "@stylistic/array-bracket-spacing": "error",
         "@stylistic/arrow-parens": [
             "error",
             "as-needed"
