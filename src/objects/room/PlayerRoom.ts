@@ -1,3 +1,5 @@
+import Logger from '@Logger'
+import type { PlayerRooms } from '../../handler/Handler'
 import Room from './Room'
 import type User from '@objects/user/User'
 
@@ -6,13 +8,17 @@ const playerRoomIdOffset = 1000
 export default class PlayerRoom extends Room {
 
     userId: number
+    playerRooms: PlayerRooms
 
-    constructor(userId: number) {
-        const playerRoomId = userId + playerRoomIdOffset
+    constructor(userId: number, playerRooms: PlayerRooms) {
+        super(userId + playerRoomIdOffset)
 
-        super(playerRoomId)
+        Logger.debug(`Create player room: ${this.id}`)
 
         this.userId = userId
+        this.playerRooms = playerRooms
+
+        playerRooms[userId] = this
     }
 
     add(user: User) {

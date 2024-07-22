@@ -51,11 +51,7 @@ export default class Join extends BasePlugin {
             return this.playerRooms[userId]
         }
 
-        const playerRoom = new PlayerRoom(userId)
-
-        this.playerRooms[userId] = playerRoom
-
-        return playerRoom
+        return new PlayerRoom(userId, this.playerRooms)
     }
 
 }
