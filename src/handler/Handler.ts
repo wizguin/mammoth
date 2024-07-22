@@ -19,10 +19,10 @@ const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" 
 
 export default class Handler {
 
-    users: User[]
-    usersById: { [key: string]: User }
-    rooms: Record<number, Room>
-    playerRooms: Record<number, PlayerRoom>
+    users: Users
+    usersById: UsersById
+    rooms: Rooms
+    playerRooms: PlayerRooms
     events: EventEmitter
     plugins: PluginLoader
 
