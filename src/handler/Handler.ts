@@ -10,6 +10,11 @@ import type World from '../World'
 import type { Element } from 'elementtree'
 import EventEmitter from 'events'
 
+export type Users = User[]
+export type UsersById = { [key: string]: User }
+export type Rooms = Record<number, Room>
+export type PlayerRooms = Record<number, PlayerRoom>
+
 const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
 
 export default class Handler {
