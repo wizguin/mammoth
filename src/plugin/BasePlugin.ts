@@ -1,7 +1,6 @@
 import type Handler from '../handler/Handler'
-import type PlayerRoom from '@objects/room/PlayerRoom'
-import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'
+import type { Users, UsersById, Rooms, PlayerRooms } from '../handler/Handler'
 
 import type { Assert, Max, MaxLen, Min, MinLen } from 'ts-runtime-checks'
 
@@ -24,10 +23,10 @@ type EventHandler = (user: User, ...args: any[]) => void | Promise<void>
 export default class BasePlugin {
 
     handler: Handler
-    users: User[]
-    usersById: { [key: string]: User }
-    rooms: Record<number, Room>
-    playerRooms: Record<number, PlayerRoom>
+    users: Users
+    usersById: UsersById
+    rooms: Rooms
+    playerRooms: PlayerRooms
     events!: Record<string, EventHandler>
 
     constructor(handler: Handler) {
