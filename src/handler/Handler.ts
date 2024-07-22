@@ -11,7 +11,7 @@ import type { Element } from 'elementtree'
 import EventEmitter from 'events'
 
 export type Users = User[]
-export type UsersById = { [key: string]: User }
+export type UsersById = Record<string, User>
 export type Rooms = Record<number, Room>
 export type PlayerRooms = Record<number, PlayerRoom>
 
