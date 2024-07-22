@@ -1,5 +1,4 @@
-import Logger from '@Logger'
-import type { PlayerRooms } from '../../handler/Handler'
+import type PlayerRooms from './PlayerRooms'
 import Room from './Room'
 import type User from '@objects/user/User'
 
@@ -13,12 +12,8 @@ export default class PlayerRoom extends Room {
     constructor(userId: number, playerRooms: PlayerRooms) {
         super(userId + playerRoomIdOffset)
 
-        Logger.debug(`Create player room: ${this.id}`)
-
         this.userId = userId
         this.playerRooms = playerRooms
-
-        playerRooms[userId] = this
     }
 
     add(user: User) {
@@ -31,9 +26,7 @@ export default class PlayerRoom extends Room {
         super.remove(user)
 
         if (!this.users.length) {
-            Logger.debug(`Destroy player room: ${this.id}`)
-
-            delete this.playerRooms[this.userId]
+            this.playerRooms.remove(this.userId)
         }
     }
 

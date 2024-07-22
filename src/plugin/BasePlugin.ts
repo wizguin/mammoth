@@ -1,5 +1,6 @@
-import type { PlayerRooms, Rooms, Users, UsersById } from '../handler/Handler'
+import type { Rooms, Users, UsersById } from '../handler/Handler'
 import type Handler from '../handler/Handler'
+import type PlayerRooms from '@objects/room/PlayerRooms'
 import type User from '@objects/user/User'
 
 import type { Assert, Max, MaxLen, Min, MinLen } from 'ts-runtime-checks'

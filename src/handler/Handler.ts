@@ -1,7 +1,7 @@
 import * as Data from '../data/Data'
 import { delimiter, parseXml, parseXt } from './packet/Packet'
 import Logger from '@Logger'
-import type PlayerRoom from '@objects/room/PlayerRoom'
+import PlayerRooms from '@objects/room/PlayerRooms'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
 import type User from '@objects/user/User'
@@ -13,7 +13,6 @@ import EventEmitter from 'events'
 export type Users = User[]
 export type UsersById = Record<string, User>
 export type Rooms = Record<number, Room>
-export type PlayerRooms = Record<number, PlayerRoom>
 
 const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
 
@@ -31,7 +30,7 @@ export default class Handler {
 
         this.usersById = {}
         this.rooms = this.setRooms()
-        this.playerRooms = {}
+        this.playerRooms = new PlayerRooms()
 
         this.events = new EventEmitter({ captureRejections: true })
         this.plugins = new PluginLoader(this)

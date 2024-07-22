@@ -1,7 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
 import { handleOnce } from '@Decorators'
-import PlayerRoom from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
 
 export default class Join extends BasePlugin {
@@ -41,17 +40,7 @@ export default class Join extends BasePlugin {
     }
 
     joinPlayerRoom(user: User, userId: Num) {
-        const playerRoom = this.getPlayerRoom(userId)
-
-        user.joinRoom(playerRoom)
-    }
-
-    getPlayerRoom(userId: number) {
-        if (userId in this.playerRooms) {
-            return this.playerRooms[userId]
-        }
-
-        return new PlayerRoom(userId, this.playerRooms)
+        user.joinRoom(this.playerRooms.get(userId))
     }
 
 }
