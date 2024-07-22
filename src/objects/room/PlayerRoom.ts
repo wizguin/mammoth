@@ -27,4 +27,14 @@ export default class PlayerRoom extends Room {
         super.add(user)
     }
 
+    remove(user: User) {
+        super.remove(user)
+
+        if (!this.users.length) {
+            Logger.debug(`Destroy player room: ${this.id}`)
+
+            delete this.playerRooms[this.userId]
+        }
+    }
+
 }
