@@ -1,44 +1,43 @@
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model Inventory {
-  userId Int
-  itemId Int
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "inventories_ibfk_1")
+    userId Int
+    itemId Int
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "inventories_ibfk_1")
 
-  @@id([userId, itemId])
-
-  @@map("inventories")
+    @@id([userId, itemId])
+    @@map("inventories")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model User {
-  id          Int           @id @default(autoincrement())
-  username    String        @unique(map: "username") @db.VarChar(12)
-  email       String?       @db.VarChar(254)
-  password    String        @db.Char(60)
-  loginKey    String?       @db.Text
-  rank        Boolean       @default(true)
-  permaBan    Boolean       @default(false)
-  joinTime    DateTime      @default(now()) @db.Timestamp(0)
-  coins       Int           @default(500)
-  head        Int           @default(0)
-  face        Int           @default(0)
-  neck        Int           @default(0)
-  body        Int           @default(0)
-  hand        Int           @default(0)
-  feet        Int           @default(0)
-  color       Int           @default(1)
-  photo       Int           @default(0)
-  flag        Int           @default(0)
-  inventory   Inventory[]
+    id        Int         @id @default(autoincrement())
+    username  String      @unique(map: "username") @db.VarChar(12)
+    email     String?     @db.VarChar(254)
+    password  String      @db.Char(60)
+    loginKey  String?     @db.Text
+    rank      Boolean     @default(true)
+    permaBan  Boolean     @default(false)
+    joinTime  DateTime    @default(now()) @db.Timestamp(0)
+    coins     Int         @default(500)
+    head      Int         @default(0)
+    face      Int         @default(0)
+    neck      Int         @default(0)
+    body      Int         @default(0)
+    hand      Int         @default(0)
+    feet      Int         @default(0)
+    color     Int         @default(1)
+    photo     Int         @default(0)
+    flag      Int         @default(0)
+    inventory Inventory[]
 
-  @@map("users")
+    @@map("users")
 }
