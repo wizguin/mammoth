@@ -4,12 +4,16 @@ import type User from '@objects/user/User'
 
 export default class PlayerRooms {
 
-    rooms: Record<number, PlayerRoom>
-    openRooms: User[]
+    private rooms: Record<number, PlayerRoom>
+    private _openRooms: User[]
 
     constructor() {
         this.rooms = {}
-        this.openRooms = []
+        this._openRooms = []
+    }
+
+    get openRooms() {
+        return this._openRooms.map(user => `${user.id}|${user.username}`)
     }
 
     add(userId: number) {
@@ -32,6 +36,16 @@ export default class PlayerRooms {
         }
 
         return this.add(userId)
+    }
+
+    openRoom(user: User) {
+        if (!this._openRooms.includes(user)) {
+            this._openRooms.push(user)
+        }
+    }
+
+    closeRoom(user: User) {
+        this._openRooms = this._openRooms.filter(u => u !== user)
     }
 
 }
