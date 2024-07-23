@@ -1,12 +1,17 @@
-import BaseCollection, { type Record } from '../BaseCollection'
+import BaseCollection from '../BaseCollection'
 
 import Database from '@Database'
 import Logger from '@Logger'
 import type User from '@objects/user/User'
 
-export default class InventoryCollection extends BaseCollection {
+interface InventoryRecord {
+    userId: number,
+    itemId: number
+}
 
-    constructor(user: User, records: Record[]) {
+export default class InventoryCollection extends BaseCollection<InventoryRecord> {
+
+    constructor(user: User, records: InventoryRecord[]) {
         super(user, records, 'itemId')
     }
 
