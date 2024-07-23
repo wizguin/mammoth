@@ -3,6 +3,7 @@ import Database from '@Database'
 import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 
+import BuddyColection from '../../database/collection/collections/BuddyCollection'
 import InventoryCollection from '../../database/collection/collections/InventoryCollection'
 
 import type { Prisma, User as PrismaUser } from '@prisma/client'
@@ -36,6 +37,8 @@ export default class User implements Partial<PrismaUser> {
     color!: number
     photo!: number
     flag!: number
+
+    buddies!: BuddyColection
     inventory!: InventoryCollection
 
     constructor(socket: Socket) {
@@ -92,16 +95,20 @@ export default class User implements Partial<PrismaUser> {
                 username: username
             },
             include: {
-                inventory: true
+                inventory: true,
+                buddies: {
+                    include: { buddy: { select: { username: true } } }
+                }
             }
         })
 
         if (!user) return false
 
-        const { inventory, ...rest } = user
+        const { buddies, inventory, ...rest } = user
 
         Object.assign(this, rest)
 
+        this.buddies = new BuddyColection(this, buddies)
         this.inventory = new InventoryCollection(this, inventory)
 
         return true
