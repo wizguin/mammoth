@@ -1,20 +1,15 @@
+import Logger from '@Logger'
 import type User from '@objects/user/User'
 
-type Collection = {
-    [key: string]: Record
-}
+type IndexKey<R> = Extract<keyof R, string>
 
-export type Record = {
-    [key: string]: number | string
-}
-
-export default abstract class BaseCollection {
+export default abstract class BaseCollection<R> {
 
     user: User
-    indexKey: string
-    collection: Collection
+    indexKey: IndexKey<R>
+    collection: Record<string, R>
 
-    constructor(user: User, records: Record[], indexKey: string) {
+    constructor(user: User, records: R[], indexKey: IndexKey<R>) {
         this.user = user
         this.indexKey = indexKey
 
@@ -39,12 +34,19 @@ export default abstract class BaseCollection {
 
     remove?(...args: (number | string)[]): void
 
-    collect(records: Record[]) {
+    collect(records: R[]) {
         records.forEach(record => this.updateCollection(record))
     }
 
-    updateCollection(record: Record) {
-        this.collection[record[this.indexKey]] = record
+    updateCollection(record: R) {
+        const indexValue = record[this.indexKey]
+
+        if (typeof indexValue === 'string' || typeof indexValue === 'number') {
+            this.collection[indexValue.toString()] = record
+
+        } else {
+            Logger.error(`Invalid index key: ${this.indexKey}`)
+        }
     }
 
     includes(key: string) {
