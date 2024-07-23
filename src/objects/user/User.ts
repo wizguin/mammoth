@@ -94,19 +94,23 @@ export default class User implements Partial<PrismaUser> {
         this.frame = 1
     }
 
-    addBuddyRequest(user: User) {
-        if (user.id === this.id) return
+    addBuddyRequest(userId: number, username: string) {
+        if (userId === this.id) return
 
-        if (this.buddies.includes(user.id)) return
+        if (this.buddies.includes(userId)) return
 
-        if (this.buddyRequests.includes(user.id)) return
+        if (this.buddyRequests.includes(userId)) return
 
-        this.buddyRequests.push(user.id)
-        this.send('bq', user.id, user.username)
+        this.buddyRequests.push(userId)
+        this.send('bq', userId, username)
     }
 
-    removeBuddyRequest(user: User) {
-        this.buddyRequests = this.buddyRequests.filter(userId => userId !== user.id)
+    removeBuddyRequest(userId: number) {
+        this.buddyRequests = this.buddyRequests.filter(requestId => requestId !== userId)
+    }
+
+    async addBuddy(buddyId: number) {
+        this.buddies.add(buddyId)
     }
 
     async load(username: string) {
@@ -117,7 +121,9 @@ export default class User implements Partial<PrismaUser> {
             include: {
                 inventory: true,
                 buddies: {
-                    include: { buddy: { select: { username: true } } }
+                    include: {
+                        buddy: { select: { username: true } }
+                    }
                 }
             }
         })

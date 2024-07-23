@@ -49,7 +49,7 @@ export default abstract class BaseCollection<R> {
         }
     }
 
-    includes(key: string) {
+    includes(key: number | string) {
         return key in this.collection
     }
 

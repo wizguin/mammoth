@@ -1,5 +1,6 @@
 import BaseCollection from '../BaseCollection'
 
+import Database from '@Database'
 import type User from '@objects/user/User'
 
 interface BuddyRecord {
@@ -16,8 +17,20 @@ export default class BuddyCollection extends BaseCollection<BuddyRecord> {
         super(user, records, 'buddyId')
     }
 
-    add() {
-        //
+    async add(buddyId: number) {
+        if (this.includes(buddyId)) return
+
+        const record = await Database.buddy.create({
+            data: {
+                userId: this.user.id,
+                buddyId: buddyId
+            },
+            include: {
+                buddy: { select: { username: true } }
+            }
+        })
+
+        this.updateCollection(record)
     }
 
     toString() {
