@@ -45,7 +45,7 @@ export default abstract class BaseCollection<R> {
             this.collection[indexValue.toString()] = record
 
         } else {
-            Logger.error(`Invalid index key: ${this.indexKey}`)
+            Logger.error('Record could not be added to collection: %O', record)
         }
     }
 
