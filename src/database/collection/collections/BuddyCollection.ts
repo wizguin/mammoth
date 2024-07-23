@@ -10,7 +10,7 @@ interface BuddyRecord {
     }
 }
 
-export default class BuddyColection extends BaseCollection<BuddyRecord> {
+export default class BuddyCollection extends BaseCollection<BuddyRecord> {
 
     constructor(user: User, records: BuddyRecord[]) {
         super(user, records, 'buddyId')
