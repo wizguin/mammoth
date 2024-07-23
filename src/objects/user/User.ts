@@ -105,6 +105,10 @@ export default class User implements Partial<PrismaUser> {
         this.send('bq', user.id, user.username)
     }
 
+    removeBuddyRequest(user: User) {
+        this.buddyRequests = this.buddyRequests.filter(userId => userId !== user.id)
+    }
+
     async load(username: string) {
         const user = await Database.user.findFirst({
             where: {
