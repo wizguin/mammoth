@@ -14,10 +14,13 @@ export default class User implements Partial<PrismaUser> {
 
     socket: Socket
     rateLimitKey: string
+
     room: Room | null
     x: number
     y: number
     frame: number
+
+    buddyRequests: number[]
 
     id!: number
     username!: string
@@ -50,6 +53,8 @@ export default class User implements Partial<PrismaUser> {
         this.x = 0
         this.y = 0
         this.frame = 0
+
+        this.buddyRequests = []
     }
 
     send(...args: (number | string | object)[]) {
@@ -87,6 +92,17 @@ export default class User implements Partial<PrismaUser> {
         this.x = x
         this.y = y
         this.frame = 1
+    }
+
+    addBuddyRequest(user: User) {
+        if (user.id === this.id) return
+
+        if (this.buddies.includes(user.id)) return
+
+        if (this.buddyRequests.includes(user.id)) return
+
+        this.buddyRequests.push(user.id)
+        this.send('bq', user.id, user.username)
     }
 
     async load(username: string) {
