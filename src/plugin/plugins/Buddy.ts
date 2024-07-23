@@ -8,7 +8,8 @@ export default class Buddy extends BasePlugin {
     events = {
         bq: this.buddyRequest,
         ba: this.buddyAccept,
-        bd: this.buddyDecline
+        bd: this.buddyDecline,
+        go: this.getBuddyOnlineList
     }
 
     buddyRequest(user: User, buddyId: Num) {
@@ -48,6 +49,12 @@ export default class Buddy extends BasePlugin {
         if (!(buddyId in this.usersById)) return
 
         this.usersById[buddyId].send('bd', user.id, user.username)
+    }
+
+    getBuddyOnlineList(user: User) {
+        const online = user.buddies.keys.filter(buddyId => buddyId in this.usersById)
+
+        user.send('go', ...online)
     }
 
 }
