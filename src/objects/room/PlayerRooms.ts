@@ -13,7 +13,9 @@ export default class PlayerRooms {
     }
 
     get openRooms() {
-        return this._openRooms.map(user => `${user.id}|${user.username}`)
+        return this._openRooms.map(user =>
+            `${user.id}|${user.username}`
+        ).join('%')
     }
 
     add(userId: number) {

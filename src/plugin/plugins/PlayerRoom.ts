@@ -26,7 +26,7 @@ export default class PlayerRoom extends BasePlugin {
     }
 
     getRoomList(user: User) {
-        user.send('gr', ...this.playerRooms.openRooms)
+        user.send('gr', this.playerRooms.openRooms)
     }
 
     openPlayerRoom(user: User) {
