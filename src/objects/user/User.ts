@@ -30,7 +30,6 @@ export default class User implements Partial<PrismaUser> {
     password!: string
     loginKey!: string | null
     rank!: boolean
-    permaBan!: boolean
     joinTime!: Date
     coins!: number
     head!: number
