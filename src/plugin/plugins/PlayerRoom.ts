@@ -1,4 +1,4 @@
-import BasePlugin from '../BasePlugin'
+import BasePlugin, { type Num } from '../BasePlugin'
 
 import type User from '@objects/user/User'
 
@@ -9,6 +9,7 @@ export default class PlayerRoom extends BasePlugin {
         g: this.getPets,
         gf: this.getFurnitureList,
         gr: this.getRoomList,
+        af: this.addFurniture,
         or: this.openPlayerRoom,
         cr: this.closePlayerRoom
     }
@@ -31,6 +32,10 @@ export default class PlayerRoom extends BasePlugin {
 
     getRoomList(user: User) {
         user.send('gr', this.playerRooms.openRooms)
+    }
+
+    addFurniture(user: User, furnitureId: Num) {
+        user.addFurniture(furnitureId)
     }
 
     openPlayerRoom(user: User) {
