@@ -1,18 +1,47 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
 import Database from '@Database'
+import { handleOnce } from '@Decorators'
 import type User from '@objects/user/User'
 
 export default class Buddy extends BasePlugin {
 
     events = {
+        bl: this.getBuddyList,
+        go: this.getBuddyOnlineList,
+        gp: this.getPlayer,
         bq: this.buddyRequest,
         ba: this.buddyAccept,
         bd: this.buddyDecline,
         bm: this.buddyMessage,
-        br: this.buddyRemove,
-        go: this.getBuddyOnlineList,
-        gp: this.getPlayer
+        br: this.buddyRemove
+    }
+
+    @handleOnce
+    getBuddyList(user: User) {
+        if (user.buddies.count) {
+            user.send('gb', user.buddies)
+        } else {
+            user.send('gb')
+        }
+    }
+
+    getBuddyOnlineList(user: User) {
+        const online = user.buddies.keys.filter(buddyId => buddyId in this.usersById)
+
+        user.send('go', ...online)
+    }
+
+    getPlayer(user: User, playerId: Num) {
+        if (!(playerId in this.usersById)) return
+
+        const player = this.usersById[playerId]
+
+        if (player.room) {
+            user.send('gp', player, player.room.id)
+        } else {
+            user.send('gp', player)
+        }
     }
 
     buddyRequest(user: User, buddyId: Num) {
@@ -86,24 +115,6 @@ export default class Buddy extends BasePlugin {
                 }
             }
         })
-    }
-
-    getBuddyOnlineList(user: User) {
-        const online = user.buddies.keys.filter(buddyId => buddyId in this.usersById)
-
-        user.send('go', ...online)
-    }
-
-    getPlayer(user: User, playerId: Num) {
-        if (!(playerId in this.usersById)) return
-
-        const player = this.usersById[playerId]
-
-        if (player.room) {
-            user.send('gp', player, player.room.id)
-        } else {
-            user.send('gp', player)
-        }
     }
 
 }
