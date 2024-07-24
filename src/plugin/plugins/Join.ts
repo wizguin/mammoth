@@ -31,7 +31,11 @@ export default class Join extends BasePlugin {
 
     @handleOnce
     getIgnoreList(user: User) {
-        user.send('gn')
+        if (user.ignores.count) {
+            user.send('gn', user.ignores)
+        } else {
+            user.send('gn')
+        }
     }
 
     @handleOnce

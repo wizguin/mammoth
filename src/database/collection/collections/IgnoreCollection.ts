@@ -18,7 +18,34 @@ export default class IgnoreCollection extends BaseCollection<IgnoreRecord> {
     }
 
     async add(ignoreId: number) {
-        //
+        if (this.includes(ignoreId)) return
+
+        const record = await Database.ignore.create({
+            data: {
+                userId: this.user.id,
+                ignoreId: ignoreId
+            },
+            include: {
+                ignore: { select: { username: true } }
+            }
+        })
+
+        this.updateCollection(record)
+    }
+
+    async remove(ignoreId: number) {
+        if (!this.includes(ignoreId)) return
+
+        await Database.ignore.delete({
+            where: {
+                userId_ignoreId: {
+                    userId: this.user.id,
+                    ignoreId: ignoreId
+                }
+            }
+        })
+
+        delete this.collection[ignoreId]
     }
 
     toString() {
