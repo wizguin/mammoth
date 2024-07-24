@@ -18,8 +18,18 @@ export default class PlayerRoom extends Room {
         super(userId + playerRoomIdOffset)
     }
 
+    get furnitureString() {
+        return this.furniture.map(({ furnitureId, x, y, rotation, frame }) =>
+            [furnitureId, x, y, rotation, frame].join('|')
+        ).join(',')
+    }
+
     add(user: User) {
-        user.send('jp', this.userId, this.playerRoomId)
+        if (this.furniture.length) {
+            user.send('jp', this.userId, this.playerRoomId, this.furnitureString)
+        } else {
+            user.send('jp', this.userId, this.playerRoomId)
+        }
 
         super.add(user)
     }
