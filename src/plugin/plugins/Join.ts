@@ -31,8 +31,8 @@ export default class Join extends BasePlugin {
         user.joinRoom(this.rooms[roomId], x, y)
     }
 
-    joinPlayerRoom(user: User, userId: Num) {
-        user.joinRoom(this.playerRooms.get(userId))
+    async joinPlayerRoom(user: User, userId: Num) {
+        user.joinRoom(await this.playerRooms.get(userId))
     }
 
 }

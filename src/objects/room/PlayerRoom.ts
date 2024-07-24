@@ -1,3 +1,4 @@
+import type { PlayerRoomFurniture } from '@prisma/client'
 import type PlayerRooms from './PlayerRooms'
 import Room from './Room'
 import type User from '@objects/user/User'
@@ -6,18 +7,19 @@ const playerRoomIdOffset = 1000
 
 export default class PlayerRoom extends Room {
 
-    userId: number
-    playerRooms: PlayerRooms
-
-    constructor(userId: number, playerRooms: PlayerRooms) {
+    constructor(
+        public userId: number,
+        public playerRoomId: number = 1,
+        public musicId: number = 0,
+        public floorId: number = 0,
+        public furniture: PlayerRoomFurniture[] = [],
+        private playerRooms: PlayerRooms
+    ) {
         super(userId + playerRoomIdOffset)
-
-        this.userId = userId
-        this.playerRooms = playerRooms
     }
 
     add(user: User) {
-        user.send('jp', this.userId, 1)
+        user.send('jp', this.userId, this.playerRoomId)
 
         super.add(user)
     }
