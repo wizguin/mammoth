@@ -18,7 +18,11 @@ export default class Buddy extends BasePlugin {
     buddyRequest(user: User, buddyId: Num) {
         if (!(buddyId in this.usersById)) return
 
-        this.usersById[buddyId].addBuddyRequest(user.id, user.username)
+        const buddy = this.usersById[buddyId]
+
+        if (buddy.ignores.includes(user.id)) return
+
+        buddy.addBuddyRequest(user.id, user.username)
     }
 
     async buddyAccept(user: User, buddyId: Num) {
