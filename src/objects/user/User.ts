@@ -4,6 +4,7 @@ import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 
 import BuddyCollection from '../../database/collection/collections/BuddyCollection'
+import IgnoreCollection from '../../database/collection/collections/IgnoreCollection'
 import InventoryCollection from '../../database/collection/collections/InventoryCollection'
 
 import type { Prisma, User as PrismaUser } from '@prisma/client'
@@ -42,6 +43,7 @@ export default class User implements Partial<PrismaUser> {
     flag!: number
 
     buddies!: BuddyCollection
+    ignores!: IgnoreCollection
     inventory!: InventoryCollection
 
     constructor(socket: Socket) {
@@ -126,22 +128,30 @@ export default class User implements Partial<PrismaUser> {
                 username: username
             },
             include: {
-                inventory: true,
                 buddies: {
                     include: {
                         buddy: { select: { username: true } }
                     }
-                }
+                },
+
+                ignores: {
+                    include: {
+                        ignore: { select: { username: true } }
+                    }
+                },
+
+                inventory: true
             }
         })
 
         if (!user) return false
 
-        const { buddies, inventory, ...rest } = user
+        const { buddies, ignores, inventory, ...rest } = user
 
         Object.assign(this, rest)
 
         this.buddies = new BuddyCollection(this, buddies)
+        this.ignores = new IgnoreCollection(this, ignores)
         this.inventory = new InventoryCollection(this, inventory)
 
         return true
