@@ -97,6 +97,16 @@ export default class User implements Partial<PrismaUser> {
         this.frame = 1
     }
 
+    async addItem(itemId: number) {
+        this.inventory.add(itemId)
+    }
+
+    updatePlayer(items: number[]) {
+        const [color, head, face, neck, body, hand, feet, flag, photo] = items
+
+        this.update({ color, head, face, neck, body, hand, feet, flag, photo })
+    }
+
     addFurniture(furnitureId: number) {
         this.furniture.add(furnitureId)
     }
