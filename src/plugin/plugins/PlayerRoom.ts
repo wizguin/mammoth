@@ -22,7 +22,11 @@ export default class PlayerRoom extends BasePlugin {
     }
 
     getFurnitureList(user: User) {
-
+        if (user.furniture.count) {
+            user.send('gf', user.furniture)
+        } else {
+            user.send('gf')
+        }
     }
 
     getRoomList(user: User) {
