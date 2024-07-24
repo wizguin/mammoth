@@ -13,7 +13,7 @@ export default class Item extends BasePlugin {
         user.addItem(itemId)
     }
 
-    updatePlayer(user: User, ...items: NumArray) {
+    updatePlayer(user: User, ...items: NumArray<9>) {
         user.updatePlayer(items)
     }
 
