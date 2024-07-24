@@ -9,6 +9,7 @@ export default class Buddy extends BasePlugin {
         bq: this.buddyRequest,
         ba: this.buddyAccept,
         bd: this.buddyDecline,
+        bm: this.buddyMessage,
         br: this.buddyRemove,
         go: this.getBuddyOnlineList,
         gp: this.getPlayer
@@ -51,6 +52,12 @@ export default class Buddy extends BasePlugin {
         if (!(buddyId in this.usersById)) return
 
         this.usersById[buddyId].send('bd', user.id, user.username)
+    }
+
+    buddyMessage(user: User, buddyId: Num, messageId: Num) {
+        if (!(buddyId in this.usersById)) return
+
+        this.usersById[buddyId].send('bm', user.id, user.username, messageId)
     }
 
     async buddyRemove(user: User, buddyId: Num) {
