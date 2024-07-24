@@ -4,6 +4,7 @@ import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 
 import BuddyCollection from '../../database/collection/collections/BuddyCollection'
+import FurnitureCollection from '../../database/collection/collections/FurnitureCollection'
 import IgnoreCollection from '../../database/collection/collections/IgnoreCollection'
 import InventoryCollection from '../../database/collection/collections/InventoryCollection'
 
@@ -43,6 +44,7 @@ export default class User implements Partial<PrismaUser> {
     flag!: number
 
     buddies!: BuddyCollection
+    furniture!: FurnitureCollection
     ignores!: IgnoreCollection
     inventory!: InventoryCollection
 
@@ -142,6 +144,8 @@ export default class User implements Partial<PrismaUser> {
                     }
                 },
 
+                furniture: true,
+
                 ignores: {
                     include: {
                         ignore: { select: { username: true } }
@@ -154,11 +158,12 @@ export default class User implements Partial<PrismaUser> {
 
         if (!user) return false
 
-        const { buddies, ignores, inventory, ...rest } = user
+        const { buddies, furniture, ignores, inventory, ...rest } = user
 
         Object.assign(this, rest)
 
         this.buddies = new BuddyCollection(this, buddies)
+        this.furniture = new FurnitureCollection(this, furniture)
         this.ignores = new IgnoreCollection(this, ignores)
         this.inventory = new InventoryCollection(this, inventory)
 
