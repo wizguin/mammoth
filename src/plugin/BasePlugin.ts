@@ -19,7 +19,7 @@ export type StrBetween<
     max extends number
 > = Assert<string & MinLen<min> & MaxLen<max>>
 
-type EventHandler = (user: User, ...args: any[]) => void | Promise<void>
+type EventHandler = (user: User, ...args: any) => void | Promise<void>
 
 export default class BasePlugin {
 

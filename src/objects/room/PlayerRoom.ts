@@ -1,7 +1,16 @@
-import type { PlayerRoomFurniture } from '@prisma/client'
+import Database from '@Database'
 import type PlayerRooms from './PlayerRooms'
 import Room from './Room'
 import type User from '@objects/user/User'
+
+interface Furniture {
+    userId: number,
+    furnitureId: number,
+    x: number,
+    y: number,
+    rotation: number,
+    frame: number
+}
 
 const playerRoomIdOffset = 1000
 
@@ -12,7 +21,7 @@ export default class PlayerRoom extends Room {
         public playerRoomId: number = 1,
         public musicId: number = 0,
         public floorId: number = 0,
-        public furniture: PlayerRoomFurniture[] = [],
+        public furniture: Furniture[] = [],
         private playerRooms: PlayerRooms
     ) {
         super(userId + playerRoomIdOffset)
@@ -40,6 +49,18 @@ export default class PlayerRoom extends Room {
         if (!this.users.length) {
             this.playerRooms.remove(this.userId)
         }
+    }
+
+    addFurniture(furniture: Furniture) {
+        this.furniture.push(furniture)
+    }
+
+    async clearFurniture() {
+        await Database.playerRoomFurniture.deleteMany({
+            where: { userId: this.userId }
+        })
+
+        this.furniture = []
     }
 
 }

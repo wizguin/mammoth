@@ -51,6 +51,10 @@ export default class PlayerRooms {
         return this.add(userId)
     }
 
+    includes(userId: number) {
+        return userId in this.rooms
+    }
+
     async findRoom(userId: number) {
         return Database.playerRoom.findFirst({
             where: { userId }

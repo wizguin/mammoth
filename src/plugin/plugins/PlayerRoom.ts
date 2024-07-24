@@ -1,25 +1,21 @@
-import BasePlugin, { type Num } from '../BasePlugin'
+import BasePlugin, { type Num, type StrArray } from '../BasePlugin'
 
+import Database from '@Database'
 import type User from '@objects/user/User'
+
+const furnitureStringRegex = /^(\d+\|){4}\d+$/
 
 export default class PlayerRoom extends BasePlugin {
 
     events = {
-        gm: this.getPlayerRoom,
-        g: this.getPets,
+        // gm: this.getPlayerRoom,
+        // g: this.getPets,
         gf: this.getFurnitureList,
         gr: this.getRoomList,
         af: this.addFurniture,
+        ur: this.updatePlayerRoom,
         or: this.openPlayerRoom,
         cr: this.closePlayerRoom
-    }
-
-    getPlayerRoom(user: User) {
-
-    }
-
-    getPets(user: User) {
-
     }
 
     getFurnitureList(user: User) {
@@ -36,6 +32,38 @@ export default class PlayerRoom extends BasePlugin {
 
     addFurniture(user: User, furnitureId: Num) {
         user.addFurniture(furnitureId)
+    }
+
+    async updatePlayerRoom(user: User, playerRoomId: Num, ...furniture: StrArray) {
+        if (!this.playerRooms.includes(user.id)) return
+
+        const playerRoom = await this.playerRooms.get(user.id)
+        const quantities: Record<number, number> = {}
+
+        await playerRoom.clearFurniture()
+
+        for (const f of furniture) {
+            if (!furnitureStringRegex.test(f)) continue
+
+            const [id, x, y, rotation, frame] = f.split('|').map(i => parseInt(i))
+
+            // Check furniture inventory
+            if (!user.furniture.includes(id)) continue
+
+            // Update quantity
+            quantities[id] = id in quantities
+                ? quantities[id] + 1
+                : 1
+
+            // Check quantity
+            if (quantities[id] > user.furniture.getQuantity(id)) continue
+
+            playerRoom.addFurniture({ userId: user.id, furnitureId: id, x, y, rotation, frame })
+        }
+
+        await Database.playerRoomFurniture.createMany({
+            data: playerRoom.furniture
+        })
     }
 
     openPlayerRoom(user: User) {

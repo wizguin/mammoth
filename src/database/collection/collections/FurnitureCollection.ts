@@ -48,6 +48,10 @@ export default class FurnitureCollection extends BaseCollection<FurnitureRecord>
         })
     }
 
+    getQuantity(furnitureId: number) {
+        return this.collection[furnitureId].quantity
+    }
+
     toString() {
         const furnitureList = []
 
