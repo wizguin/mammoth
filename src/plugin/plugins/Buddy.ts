@@ -9,6 +9,7 @@ export default class Buddy extends BasePlugin {
         bq: this.buddyRequest,
         ba: this.buddyAccept,
         bd: this.buddyDecline,
+        br: this.buddyRemove,
         go: this.getBuddyOnlineList
     }
 
@@ -49,6 +50,30 @@ export default class Buddy extends BasePlugin {
         if (!(buddyId in this.usersById)) return
 
         this.usersById[buddyId].send('bd', user.id, user.username)
+    }
+
+    async buddyRemove(user: User, buddyId: Num) {
+        if (!user.buddies.includes(buddyId)) return
+
+        user.removeBuddy(buddyId)
+
+        if (buddyId in this.usersById) {
+            const buddy = this.usersById[buddyId]
+
+            buddy.removeBuddy(user.id)
+            buddy.send('br', user.id, user.username)
+
+            return
+        }
+
+        await Database.buddy.delete({
+            where: {
+                userId_buddyId: {
+                    userId: buddyId,
+                    buddyId: user.id
+                }
+            }
+        })
     }
 
     getBuddyOnlineList(user: User) {

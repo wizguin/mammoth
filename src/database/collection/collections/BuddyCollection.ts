@@ -33,6 +33,21 @@ export default class BuddyCollection extends BaseCollection<BuddyRecord> {
         this.updateCollection(record)
     }
 
+    async remove(buddyId: number) {
+        if (!this.includes(buddyId)) return
+
+        await Database.buddy.delete({
+            where: {
+                userId_buddyId: {
+                    userId: this.user.id,
+                    buddyId: buddyId
+                }
+            }
+        })
+
+        delete this.collection[buddyId]
+    }
+
     toString() {
         return this.values.map(record =>
             `${record.buddyId}|${record.buddy.username}`

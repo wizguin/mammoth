@@ -113,6 +113,10 @@ export default class User implements Partial<PrismaUser> {
         this.buddies.add(buddyId)
     }
 
+    async removeBuddy(buddyId: number) {
+        this.buddies.remove(buddyId)
+    }
+
     async load(username: string) {
         const user = await Database.user.findFirst({
             where: {
