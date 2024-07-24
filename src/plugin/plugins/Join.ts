@@ -22,7 +22,11 @@ export default class Join extends BasePlugin {
 
     @handleOnce
     getBuddyList(user: User) {
-        user.send('gb')
+        if (user.buddies.count) {
+            user.send('gb', user.buddies)
+        } else {
+            user.send('gb')
+        }
     }
 
     @handleOnce
@@ -32,7 +36,11 @@ export default class Join extends BasePlugin {
 
     @handleOnce
     getItemList(user: User) {
-        user.send('gi', user.inventory)
+        if (user.inventory.count) {
+            user.send('gi', user.inventory)
+        } else {
+            user.send('gi')
+        }
     }
 
     joinRoom(user: User, roomId: Num, x: Num, y: Num) {
