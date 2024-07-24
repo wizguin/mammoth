@@ -35,7 +35,9 @@ export default class PlayerRoom extends Room {
 
     add(user: User) {
         if (this.furniture.length) {
-            user.send('jp', this.userId, this.playerRoomId, this.furnitureString)
+            // Add , because 2006 client shifts first element
+            user.send('jp', this.userId, this.playerRoomId, `,${this.furnitureString}`)
+
         } else {
             user.send('jp', this.userId, this.playerRoomId)
         }
