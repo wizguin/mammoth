@@ -48,4 +48,16 @@ export default class FurnitureCollection extends BaseCollection<FurnitureRecord>
         })
     }
 
+    toString() {
+        const furnitureList = []
+
+        for (const furniture of this.values) {
+            for (let i = 0; i < furniture.quantity; i++) {
+                furnitureList.push(furniture.furnitureId)
+            }
+        }
+
+        return furnitureList.join('%')
+    }
+
 }
