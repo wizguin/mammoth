@@ -82,6 +82,7 @@ export default class PlayerRoom extends BasePlugin {
         const playerRoom = await this.playerRooms.get(user.id)
 
         await playerRoom.clearFurniture()
+        playerRoom.playerRoomId = playerRoomId
 
         user.send('au', playerRoomId, user.coins)
     }
