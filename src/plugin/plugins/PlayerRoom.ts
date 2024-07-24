@@ -14,6 +14,7 @@ export default class PlayerRoom extends BasePlugin {
         gr: this.getRoomList,
         af: this.addFurniture,
         ur: this.updatePlayerRoom,
+        au: this.addPlayerRoomUpgrade,
         or: this.openPlayerRoom,
         cr: this.closePlayerRoom
     }
@@ -64,6 +65,25 @@ export default class PlayerRoom extends BasePlugin {
         await Database.playerRoomFurniture.createMany({
             data: playerRoom.furniture
         })
+    }
+
+    async addPlayerRoomUpgrade(user: User, playerRoomId: Num) {
+        if (!this.playerRooms.includes(user.id)) return
+
+        await Database.playerRoom.update({
+            data: {
+                playerRoomId: playerRoomId
+            },
+            where: {
+                userId: user.id
+            }
+        })
+
+        const playerRoom = await this.playerRooms.get(user.id)
+
+        await playerRoom.clearFurniture()
+
+        user.send('au', playerRoomId, user.coins)
     }
 
     openPlayerRoom(user: User) {
