@@ -101,7 +101,10 @@ export default class User implements Partial<PrismaUser> {
 
         if (this.buddyRequests.includes(userId)) return
 
-        this.buddyRequests.push(userId)
+        if (this.buddies.count < 100) {
+            this.buddyRequests.push(userId)
+        }
+
         this.send('bq', userId, username)
     }
 
