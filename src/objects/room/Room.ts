@@ -15,6 +15,10 @@ export default class Room {
         this.users = []
     }
 
+    get isFull() {
+        return this.users.length >= this.maxUsers
+    }
+
     add(user: User) {
         this.users.push(user)
 

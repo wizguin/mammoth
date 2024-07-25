@@ -1,6 +1,6 @@
 import { delimiter, makeXt } from '../../handler/packet/Packet'
 import Database from '@Database'
-import type Errors from './Errors'
+import Errors from './Errors'
 import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 
@@ -87,6 +87,11 @@ export default class User implements Partial<PrismaUser> {
 
     joinRoom(room: Room, x = 0, y = 0) {
         if (!room) return
+
+        if (room.isFull) {
+            this.sendError(Errors.RoomFull)
+            return
+        }
 
         if (this.room) this.room.remove(this)
 
