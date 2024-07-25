@@ -53,7 +53,7 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
 
             this.updateCollection(record)
 
-            await this.user.update({ coins: this.user.coins - itemData.cost })
+            await this.user.update({ coins: this.user.coins - cost })
 
             this.user.send('ai', itemId, this.user.coins)
 

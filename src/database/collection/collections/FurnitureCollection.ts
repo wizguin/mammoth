@@ -39,7 +39,7 @@ export default class FurnitureCollection extends BaseCollection<FurnitureRecord>
 
             this.updateCollection(record)
 
-            await this.user.update({ coins: this.user.coins - furnitureData.cost })
+            await this.user.update({ coins: this.user.coins - cost })
 
             this.user.send('af', furnitureId, this.user.coins)
 

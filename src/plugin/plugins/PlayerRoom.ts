@@ -1,6 +1,8 @@
 import BasePlugin, { type Num, type StrArray } from '../BasePlugin'
 
 import Database from '@Database'
+import Errors from '@objects/user/Errors'
+import { playerRooms } from '@Data'
 import type User from '@objects/user/User'
 
 const furnitureStringRegex = /^(\d+\|){4}\d+$/
@@ -70,6 +72,19 @@ export default class PlayerRoom extends BasePlugin {
     async addPlayerRoomUpgrade(user: User, roomId: Num) {
         if (!this.playerRooms.includes(user.id)) return
 
+        if (!(roomId in playerRooms)) {
+            user.sendError(Errors.ItemNotFound)
+            return
+        }
+
+        const playerRoomData = playerRooms[roomId]
+        const cost = playerRoomData.cost
+
+        if (user.coins < cost) {
+            user.sendError(Errors.InsufficientCoins)
+            return
+        }
+
         await Database.playerRoom.update({
             data: {
                 roomId: roomId
@@ -78,6 +93,8 @@ export default class PlayerRoom extends BasePlugin {
                 userId: user.id
             }
         })
+
+        await user.update({ coins: user.coins - cost })
 
         const playerRoom = await this.playerRooms.get(user.id)
 
