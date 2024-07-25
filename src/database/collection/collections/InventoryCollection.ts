@@ -24,6 +24,8 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
     }
 
     async add(itemId: number) {
+        if (this.includes(itemId)) return
+
         if (!(itemId in items)) return
 
         const itemData = items[itemId]
