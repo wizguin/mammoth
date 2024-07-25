@@ -2,7 +2,16 @@ import { loadData } from './LoadData'
 
 import type { Assert } from 'ts-runtime-checks'
 
-export interface Room {
+type Items = Record<string, Item>
+
+interface Item {
+    name: string,
+    type: number,
+    cost: number,
+    member: boolean
+}
+
+interface Room {
     id: number
     name: string
     member: boolean
@@ -11,4 +20,5 @@ export interface Room {
     spawn: boolean
 }
 
+export const items: Items = loadData('items') as Assert<Items>
 export const rooms: Room[] = loadData('rooms') as Assert<Room[]>
