@@ -7,37 +7,133 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model Ban {
+    id          Int      @id @default(autoincrement())
+    userId      Int
+    issued      DateTime @default(now()) @db.Timestamp(0)
+    expires     DateTime @default(now()) @db.Timestamp(0)
+    moderatorId Int
+    message     String?  @db.VarChar(200)
+
+    user      User @relation("Bans", fields: [userId], references: [id], onDelete: Cascade, map: "fk_bans_users_1")
+    moderator User @relation("BansOf", fields: [moderatorId], references: [id], onDelete: Cascade, map: "fk_bans_users_2")
+
+    @@map("bans")
+}
+
+model Buddy {
+    userId  Int
+    buddyId Int
+
+    user  User @relation("Buddies", fields: [userId], references: [id], onDelete: Cascade, map: "fk_buddies_users_1")
+    buddy User @relation("BuddiesOf", fields: [buddyId], references: [id], onDelete: Cascade, map: "fk_buddies_users_2")
+
+    @@id([userId, buddyId])
+    @@map("buddies")
+}
+
+model Furniture {
+    userId      Int
+    furnitureId Int
+    quantity    Int @default(1)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_furnitures_users")
+
+    @@id([userId, furnitureId])
+    @@map("furnitures")
+}
+
+model Ignore {
+    userId   Int
+    ignoreId Int
+
+    user   User @relation("Ignores", fields: [userId], references: [id], onDelete: Cascade, map: "fk_ignores_users_1")
+    ignore User @relation("IgnoresOf", fields: [ignoreId], references: [id], onDelete: Cascade, map: "fk_ignores_users_2")
+
+    @@id([userId, ignoreId])
+    @@map("ignores")
+}
+
 model Inventory {
     userId Int
     itemId Int
-    user   User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "inventories_ibfk_1")
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_inventories_users")
 
     @@id([userId, itemId])
     @@map("inventories")
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model Pet {
+    id           Int      @id @default(autoincrement())
+    userId       Int
+    typeId       Int
+    name         String   @db.VarChar(12)
+    adoptionDate DateTime @default(now()) @db.Timestamp(0)
+    energy       Int      @default(100)
+    health       Int      @default(100)
+    rest         Int      @default(100)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_pets_users")
+
+    @@map("pets")
+}
+
+model PlayerRoom {
+    userId  Int @id
+    roomId  Int @default(1)
+    musicId Int @default(0)
+    floorId Int @default(0)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_player_rooms_users")
+
+    @@map("player_rooms")
+}
+
+model PlayerRoomFurniture {
+    id          Int @id @default(autoincrement())
+    userId      Int
+    furnitureId Int
+    x           Int @default(0)
+    y           Int @default(0)
+    rotation    Int @default(1)
+    frame       Int @default(1)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_player_room_furnitures_users")
+
+    @@map("player_room_furnitures")
+}
+
 model User {
-    id        Int         @id @default(autoincrement())
-    username  String      @unique(map: "username") @db.VarChar(12)
-    email     String?     @db.VarChar(254)
-    password  String      @db.Char(60)
-    loginKey  String?     @db.Text
-    rank      Boolean     @default(true)
-    permaBan  Boolean     @default(false)
-    joinTime  DateTime    @default(now()) @db.Timestamp(0)
-    coins     Int         @default(500)
-    head      Int         @default(0)
-    face      Int         @default(0)
-    neck      Int         @default(0)
-    body      Int         @default(0)
-    hand      Int         @default(0)
-    feet      Int         @default(0)
-    color     Int         @default(1)
-    photo     Int         @default(0)
-    flag      Int         @default(0)
-    inventory Inventory[]
+    id       Int      @id @default(autoincrement())
+    username String   @unique() @db.VarChar(12)
+    email    String?  @db.VarChar(254)
+    password String   @db.Char(60)
+    loginKey String?  @db.Text
+    rank     Int      @default(1)
+    joinTime DateTime @default(now()) @db.Timestamp(0)
+    coins    Int      @default(500)
+    head     Int      @default(0)
+    face     Int      @default(0)
+    neck     Int      @default(0)
+    body     Int      @default(0)
+    hand     Int      @default(0)
+    feet     Int      @default(0)
+    color    Int      @default(1)
+    photo    Int      @default(0)
+    flag     Int      @default(0)
+
+    bans                Ban[]                 @relation("Bans")
+    bansOf              Ban[]                 @relation("BansOf")
+    buddies             Buddy[]               @relation("Buddies")
+    buddiesOf           Buddy[]               @relation("BuddiesOf")
+    furniture           Furniture[]
+    ignores             Ignore[]              @relation("Ignores")
+    ignoresOf           Ignore[]              @relation("IgnoresOf")
+    inventory           Inventory[]
+    pets                Pet[]
+    playerRoom          PlayerRoom?
+    playerRoomFurniture PlayerRoomFurniture[]
 
     @@map("users")
 }
