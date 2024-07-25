@@ -1,6 +1,7 @@
 import BaseCollection from '../BaseCollection'
 
 import Database from '@Database'
+import Errors from '@objects/user/Errors'
 import { items } from '../../../data/Data'
 import Logger from '@Logger'
 import type User from '@objects/user/User'
@@ -24,11 +25,23 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
     }
 
     async add(itemId: number) {
-        if (this.includes(itemId)) return
+        if (this.includes(itemId)) {
+            this.user.sendError(Errors.ItemOwned)
+            return
+        }
 
-        if (!(itemId in items)) return
+        if (!(itemId in items)) {
+            this.user.sendError(Errors.ItemNotFound)
+            return
+        }
 
         const itemData = items[itemId]
+        const cost = itemData.cost
+
+        if (this.user.coins < cost) {
+            this.user.sendError(Errors.InsufficientCoins)
+            return
+        }
 
         try {
             const record = await Database.inventory.create({
