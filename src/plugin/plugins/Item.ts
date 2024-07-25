@@ -6,7 +6,8 @@ export default class Item extends BasePlugin {
 
     events = {
         ai: this.addItem,
-        up: this.updatePlayer
+        up: this.updatePlayer,
+        spy: this.addSpyPhone
     }
 
     addItem(user: User, itemId: Num) {
@@ -15,6 +16,10 @@ export default class Item extends BasePlugin {
 
     updatePlayer(user: User, ...items: NumArray<9>) {
         user.updatePlayer(items)
+    }
+
+    addSpyPhone(user: User) {
+        user.addItem(800)
     }
 
 }
