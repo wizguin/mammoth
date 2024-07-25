@@ -2,12 +2,12 @@ import { loadData } from './LoadData'
 
 import type { Assert } from 'ts-runtime-checks'
 
-type Furnitures = Record<string, Furniture>
+type Furniture = Record<string, FurnitureItem>
 type Items = Record<string, Item>
 type PlayerRooms = Record<string, PlayerRoom>
 type Rooms = Room[]
 
-interface Furniture {
+interface FurnitureItem {
     name: string,
     cost: number
 }
@@ -33,7 +33,7 @@ interface Room {
     spawn: boolean
 }
 
-export const furnitures: Furnitures = loadData('furnitures') as Assert<Furnitures>
+export const furniture: Furniture = loadData('furniture') as Assert<Furniture>
 export const items: Items = loadData('items') as Assert<Items>
 export const playerRooms: PlayerRooms = loadData('player_rooms') as Assert<PlayerRooms>
 export const rooms: Rooms = loadData('rooms') as Assert<Rooms>
