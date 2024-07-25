@@ -24,6 +24,10 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
     }
 
     async add(itemId: number) {
+        if (!(itemId in items)) return
+
+        const itemData = items[itemId]
+
         try {
             const record = await Database.inventory.create({
                 data: {
@@ -34,7 +38,7 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
 
             this.updateCollection(record)
 
-            await this.user.update({ coins: this.user.coins - 100 })
+            await this.user.update({ coins: this.user.coins - itemData.cost })
 
             this.user.send('ai', itemId, this.user.coins)
 
