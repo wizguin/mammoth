@@ -35,7 +35,7 @@ export default class PlayerRoom extends BasePlugin {
         user.addFurniture(furnitureId)
     }
 
-    async updatePlayerRoom(user: User, playerRoomId: Num, ...furniture: StrArray) {
+    async updatePlayerRoom(user: User, roomId: Num, ...furniture: StrArray) {
         if (!this.playerRooms.includes(user.id)) return
 
         const playerRoom = await this.playerRooms.get(user.id)
@@ -67,12 +67,12 @@ export default class PlayerRoom extends BasePlugin {
         })
     }
 
-    async addPlayerRoomUpgrade(user: User, playerRoomId: Num) {
+    async addPlayerRoomUpgrade(user: User, roomId: Num) {
         if (!this.playerRooms.includes(user.id)) return
 
         await Database.playerRoom.update({
             data: {
-                playerRoomId: playerRoomId
+                roomId: roomId
             },
             where: {
                 userId: user.id
@@ -82,9 +82,9 @@ export default class PlayerRoom extends BasePlugin {
         const playerRoom = await this.playerRooms.get(user.id)
 
         await playerRoom.clearFurniture()
-        playerRoom.playerRoomId = playerRoomId
+        playerRoom.roomId = roomId
 
-        user.send('au', playerRoomId, user.coins)
+        user.send('au', roomId, user.coins)
     }
 
     openPlayerRoom(user: User) {

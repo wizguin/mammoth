@@ -27,7 +27,7 @@ export default class PlayerRooms {
 
         return this.rooms[userId] = new PlayerRoom(
             userId,
-            room?.playerRoomId,
+            room?.roomId,
             room?.musicId,
             room?.floorId,
             furniture,

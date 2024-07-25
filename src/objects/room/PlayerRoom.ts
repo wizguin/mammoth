@@ -18,7 +18,7 @@ export default class PlayerRoom extends Room {
 
     constructor(
         public userId: number,
-        public playerRoomId: number = 1,
+        public roomId: number = 1,
         public musicId: number = 0,
         public floorId: number = 0,
         public furniture: Furniture[] = [],
@@ -36,10 +36,10 @@ export default class PlayerRoom extends Room {
     add(user: User) {
         if (this.furniture.length) {
             // Add , because 2006 client shifts first element
-            user.send('jp', this.userId, this.playerRoomId, `,${this.furnitureString}`)
+            user.send('jp', this.userId, this.roomId, `,${this.furnitureString}`)
 
         } else {
-            user.send('jp', this.userId, this.playerRoomId)
+            user.send('jp', this.userId, this.roomId)
         }
 
         super.add(user)
