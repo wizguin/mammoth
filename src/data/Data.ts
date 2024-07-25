@@ -27,10 +27,10 @@ interface PlayerRoom {
 interface Room {
     id: number
     name: string
-    member: boolean
+    member?: boolean
     maxUsers?: number
-    game: boolean
-    spawn: boolean
+    game?: boolean
+    spawn?: boolean
 }
 
 export const furniture: Furniture = loadData('furniture') as Assert<Furniture>
