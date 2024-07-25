@@ -18,6 +18,13 @@ export default class FurnitureCollection extends BaseCollection<FurnitureRecord>
         super(user, records, 'furnitureId')
     }
 
+    collect(records: FurnitureRecord[]) {
+        // Filter out items that don't exist
+        const exists = records.filter(r => r.furnitureId in furniture)
+
+        super.collect(exists)
+    }
+
     async add(furnitureId: number) {
         if (!(furnitureId in furniture)) {
             this.user.sendError(Errors.ItemNotFound)

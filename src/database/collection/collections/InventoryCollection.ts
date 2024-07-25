@@ -17,11 +17,11 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
         super(user, records, 'itemId')
     }
 
-    collect(records: InventoryRecord[]): void {
+    collect(records: InventoryRecord[]) {
         // Filter out items that don't exist
-        const filteredRecords = records.filter(r => r.itemId in items)
+        const exists = records.filter(r => r.itemId in items)
 
-        super.collect(filteredRecords)
+        super.collect(exists)
     }
 
     async add(itemId: number) {
