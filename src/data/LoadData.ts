@@ -4,7 +4,9 @@ import Logger from '@Logger'
 export function loadData(file: string) {
     const data = loadJson(`data/${file}`)
 
-    Logger.success(`Loaded ${Object.keys(data).length} ${file}`)
+    const name = file.replace('_', ' ')
+
+    Logger.success(`Loaded ${Object.keys(data).length} ${name}`)
 
     return data
 }
