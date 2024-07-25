@@ -12,8 +12,7 @@
     },
     "worlds": {
         "Blizzard": {
-            "port": 6114,
-            "maxUsers": 300
+            "port": 6114
         }
     }
 }

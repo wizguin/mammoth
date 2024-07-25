@@ -18,7 +18,7 @@ const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" 
 
 export default class Handler {
 
-    users: Users
+    world: World
     usersById: UsersById
     rooms: Rooms
     playerRooms: PlayerRooms
@@ -26,7 +26,7 @@ export default class Handler {
     plugins: PluginLoader
 
     constructor(world: World) {
-        this.users = world.users
+        this.world = world
 
         this.usersById = {}
         this.rooms = this.setRooms()
@@ -36,6 +36,14 @@ export default class Handler {
         this.plugins = new PluginLoader(this)
 
         this.events.on('error', error => Logger.error(error))
+    }
+
+    get users() {
+        return this.world.users
+    }
+
+    set users(users: Users) {
+        this.world.users = users
     }
 
     setRooms() {

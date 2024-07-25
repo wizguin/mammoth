@@ -21,7 +21,7 @@ interface RateLimit {
 interface Worlds {
     [key: string]: {
         port: number,
-        maxUsers: number
+        maxUsers?: number
     }
 }
 

@@ -3,6 +3,7 @@ import { Server, type Socket } from 'net'
 import './utils/Setup'
 
 import { rateLimit, worlds } from '@Config'
+import Errors from '@objects/user/Errors'
 import Handler from './handler/Handler'
 import Logger from '@Logger'
 import RateLimiter from './ratelimit/RateLimiter'
@@ -10,15 +11,16 @@ import User from '@objects/user/User'
 
 export default class World extends Server {
 
-    port: number
     users: User[]
     handler: Handler
     rateLimiter?: RateLimiter
 
-    constructor() {
+    constructor(
+        private port: number,
+        private maxUsers: number = 300
+    ) {
         super()
 
-        this.port = worlds[id].port
         this.users = []
         this.handler = new Handler(this)
 
@@ -59,6 +61,13 @@ export default class World extends Server {
     createUser(socket: Socket) {
         const user = new User(socket)
 
+        if (this.users.length >= this.maxUsers) {
+            user.sendError(Errors.ServerFull)
+            user.disconnect()
+
+            return
+        }
+
         this.users.push(user)
 
         socket.setEncoding('utf8')
@@ -88,4 +97,8 @@ export default class World extends Server {
 
 const id = process.argv[2]
 
-if (id in worlds) new World()
+if (id in worlds) {
+    const { port, maxUsers } = worlds[id]
+
+    new World(port, maxUsers)
+}
