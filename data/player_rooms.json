@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "Basic Igloo",
+        "cost": 1500
+    },
+    "2": {
+        "name": "Candy Igloo",
+        "cost": 1500
+    },
+    "3": {
+        "name": "Deluxe Blue Igloo",
+        "cost": 4000
+    },
+    "4": {
+        "name": "Deluxe Candy Igloo",
+        "cost": 4000
+    },
+    "5": {
+        "name": "Secret Stone Igloo",
+        "cost": 2000
+    }
+}

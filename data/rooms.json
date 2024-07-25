@@ -1,0 +1,114 @@
+[
+    {
+        "id": 100,
+        "name": "Town",
+        "spawn": true
+    },
+    {
+        "id": 110,
+        "name": "Coffee"
+    },
+    {
+        "id": 111,
+        "name": "Book"
+    },
+    {
+        "id": 120,
+        "name": "Dance"
+    },
+    {
+        "id": 121,
+        "name": "Lounge"
+    },
+    {
+        "id": 130,
+        "name": "Shop"
+    },
+    {
+        "id": 200,
+        "name": "Village",
+        "spawn": true
+    },
+    {
+        "id": 210,
+        "name": "Sport"
+    },
+    {
+        "id": 220,
+        "name": "Lodge"
+    },
+    {
+        "id": 230,
+        "name": "Mtn"
+    },
+    {
+        "id": 300,
+        "name": "Plaza",
+        "spawn": true
+    },
+    {
+        "id": 310,
+        "name": "Pet"
+    },
+    {
+        "id": 320,
+        "name": "Dojo"
+    },
+    {
+        "id": 330,
+        "name": "Pizza"
+    },
+    {
+        "id": 800,
+        "name": "Dock",
+        "spawn": true
+    },
+    {
+        "id": 801,
+        "name": "Forts",
+        "spawn": true
+    },
+    {
+        "id": 802,
+        "name": "Rink"
+    },
+    {
+        "id": 803,
+        "name": "Agent"
+    },
+    {
+        "id": 804,
+        "name": "Berg",
+        "spawn": true
+    },
+    {
+        "id": 900,
+        "name": "Astro",
+        "game": true
+    },
+    {
+        "id": 901,
+        "name": "Beans",
+        "game": true
+    },
+    {
+        "id": 902,
+        "name": "Puffle",
+        "game": true
+    },
+    {
+        "id": 903,
+        "name": "Biscuit",
+        "game": true
+    },
+    {
+        "id": 904,
+        "name": "Fish",
+        "game": true
+    },
+    {
+        "id": 999,
+        "name": "Sled",
+        "game": true
+    }
+]

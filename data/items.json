@@ -1,0 +1,662 @@
+{
+    "1": {
+        "name": "Blue",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "2": {
+        "name": "Green",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "3": {
+        "name": "Pink",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "4": {
+        "name": "Black",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "5": {
+        "name": "Red",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "6": {
+        "name": "Orange",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "7": {
+        "name": "Yellow",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "8": {
+        "name": "Purple",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "9": {
+        "name": "Brown",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "10": {
+        "name": "Peach",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "11": {
+        "name": "Dark Green",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "12": {
+        "name": "Light Blue",
+        "type": 1,
+        "cost": 20,
+        "member": false
+    },
+    "101": {
+        "name": "Black Sunglasses",
+        "type": 3,
+        "cost": 200,
+        "member": true
+    },
+    "102": {
+        "name": "Night Vision",
+        "type": 3,
+        "cost": 1000,
+        "member": true
+    },
+    "103": {
+        "name": "3D Glasses",
+        "type": 3,
+        "cost": 50,
+        "member": true
+    },
+    "106": {
+        "name": "Superhero Mask",
+        "type": 3,
+        "cost": 100,
+        "member": true
+    },
+    "107": {
+        "name": "Blue Sunglasses",
+        "type": 3,
+        "cost": 0,
+        "member": false
+    },
+    "108": {
+        "name": "Blue Sunglasses",
+        "type": 3,
+        "cost": 150,
+        "member": true
+    },
+    "109": {
+        "name": "Free Red Sunglasses",
+        "type": 3,
+        "cost": 0,
+        "member": false
+    },
+    "110": {
+        "name": "Red Sunglasses",
+        "type": 3,
+        "cost": 150,
+        "member": true
+    },
+    "131": {
+        "name": "Snorkle",
+        "type": 3,
+        "cost": 200,
+        "member": true
+    },
+    "171": {
+        "name": "Hawaiian Lei",
+        "type": 4,
+        "cost": 0,
+        "member": false
+    },
+    "172": {
+        "name": "Scarf",
+        "type": 4,
+        "cost": 150,
+        "member": true
+    },
+    "173": {
+        "name": "Christmas Scarf",
+        "type": 4,
+        "cost": 0,
+        "member": false
+    },
+    "174": {
+        "name": "Boa",
+        "type": 4,
+        "cost": 300,
+        "member": true
+    },
+    "175": {
+        "name": "Pink Scarf",
+        "type": 4,
+        "cost": 150,
+        "member": true
+    },
+    "176": {
+        "name": "Black Tie",
+        "type": 4,
+        "cost": 125,
+        "member": true
+    },
+    "177": {
+        "name": "Striped Tie",
+        "type": 4,
+        "cost": 150,
+        "member": true
+    },
+    "181": {
+        "name": "Pearl Necklace",
+        "type": 4,
+        "cost": 550,
+        "member": true
+    },
+    "201": {
+        "name": "Red Shirt",
+        "type": 5,
+        "cost": 200,
+        "member": true
+    },
+    "212": {
+        "name": "Grass Skirt",
+        "type": 5,
+        "cost": 200,
+        "member": true
+    },
+    "214": {
+        "name": "Bow Tie",
+        "type": 4,
+        "cost": 50,
+        "member": true
+    },
+    "216": {
+        "name": "Free Bow Tie",
+        "type": 4,
+        "cost": 0,
+        "member": false
+    },
+    "218": {
+        "name": "Quilted Vest",
+        "type": 5,
+        "cost": 450,
+        "member": true
+    },
+    "219": {
+        "name": "Blue Coat",
+        "type": 5,
+        "cost": 750,
+        "member": true
+    },
+    "220": {
+        "name": "Hockey Stick",
+        "type": 6,
+        "cost": 750,
+        "member": true
+    },
+    "221": {
+        "name": "Bunny Hug",
+        "type": 5,
+        "cost": 400,
+        "member": true
+    },
+    "222": {
+        "name": "Pink Hoodie",
+        "type": 5,
+        "cost": 400,
+        "member": true
+    },
+    "233": {
+        "name": "Electric Guitar",
+        "type": 6,
+        "cost": 975,
+        "member": true
+    },
+    "234": {
+        "name": "Acoustic Guitar",
+        "type": 6,
+        "cost": 700,
+        "member": true
+    },
+    "235": {
+        "name": "Raincoat",
+        "type": 5,
+        "cost": 450,
+        "member": true
+    },
+    "237": {
+        "name": "Red Suede Jacket",
+        "type": 5,
+        "cost": 850,
+        "member": true
+    },
+    "238": {
+        "name": "Pastal Suede Jacket",
+        "type": 5,
+        "cost": 850,
+        "member": true
+    },
+    "240": {
+        "name": "Pizza Apron",
+        "type": 5,
+        "cost": 0,
+        "member": false
+    },
+    "244": {
+        "name": "Ghost Costume",
+        "type": 5,
+        "cost": 600,
+        "member": true
+    },
+    "252": {
+        "name": "Pink Dress",
+        "type": 5,
+        "cost": 400,
+        "member": true
+    },
+    "253": {
+        "name": "Purple Dress",
+        "type": 5,
+        "cost": 400,
+        "member": true
+    },
+    "261": {
+        "name": "Black Suit",
+        "type": 5,
+        "cost": 650,
+        "member": true
+    },
+    "262": {
+        "name": "Coffee Apron",
+        "type": 5,
+        "cost": 100,
+        "member": true
+    },
+    "263": {
+        "name": "Pizza Apron",
+        "type": 5,
+        "cost": 100,
+        "member": true
+    },
+    "301": {
+        "name": "Superhero Cape",
+        "type": 5,
+        "cost": 500,
+        "member": true
+    },
+    "351": {
+        "name": "Leather Shoes",
+        "type": 7,
+        "cost": 400,
+        "member": true
+    },
+    "352": {
+        "name": "Black Sneakers",
+        "type": 7,
+        "cost": 250,
+        "member": true
+    },
+    "363": {
+        "name": "Yellow Sandals",
+        "type": 7,
+        "cost": 150,
+        "member": true
+    },
+    "366": {
+        "name": "Bunny Slippers",
+        "type": 7,
+        "cost": 200,
+        "member": true
+    },
+    "401": {
+        "name": "Sombrero",
+        "type": 2,
+        "cost": 300,
+        "member": true
+    },
+    "402": {
+        "name": "Black Toque",
+        "type": 2,
+        "cost": 0,
+        "member": false
+    },
+    "403": {
+        "name": "Hard Hat",
+        "type": 2,
+        "cost": 50,
+        "member": true
+    },
+    "404": {
+        "name": "Cowboy Hat",
+        "type": 2,
+        "cost": 250,
+        "member": true
+    },
+    "405": {
+        "name": "Baseball Cap",
+        "type": 2,
+        "cost": 200,
+        "member": true
+    },
+    "406": {
+        "name": "Pink Ball Cap",
+        "type": 2,
+        "cost": 200,
+        "member": true
+    },
+    "407": {
+        "name": "Propellor Cap",
+        "type": 2,
+        "cost": 0,
+        "member": false
+    },
+    "408": {
+        "name": "Flower Hat",
+        "type": 2,
+        "cost": 50,
+        "member": true
+    },
+    "410": {
+        "name": "Small Crown",
+        "type": 2,
+        "cost": 450,
+        "member": true
+    },
+    "412": {
+        "name": "Tiara",
+        "type": 2,
+        "cost": 200,
+        "member": true
+    },
+    "413": {
+        "name": "Party Hat",
+        "type": 2,
+        "cost": 0,
+        "member": false
+    },
+    "414": {
+        "name": "Santa Hat",
+        "type": 2,
+        "cost": 0,
+        "member": false
+    },
+    "417": {
+        "name": "Brown Fedora",
+        "type": 2,
+        "cost": 225,
+        "member": true
+    },
+    "418": {
+        "name": "Pink Toque",
+        "type": 2,
+        "cost": 0,
+        "member": false
+    },
+    "419": {
+        "name": "Russian Hat",
+        "type": 2,
+        "cost": 600,
+        "member": true
+    },
+    "420": {
+        "name": "Black Toque",
+        "type": 2,
+        "cost": 75,
+        "member": true
+    },
+    "421": {
+        "name": "Pink Toque",
+        "type": 2,
+        "cost": 75,
+        "member": true
+    },
+    "422": {
+        "name": "Newspaper Hat",
+        "type": 2,
+        "cost": 50,
+        "member": true
+    },
+    "423": {
+        "name": "Top Hat",
+        "type": 2,
+        "cost": 350,
+        "member": true
+    },
+    "424": {
+        "name": "Chef Hat",
+        "type": 2,
+        "cost": 0,
+        "member": true
+    },
+    "425": {
+        "name": "Lucky Hat",
+        "type": 2,
+        "cost": 0,
+        "member": false
+    },
+    "451": {
+        "name": "Roman Helmet",
+        "type": 2,
+        "cost": 800,
+        "member": true
+    },
+    "452": {
+        "name": "Viking Helmet",
+        "type": 2,
+        "cost": 750,
+        "member": true
+    },
+    "453": {
+        "name": "Football Helmet",
+        "type": 2,
+        "cost": 550,
+        "member": true
+    },
+    "456": {
+        "name": "Blue Viking Helmet",
+        "type": 2,
+        "cost": 1200,
+        "member": true
+    },
+    "481": {
+        "name": "Headphones",
+        "type": 2,
+        "cost": 350,
+        "member": true
+    },
+    "484": {
+        "name": "Pink Ear Muffs",
+        "type": 2,
+        "cost": 250,
+        "member": true
+    },
+    "500": {
+        "name": "Canada",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "501": {
+        "name": "USA",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "502": {
+        "name": "Australia",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "503": {
+        "name": "United Kingdom",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "504": {
+        "name": "Belgium",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "505": {
+        "name": "Brazil",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "506": {
+        "name": "China",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "507": {
+        "name": "Denmark",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "508": {
+        "name": "Finland",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "509": {
+        "name": "France",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "510": {
+        "name": "Germany",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "511": {
+        "name": "Isreal",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "512": {
+        "name": "Japan",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "513": {
+        "name": "Korea",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "514": {
+        "name": "Neatherlands",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "515": {
+        "name": "Norway",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "516": {
+        "name": "Poland",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "517": {
+        "name": "Russia",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "518": {
+        "name": "Spain",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "519": {
+        "name": "Sweden",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "520": {
+        "name": "Switzerland",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "521": {
+        "name": "Turkey",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "522": {
+        "name": "Mexico",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "523": {
+        "name": "New Zealand",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "524": {
+        "name": "Ireland",
+        "type": 8,
+        "cost": 20,
+        "member": true
+    },
+    "550": {
+        "name": "Shamrock",
+        "type": 8,
+        "cost": 0,
+        "member": false
+    },
+    "551": {
+        "name": "Music Note",
+        "type": 8,
+        "cost": 0,
+        "member": false
+    },
+    "800": {
+        "name": "Spy Phone",
+        "type": 10,
+        "cost": 0,
+        "member": false
+    }
+}

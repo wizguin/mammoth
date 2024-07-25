@@ -1,0 +1,254 @@
+{
+    "1": {
+        "name": "Pink Chair",
+        "cost": 200
+    },
+    "2": {
+        "name": "Pink Beanbag Chair",
+        "cost": 350
+    },
+    "3": {
+        "name": "Pink Table",
+        "cost": 300
+    },
+    "4": {
+        "name": "Pink Dresser",
+        "cost": 350
+    },
+    "5": {
+        "name": "Pink Lamp",
+        "cost": 75
+    },
+    "6": {
+        "name": "Pink Sofa",
+        "cost": 500
+    },
+    "10": {
+        "name": "Log Chair",
+        "cost": 200
+    },
+    "11": {
+        "name": "Log Bench",
+        "cost": 500
+    },
+    "12": {
+        "name": "Log Drawers",
+        "cost": 250
+    },
+    "13": {
+        "name": "Log Stump",
+        "cost": 50
+    },
+    "14": {
+        "name": "Log Table",
+        "cost": 200
+    },
+    "21": {
+        "name": "Blue Chair",
+        "cost": 200
+    },
+    "22": {
+        "name": "Blue Bench",
+        "cost": 500
+    },
+    "23": {
+        "name": "Blue Bookcase",
+        "cost": 450
+    },
+    "24": {
+        "name": "Blue Table",
+        "cost": 300
+    },
+    "25": {
+        "name": "Blue Deck Chair",
+        "cost": 400
+    },
+    "26": {
+        "name": "Blue Lamp",
+        "cost": 100
+    },
+    "31": {
+        "name": "Coffee Tree",
+        "cost": 400
+    },
+    "32": {
+        "name": "Coffee Couch",
+        "cost": 500
+    },
+    "33": {
+        "name": "Coffee Table",
+        "cost": 250
+    },
+    "34": {
+        "name": "Java Bag",
+        "cost": 120
+    },
+    "41": {
+        "name": "Book Room Couch",
+        "cost": 600
+    },
+    "42": {
+        "name": "Book Room Lamp",
+        "cost": 250
+    },
+    "46": {
+        "name": "Dinner Table",
+        "cost": 700
+    },
+    "47": {
+        "name": "Dinner Chair",
+        "cost": 150
+    },
+    "51": {
+        "name": "Snow Chair",
+        "cost": 150
+    },
+    "52": {
+        "name": "Snow Couch",
+        "cost": 300
+    },
+    "53": {
+        "name": "Snow Clump",
+        "cost": 40
+    },
+    "54": {
+        "name": "Ice Table",
+        "cost": 350
+    },
+    "55": {
+        "name": "Penguin Ice Sculptur",
+        "cost": 850
+    },
+    "61": {
+        "name": "Princess Armoire",
+        "cost": 700
+    },
+    "62": {
+        "name": "Princess Vanity",
+        "cost": 600
+    },
+    "63": {
+        "name": "Princess Throne",
+        "cost": 500
+    },
+    "71": {
+        "name": "Fridge",
+        "cost": 700
+    },
+    "72": {
+        "name": "Barbecue",
+        "cost": 450
+    },
+    "100": {
+        "name": "Moose Head",
+        "cost": 2000
+    },
+    "101": {
+        "name": "Fish Tank",
+        "cost": 500
+    },
+    "102": {
+        "name": "Speaker",
+        "cost": 150
+    },
+    "103": {
+        "name": "Big Cactus",
+        "cost": 400
+    },
+    "104": {
+        "name": "Small Cactus",
+        "cost": 200
+    },
+    "105": {
+        "name": "Wood Cabinet",
+        "cost": 500
+    },
+    "106": {
+        "name": "Mona Lisa",
+        "cost": 3000
+    },
+    "107": {
+        "name": "Recycle Bin",
+        "cost": 50
+    },
+    "108": {
+        "name": "Welcome Mat",
+        "cost": 75
+    },
+    "109": {
+        "name": "Big Screen TV",
+        "cost": 5000
+    },
+    "110": {
+        "name": "Tombstone",
+        "cost": 300
+    },
+    "111": {
+        "name": "Jack-O-Lantern Happy",
+        "cost": 250
+    },
+    "112": {
+        "name": "Jack-O-Lantern Goofy",
+        "cost": 250
+    },
+    "113": {
+        "name": "Jack-O-Lantern Sad",
+        "cost": 250
+    },
+    "114": {
+        "name": "Spiderweb",
+        "cost": 75
+    },
+    "130": {
+        "name": "Christmas Tree",
+        "cost": 700
+    },
+    "131": {
+        "name": "Christmas Wreath",
+        "cost": 150
+    },
+    "132": {
+        "name": "Fireplace",
+        "cost": 900
+    },
+    "150": {
+        "name": "Lava Lamp",
+        "cost": 450
+    },
+    "151": {
+        "name": "Oval Rug",
+        "cost": 400
+    },
+    "152": {
+        "name": "Rectangle Rug",
+        "cost": 500
+    },
+    "153": {
+        "name": "Coat Rack",
+        "cost": 200
+    },
+    "154": {
+        "name": "Grandfather Clock",
+        "cost": 600
+    },
+    "155": {
+        "name": "Modern Art",
+        "cost": 550
+    },
+    "156": {
+        "name": "Teddy Bear",
+        "cost": 200
+    },
+    "157": {
+        "name": "Student Desk",
+        "cost": 125
+    },
+    "158": {
+        "name": "Sunset Painting",
+        "cost": 600
+    },
+    "159": {
+        "name": "LCD HD-TV",
+        "cost": 2500
+    }
+}
