@@ -77,8 +77,7 @@ export default class PlayerRoom extends BasePlugin {
             return
         }
 
-        const playerRoomData = playerRooms[roomId]
-        const cost = playerRoomData.cost
+        const cost = playerRooms[roomId].cost
 
         if (user.coins < cost) {
             user.sendError(Errors.InsufficientCoins)

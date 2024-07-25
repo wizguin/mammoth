@@ -24,8 +24,7 @@ export default class FurnitureCollection extends BaseCollection<FurnitureRecord>
             return
         }
 
-        const furnitureData = furniture[furnitureId]
-        const cost = furnitureData.cost
+        const cost = furniture[furnitureId].cost
 
         if (this.user.coins < cost) {
             this.user.sendError(Errors.InsufficientCoins)

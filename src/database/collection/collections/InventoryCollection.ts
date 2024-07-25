@@ -35,8 +35,7 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
             return
         }
 
-        const itemData = items[itemId]
-        const cost = itemData.cost
+        const cost = items[itemId].cost
 
         if (this.user.coins < cost) {
             this.user.sendError(Errors.InsufficientCoins)
