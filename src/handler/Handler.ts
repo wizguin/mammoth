@@ -1,4 +1,4 @@
-import * as Data from '../data/Data'
+import * as Data from '@Data'
 import { delimiter, parseXml, parseXt } from './packet/Packet'
 import Logger from '@Logger'
 import PlayerRooms from '@objects/room/PlayerRooms'

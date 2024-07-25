@@ -2,7 +2,7 @@ import BaseCollection from '../BaseCollection'
 
 import Database from '@Database'
 import Errors from '@objects/user/Errors'
-import { items } from '../../../data/Data'
+import { items } from '@Data'
 import Logger from '@Logger'
 import type User from '@objects/user/User'
 
