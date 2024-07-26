@@ -1,3 +1,4 @@
+import type Room from '../Room'
 import type User from '@objects/user/User'
 
 export default class Waddle {
@@ -6,9 +7,9 @@ export default class Waddle {
 
     constructor(
         public id: number,
-        public roomId: number,
         public seats: number,
-        public game: string
+        public game: string,
+        public room: Room
     ) {
         this.users = new Array(seats).fill(null)
     }

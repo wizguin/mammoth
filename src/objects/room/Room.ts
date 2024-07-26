@@ -1,5 +1,5 @@
 import type User from '@objects/user/User'
-import type Waddle from './waddle/Waddle'
+import Waddle from './waddle/Waddle'
 
 export default class Room {
 
@@ -42,6 +42,10 @@ export default class Room {
 
     send(...args: (number | string | object)[]) {
         this.users.forEach(user => user.send(...args))
+    }
+
+    addWaddle(id: number, seats: number, game: string) {
+        this.waddles[id] = new Waddle(id, seats, game, this)
     }
 
 }
