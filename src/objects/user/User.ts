@@ -111,10 +111,12 @@ export default class User implements Partial<PrismaUser> {
         this.inventory.add(itemId)
     }
 
-    updatePlayer(items: number[]) {
+    async updatePlayer(items: number[]) {
         const [color, head, face, neck, body, hand, feet, flag, photo] = items
 
-        this.update({ color, head, face, neck, body, hand, feet, flag, photo })
+        await this.update({ color, head, face, neck, body, hand, feet, flag, photo })
+
+        this.sendRoom('up', this)
     }
 
     addFurniture(furnitureId: number) {
