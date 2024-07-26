@@ -5,7 +5,6 @@ import PlayerRooms from '@objects/room/PlayerRooms'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
 import type User from '@objects/user/User'
-import Waddle from '@objects/room/waddle/Waddle'
 import type World from '../World'
 
 import type { Element } from 'elementtree'
