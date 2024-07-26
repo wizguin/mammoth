@@ -89,7 +89,7 @@ export default class User implements Partial<PrismaUser> {
     }
 
     joinRoom(room: Room, x = 0, y = 0) {
-        if (!room) return
+        if (!room || this.waddle) return
 
         if (room.isFull) {
             this.sendError(Errors.RoomFull)
