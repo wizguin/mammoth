@@ -14,6 +14,20 @@ export default class Waddle {
         this.users = new Array(seats).fill(null)
     }
 
+    get isNotFull() {
+        return this.users.includes(null)
+    }
+
+    add(user: User) {
+        const seat = this.users.indexOf(null)
+
+        this.users[seat] = user
+        user.waddle = this
+
+        user.send('jw', seat)
+        this.room.send('uw', this.id, seat, user.username)
+    }
+
     toString() {
         const seatList = this.users.map(user => user?.username || '').join(',')
 

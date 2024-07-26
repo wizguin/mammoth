@@ -5,7 +5,8 @@ import type User from '@objects/user/User'
 export default class Waddle extends BasePlugin {
 
     events = {
-        gw: this.getWaddleList
+        gw: this.getWaddleList,
+        jw: this.joinWaddle
     }
 
     getWaddleList(user: User) {
@@ -13,9 +14,21 @@ export default class Waddle extends BasePlugin {
 
         const waddles = Object.values(user.room.waddles)
 
-        if (!waddles.length) return
+        if (waddles.length) {
+            user.send('gw', ...waddles)
+        }
+    }
 
-        user.send('gw', ...waddles)
+    joinWaddle(user: User, waddleId: Num) {
+        if (!user.room || user.waddle) return
+
+        if (!(waddleId in user.room.waddles)) return
+
+        const waddle = user.room.waddles[waddleId]
+
+        if (waddle.isNotFull) {
+            waddle.add(user)
+        }
     }
 
 }

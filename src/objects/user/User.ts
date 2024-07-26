@@ -3,6 +3,7 @@ import Database from '@Database'
 import Errors from './Errors'
 import Logger from '@Logger'
 import type Room from '@objects/room/Room'
+import type Waddle from '@objects/room/waddle/Waddle'
 
 import BuddyCollection from '@collections/BuddyCollection'
 import FurnitureCollection from '@collections/FurnitureCollection'
@@ -22,6 +23,7 @@ export default class User implements Partial<PrismaUser> {
     x: number
     y: number
     frame: number
+    waddle: Waddle | null
 
     buddyRequests: number[]
 
@@ -57,6 +59,7 @@ export default class User implements Partial<PrismaUser> {
         this.x = 0
         this.y = 0
         this.frame = 0
+        this.waddle = null
 
         this.buddyRequests = []
     }
