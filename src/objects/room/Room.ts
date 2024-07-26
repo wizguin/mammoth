@@ -1,8 +1,10 @@
 import type User from '@objects/user/User'
+import type Waddle from './waddle/Waddle'
 
 export default class Room {
 
     users: User[]
+    waddles: Record<string, Waddle>
 
     constructor(
         public id: number,
@@ -13,6 +15,7 @@ export default class Room {
         public spawn: boolean = false
     ) {
         this.users = []
+        this.waddles = {}
     }
 
     get isFull() {

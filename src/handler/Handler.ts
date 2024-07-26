@@ -5,6 +5,7 @@ import PlayerRooms from '@objects/room/PlayerRooms'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
 import type User from '@objects/user/User'
+import Waddle from '@objects/room/waddle/Waddle'
 import type World from '../World'
 
 import type { Element } from 'elementtree'
@@ -36,6 +37,8 @@ export default class Handler {
         this.plugins = new PluginLoader(this)
 
         this.events.on('error', error => Logger.error(error))
+
+        this.setWaddles()
     }
 
     get users() {
@@ -56,6 +59,14 @@ export default class Handler {
         }
 
         return rooms
+    }
+
+    setWaddles() {
+        for (const waddle of Data.waddles) {
+            const { id, roomId, seats, game } = waddle
+
+            this.rooms[waddle.roomId].waddles[waddle.id] = new Waddle(id, roomId, seats, game)
+        }
     }
 
     handle(data: string, user: User) {
