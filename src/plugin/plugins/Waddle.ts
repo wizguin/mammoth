@@ -6,7 +6,8 @@ export default class Waddle extends BasePlugin {
 
     events = {
         gw: this.getWaddleList,
-        jw: this.joinWaddle
+        jw: this.joinWaddle,
+        lw: this.leaveWaddle
     }
 
     getWaddleList(user: User) {
@@ -28,6 +29,12 @@ export default class Waddle extends BasePlugin {
 
         if (waddle.isNotFull) {
             waddle.add(user)
+        }
+    }
+
+    leaveWaddle(user: User) {
+        if (user.waddle) {
+            user.waddle.remove(user)
         }
     }
 

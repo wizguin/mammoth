@@ -28,6 +28,15 @@ export default class Waddle {
         this.room.send('uw', this.id, seat, user.username)
     }
 
+    remove(user: User) {
+        const seat = this.users.indexOf(user)
+
+        this.users[seat] = null
+        user.waddle = null
+
+        this.room.send('uw', this.id, seat)
+    }
+
     toString() {
         const seatList = this.users.map(user => user?.username || '').join(',')
 
