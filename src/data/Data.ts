@@ -36,9 +36,9 @@ interface Room {
 
 interface Waddle {
     id: number,
-    roomId: number,
     seats: number,
-    game: string
+    roomId: number,
+    gameId: number
 }
 
 export const furniture: Furniture = loadData('furniture') as Assert<Furniture>

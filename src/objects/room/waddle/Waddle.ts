@@ -8,8 +8,8 @@ export default class Waddle {
     constructor(
         public id: number,
         public seats: number,
-        public game: string,
-        public room: Room
+        public room: Room,
+        public game: Room
     ) {
         this.users = new Array(seats).fill(null)
     }

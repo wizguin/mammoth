@@ -62,14 +62,14 @@ export default class Handler {
 
     setWaddles() {
         for (const waddle of Data.waddles) {
-            const { id, roomId, seats, game } = waddle
+            const { id, roomId, seats, gameId } = waddle
 
-            if (!(roomId in this.rooms)) {
+            if (!(roomId in this.rooms) || !(gameId in this.rooms)) {
                 Logger.error('Could not create waddle: %O', waddle)
                 continue
             }
 
-            this.rooms[roomId].addWaddle(id, seats, game)
+            this.rooms[roomId].addWaddle(id, seats, this.rooms[gameId])
         }
     }
 

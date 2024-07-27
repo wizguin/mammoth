@@ -44,8 +44,8 @@ export default class Room {
         this.users.forEach(user => user.send(...args))
     }
 
-    addWaddle(id: number, seats: number, game: string) {
-        this.waddles[id] = new Waddle(id, seats, game, this)
+    addWaddle(id: number, seats: number, game: Room) {
+        this.waddles[id] = new Waddle(id, seats, this, game)
     }
 
 }
