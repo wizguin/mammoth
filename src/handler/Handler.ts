@@ -37,6 +37,7 @@ export default class Handler {
 
         this.events.on('error', error => Logger.error(error))
 
+        this.setTables()
         this.setWaddles()
     }
 
@@ -58,6 +59,19 @@ export default class Handler {
         }
 
         return rooms
+    }
+
+    setTables() {
+        for (const table of Data.tables) {
+            const { id, roomId, type } = table
+
+            if (!(roomId in this.rooms)) {
+                Logger.error('Could not create table: %O', table)
+                continue
+            }
+
+            this.rooms[roomId].addTable(id, type)
+        }
     }
 
     setWaddles() {

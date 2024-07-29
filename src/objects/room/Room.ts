@@ -1,9 +1,12 @@
+import createTable, { type TableType } from '@objects/room/table/TableFactory'
+import type BaseTable from './table/BaseTable'
 import type User from '@objects/user/User'
 import Waddle from './waddle/Waddle'
 
 export default class Room {
 
     users: User[]
+    tables: Record<string, BaseTable>
     waddles: Record<string, Waddle>
 
     constructor(
@@ -15,6 +18,8 @@ export default class Room {
         public spawn: boolean = false
     ) {
         this.users = []
+
+        this.tables = {}
         this.waddles = {}
     }
 
@@ -48,6 +53,10 @@ export default class Room {
 
     send(...args: (number | string | object)[]) {
         this.users.forEach(user => user.send(...args))
+    }
+
+    addTable(id: number, type: TableType) {
+        this.tables[id] = createTable(id, this, type)
     }
 
     addWaddle(id: number, seats: number, game: Room) {
