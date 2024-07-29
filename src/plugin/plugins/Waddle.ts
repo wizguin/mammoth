@@ -7,8 +7,7 @@ export default class Waddle extends BasePlugin {
     events = {
         gw: this.getWaddleList,
         jw: this.joinWaddle,
-        lw: this.leaveWaddle,
-        st: this.sendTeleport
+        lw: this.leaveWaddle
     }
 
     getWaddleList(user: User) {
@@ -43,17 +42,6 @@ export default class Waddle extends BasePlugin {
         if (user.waddle) {
             user.waddle.remove(user)
         }
-    }
-
-    sendTeleport(user: User, x: Num, y: Num, frame: Num) {
-        if (!user.room || !user.waddle) {
-            return
-        }
-
-        user.setPosition(x, y)
-        user.frame = frame
-
-        user.room.send('st', user.id, x, y, frame)
     }
 
 }

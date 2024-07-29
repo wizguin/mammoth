@@ -9,7 +9,8 @@ export default class Minigame extends BasePlugin {
 
     events = {
         zo: this.gameOver,
-        ac: this.addCoin
+        ac: this.addCoin,
+        st: this.sendTeleport
     }
 
     async gameOver(user: User, score: Num) {
@@ -36,6 +37,17 @@ export default class Minigame extends BasePlugin {
         }
 
         user.send('ac', user.coins)
+    }
+
+    sendTeleport(user: User, x: Num, y: Num, frame: Num) {
+        if (!user.room || !(user.table || user.waddle)) {
+            return
+        }
+
+        user.setPosition(x, y)
+        user.frame = frame
+
+        user.room.send('st', user.id, x, y, frame)
     }
 
 }
