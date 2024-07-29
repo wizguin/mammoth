@@ -3,15 +3,15 @@ import type User from '@objects/user/User'
 
 export default class WaddleRoom {
 
-    users: (User | null)[]
+    ready: (User | null)[]
     coins: number[]
     started: boolean
 
     constructor(
         public id: number,
-        public pendingUsers: User[]
+        public users: User[]
     ) {
-        this.users = []
+        this.ready = []
         this.coins = [20, 10, 5, 5]
         this.started = false
 
@@ -19,7 +19,7 @@ export default class WaddleRoom {
         this.handleJoinGame = this.handleJoinGame.bind(this)
         this.handleSendMove = this.handleSendMove.bind(this)
 
-        pendingUsers.forEach(user => this.init(user))
+        users.forEach(user => this.init(user))
     }
 
     addListeners(user: User) {
@@ -39,16 +39,16 @@ export default class WaddleRoom {
     }
 
     handleJoinGame(user: User) {
-        if (this.users.includes(user)) return
+        if (this.ready.includes(user)) return
 
-        this.users.push(user)
+        this.ready.push(user)
         this.checkStart()
     }
 
     handleSendMove(user: User, playerId: Num, x: Num, y: Num, time: Num) {
         if (!this.started) return
 
-        if (playerId !== this.users.indexOf(user)) return
+        if (playerId !== this.ready.indexOf(user)) return
 
         this.send('zm', playerId, x, y, time)
     }
@@ -63,13 +63,13 @@ export default class WaddleRoom {
     remove(user: User) {
         this.removeListeners(user)
 
-        // Remove from pending users
-        this.pendingUsers = this.pendingUsers.filter(u => u !== user)
-
-        const seat = this.users.indexOf(user)
-
         // Remove from users
-        if (seat !== -1) this.users[seat] = null
+        this.users = this.users.filter(u => u !== user)
+
+        const seat = this.ready.indexOf(user)
+
+        // Remove from ready
+        if (seat !== -1) this.ready[seat] = null
 
         user.waddleRoom = null
 
@@ -79,7 +79,7 @@ export default class WaddleRoom {
 
     checkStart() {
         // Compare with non null values in case user disconnects
-        if (this.pendingUsers.length === this.users.filter(Boolean).length) {
+        if (this.users.length === this.ready.filter(Boolean).length) {
             this.start()
         }
     }
@@ -89,14 +89,14 @@ export default class WaddleRoom {
 
         this.started = true
 
-        const users = this.users as User[]
+        const users = this.ready as User[]
         const userStrings = users.map(u => `${u.username}|${u.color}`)
 
         this.send('uz', users.length, ...userStrings)
     }
 
     send(...args: (number | string | object)[]) {
-        for (const user of this.users) {
+        for (const user of this.ready) {
             if (user) user.send(...args)
         }
     }
