@@ -18,7 +18,9 @@ export default class BuddyCollection extends BaseCollection<BuddyRecord> {
     }
 
     async add(buddyId: number) {
-        if (this.includes(buddyId)) return
+        if (this.includes(buddyId)) {
+            return
+        }
 
         const record = await Database.buddy.create({
             data: {
@@ -34,7 +36,9 @@ export default class BuddyCollection extends BaseCollection<BuddyRecord> {
     }
 
     async remove(buddyId: number) {
-        if (!this.includes(buddyId)) return
+        if (!this.includes(buddyId)) {
+            return
+        }
 
         await Database.buddy.delete({
             where: {

@@ -80,13 +80,19 @@ export default class Handler {
             for (const packet of packets) {
                 Logger.info(`Received: ${packet}`)
 
-                if (packet.startsWith('<')) this.handleXml(packet, user)
+                if (packet.startsWith('<')) {
+                    this.handleXml(packet, user)
+                }
 
-                if (packet.startsWith('%')) this.handleXt(packet, user)
+                if (packet.startsWith('%')) {
+                    this.handleXt(packet, user)
+                }
             }
 
         } catch (error) {
-            if (error instanceof Error) Logger.error(error.stack)
+            if (error instanceof Error) {
+                Logger.error(error.stack)
+            }
         }
     }
 
@@ -112,7 +118,9 @@ export default class Handler {
     handleXmlMsg(parsed: Element, user: User) {
         const body = parsed.find('body')
 
-        if (!body) return
+        if (!body) {
+            return
+        }
 
         const action = body.get('action')
 

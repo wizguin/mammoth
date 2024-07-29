@@ -12,7 +12,9 @@ export default class Waddle extends BasePlugin {
     }
 
     getWaddleList(user: User) {
-        if (!user.room) return
+        if (!user.room) {
+            return
+        }
 
         const waddles = Object.values(user.room.waddles)
 
@@ -22,9 +24,13 @@ export default class Waddle extends BasePlugin {
     }
 
     joinWaddle(user: User, waddleId: Num) {
-        if (!user.room || user.waddle) return
+        if (!user.room || user.waddle) {
+            return
+        }
 
-        if (!(waddleId in user.room.waddles)) return
+        if (!(waddleId in user.room.waddles)) {
+            return
+        }
 
         const waddle = user.room.waddles[waddleId]
 
@@ -40,7 +46,9 @@ export default class Waddle extends BasePlugin {
     }
 
     sendTeleport(user: User, x: Num, y: Num, frame: Num) {
-        if (!user.room || !user.waddle) return
+        if (!user.room || !user.waddle) {
+            return
+        }
 
         user.setPosition(x, y)
         user.frame = frame

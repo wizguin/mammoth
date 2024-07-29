@@ -41,7 +41,9 @@ export default class Room {
 
         this.users = this.users.filter(u => u !== user)
 
-        if (!this.game) this.send('rp', user.id)
+        if (!this.game) {
+            this.send('rp', user.id)
+        }
     }
 
     send(...args: (number | string | object)[]) {

@@ -39,7 +39,9 @@ export default class PlayerRoom extends BasePlugin {
     }
 
     async updatePlayerRoom(user: User, roomId: Num, ...furniture: StrArray) {
-        if (!this.playerRooms.includes(user.id)) return
+        if (!this.playerRooms.includes(user.id)) {
+            return
+        }
 
         const playerRoom = await this.playerRooms.get(user.id)
         const quantities: Record<number, number> = {}
@@ -47,12 +49,16 @@ export default class PlayerRoom extends BasePlugin {
         await playerRoom.clearFurniture()
 
         for (const f of furniture) {
-            if (!furnitureStringRegex.test(f)) continue
+            if (!furnitureStringRegex.test(f)) {
+                continue
+            }
 
             const [id, x, y, rotation, frame] = f.split('|').map(i => parseInt(i))
 
             // Check furniture inventory
-            if (!user.furniture.includes(id)) continue
+            if (!user.furniture.includes(id)) {
+                continue
+            }
 
             // Update quantity
             quantities[id] = id in quantities
@@ -60,7 +66,9 @@ export default class PlayerRoom extends BasePlugin {
                 : 1
 
             // Check quantity
-            if (quantities[id] > user.furniture.getQuantity(id)) continue
+            if (quantities[id] > user.furniture.getQuantity(id)) {
+                continue
+            }
 
             playerRoom.addFurniture({ userId: user.id, furnitureId: id, x, y, rotation, frame })
         }
@@ -71,7 +79,9 @@ export default class PlayerRoom extends BasePlugin {
     }
 
     async addPlayerRoomUpgrade(user: User, roomId: Num) {
-        if (!this.playerRooms.includes(user.id)) return
+        if (!this.playerRooms.includes(user.id)) {
+            return
+        }
 
         if (!(roomId in playerRooms)) {
             user.sendError(Errors.ItemNotFound)

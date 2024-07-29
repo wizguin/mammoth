@@ -6,7 +6,9 @@ export function handleOnce(originalMethod: any, _context: ClassMethodDecoratorCo
     return function replacementMethod(this: any, ...args: any[]): any {
         const user = args[0]
 
-        if (handledUsers.includes(user)) return
+        if (handledUsers.includes(user)) {
+            return
+        }
 
         handledUsers.push(user)
         originalMethod.call(this, ...args)

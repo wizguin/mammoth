@@ -40,7 +40,9 @@ export default class World extends Server {
     }
 
     async onConnection(socket: Socket) {
-        if (!socket.remoteAddress) return
+        if (!socket.remoteAddress) {
+            return
+        }
 
         Logger.info(`New connection from: ${socket.remoteAddress}`)
 
@@ -78,7 +80,9 @@ export default class World extends Server {
     }
 
     async onData(data: string, user: User) {
-        if (!user.socket.remoteAddress) return
+        if (!user.socket.remoteAddress) {
+            return
+        }
 
         try {
             if (this.rateLimiter) {

@@ -18,7 +18,9 @@ export default class IgnoreCollection extends BaseCollection<IgnoreRecord> {
     }
 
     async add(ignoreId: number) {
-        if (this.includes(ignoreId)) return
+        if (this.includes(ignoreId)) {
+            return
+        }
 
         const record = await Database.ignore.create({
             data: {
@@ -34,7 +36,9 @@ export default class IgnoreCollection extends BaseCollection<IgnoreRecord> {
     }
 
     async remove(ignoreId: number) {
-        if (!this.includes(ignoreId)) return
+        if (!this.includes(ignoreId)) {
+            return
+        }
 
         await Database.ignore.delete({
             where: {

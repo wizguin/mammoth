@@ -45,16 +45,22 @@ export default class WaddleRoom {
     }
 
     handleJoinGame(user: User) {
-        if (this.ready.includes(user)) return
+        if (this.ready.includes(user)) {
+            return
+        }
 
         this.ready.push(user)
         this.checkStart()
     }
 
     handleSendMove(user: User, playerId: Num, x: Num, y: Num, time: Num) {
-        if (!this.started) return
+        if (!this.started) {
+            return
+        }
 
-        if (playerId !== this.ready.indexOf(user)) return
+        if (playerId !== this.ready.indexOf(user)) {
+            return
+        }
 
         this.send('zm', playerId, x, y, time)
     }
@@ -90,7 +96,9 @@ export default class WaddleRoom {
         const seat = this.ready.indexOf(user)
 
         // Remove from ready
-        if (seat !== -1) this.ready[seat] = null
+        if (seat !== -1) {
+            this.ready[seat] = null
+        }
 
         user.waddleRoom = null
 
@@ -106,7 +114,9 @@ export default class WaddleRoom {
     }
 
     start() {
-        if (this.started) return
+        if (this.started) {
+            return
+        }
 
         this.started = true
 
@@ -118,7 +128,9 @@ export default class WaddleRoom {
 
     send(...args: (number | string | object)[]) {
         for (const user of this.ready) {
-            if (user) user.send(...args)
+            if (user) {
+                user.send(...args)
+            }
         }
     }
 

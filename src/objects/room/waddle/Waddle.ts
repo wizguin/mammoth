@@ -36,7 +36,9 @@ export default class Waddle {
     remove(user: User) {
         const seat = this.users.indexOf(user)
 
-        if (seat !== -1) this.users[seat] = null
+        if (seat !== -1) {
+            this.users[seat] = null
+        }
 
         user.waddle = null
 

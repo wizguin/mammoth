@@ -17,7 +17,9 @@ class Database extends PrismaClient {
             Logger.success('Sucessfully connected to database')
 
         } catch (error) {
-            if (error instanceof Error) Logger.error(error.toString())
+            if (error instanceof Error) {
+                Logger.error(error.toString())
+            }
         }
     }
 

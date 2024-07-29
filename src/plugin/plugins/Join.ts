@@ -44,7 +44,9 @@ export default class Join extends BasePlugin {
         if (preferredSpawn && preferredSpawn in this.rooms) {
             const room = this.rooms[preferredSpawn]
 
-            if (!room.isFull) return room
+            if (!room.isFull) {
+                return room
+            }
         }
 
         let spawns = this.getSpawns(room => room.spawn && !room.isFull)

@@ -13,7 +13,9 @@ export default class Minigame extends BasePlugin {
     }
 
     async gameOver(user: User, score: Num) {
-        if (!user.room?.game) return
+        if (!user.room?.game) {
+            return
+        }
 
         const coinsEarned = defaultScoreGames.includes(user.room.id)
             ? score
@@ -29,7 +31,9 @@ export default class Minigame extends BasePlugin {
     }
 
     addCoin(user: User) {
-        if (!user.room?.game) return
+        if (!user.room?.game) {
+            return
+        }
 
         user.send('ac', user.coins)
     }

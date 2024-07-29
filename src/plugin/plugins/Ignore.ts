@@ -21,13 +21,17 @@ export default class Ignore extends BasePlugin {
     }
 
     addIgnore(user: User, ignoreId: Num) {
-        if (user.ignores.includes(ignoreId)) return
+        if (user.ignores.includes(ignoreId)) {
+            return
+        }
 
         user.addIgnore(ignoreId)
     }
 
     removeIgnore(user: User, ignoreId: Num) {
-        if (!user.ignores.includes(ignoreId)) return
+        if (!user.ignores.includes(ignoreId)) {
+            return
+        }
 
         user.removeIgnore(ignoreId)
     }

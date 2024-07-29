@@ -33,7 +33,9 @@ export default class Buddy extends BasePlugin {
     }
 
     getPlayer(user: User, playerId: Num) {
-        if (!(playerId in this.usersById)) return
+        if (!(playerId in this.usersById)) {
+            return
+        }
 
         const player = this.usersById[playerId]
 
@@ -45,17 +47,23 @@ export default class Buddy extends BasePlugin {
     }
 
     buddyRequest(user: User, buddyId: Num) {
-        if (!(buddyId in this.usersById)) return
+        if (!(buddyId in this.usersById)) {
+            return
+        }
 
         const buddy = this.usersById[buddyId]
 
-        if (buddy.ignores.includes(user.id)) return
+        if (buddy.ignores.includes(user.id)) {
+            return
+        }
 
         buddy.addBuddyRequest(user.id, user.username)
     }
 
     async buddyAccept(user: User, buddyId: Num) {
-        if (!user.buddyRequests.includes(buddyId)) return
+        if (!user.buddyRequests.includes(buddyId)) {
+            return
+        }
 
         user.removeBuddyRequest(buddyId)
         user.addBuddy(buddyId)
@@ -78,23 +86,31 @@ export default class Buddy extends BasePlugin {
     }
 
     buddyDecline(user: User, buddyId: Num) {
-        if (!user.buddyRequests.includes(buddyId)) return
+        if (!user.buddyRequests.includes(buddyId)) {
+            return
+        }
 
         user.removeBuddyRequest(user.id)
 
-        if (!(buddyId in this.usersById)) return
+        if (!(buddyId in this.usersById)) {
+            return
+        }
 
         this.usersById[buddyId].send('bd', user.id, user.username)
     }
 
     buddyMessage(user: User, buddyId: Num, messageId: Num) {
-        if (!(buddyId in this.usersById)) return
+        if (!(buddyId in this.usersById)) {
+            return
+        }
 
         this.usersById[buddyId].send('bm', user.id, user.username, messageId)
     }
 
     async buddyRemove(user: User, buddyId: Num) {
-        if (!user.buddies.includes(buddyId)) return
+        if (!user.buddies.includes(buddyId)) {
+            return
+        }
 
         user.removeBuddy(buddyId)
 

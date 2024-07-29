@@ -14,21 +14,27 @@ export default class Actions extends BasePlugin {
     }
 
     sendAction(user: User, actionId: Num) {
-        if (!user.room) return
+        if (!user.room) {
+            return
+        }
 
         user.frame = 1
         user.sendRoom('sa', user.id, actionId)
     }
 
     sendFrame(user: User, frameId: Num) {
-        if (!user.room) return
+        if (!user.room) {
+            return
+        }
 
         user.frame = frameId
         user.sendRoom('sf', user.id, frameId)
     }
 
     sendPosition(user: User, x: Num, y: Num) {
-        if (!user.room) return
+        if (!user.room) {
+            return
+        }
 
         user.setPosition(x, y)
         user.sendRoom('sp', user.id, x, y)

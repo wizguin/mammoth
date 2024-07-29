@@ -18,7 +18,9 @@ export default class Login extends BasePlugin {
     verChk(user: User, body: Element) {
         const ver = body.find('ver')
 
-        if (!ver) return
+        if (!ver) {
+            return
+        }
 
         const v = ver.get('v')
 
@@ -45,16 +47,22 @@ export default class Login extends BasePlugin {
     async authenticateUser(user: User, body: Element) {
         const login = body.find('login')
 
-        if (!login) return false
+        if (!login) {
+            return false
+        }
 
         const nick = login.find('nick')?.text
         const pword = login.find('pword')?.text
 
-        if (!nick || !pword) return false
+        if (!nick || !pword) {
+            return false
+        }
 
         const isLoaded = await user.load(nick.toString())
 
-        if (!isLoaded || !user.loginKey) return false
+        if (!isLoaded || !user.loginKey) {
+            return false
+        }
 
         // Swap bcrypt prefix
         return compare(pword.toString(), user.loginKey.replace('$2y$', '$2a$'))

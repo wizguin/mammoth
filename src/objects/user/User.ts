@@ -99,7 +99,9 @@ export default class User implements Partial<PrismaUser> {
     }
 
     joinRoom(room: Room, x = 0, y = 0) {
-        if (!room) return
+        if (!room) {
+            return
+        }
 
         if (room.isFull) {
             this.sendError(Errors.RoomFull)
@@ -114,11 +116,17 @@ export default class User implements Partial<PrismaUser> {
     }
 
     leaveRoom() {
-        if (this.room) this.room.remove(this)
+        if (this.room) {
+            this.room.remove(this)
+        }
 
-        if (this.waddle) this.waddle.remove(this)
+        if (this.waddle) {
+            this.waddle.remove(this)
+        }
 
-        if (this.waddleRoom) this.waddleRoom.remove(this)
+        if (this.waddleRoom) {
+            this.waddleRoom.remove(this)
+        }
     }
 
     setPosition(x: number, y: number) {
@@ -144,11 +152,17 @@ export default class User implements Partial<PrismaUser> {
     }
 
     addBuddyRequest(userId: number, username: string) {
-        if (userId === this.id) return
+        if (userId === this.id) {
+            return
+        }
 
-        if (this.buddies.includes(userId)) return
+        if (this.buddies.includes(userId)) {
+            return
+        }
 
-        if (this.buddyRequests.includes(userId)) return
+        if (this.buddyRequests.includes(userId)) {
+            return
+        }
 
         if (this.buddies.count < 100) {
             this.buddyRequests.push(userId)
@@ -201,7 +215,9 @@ export default class User implements Partial<PrismaUser> {
             }
         })
 
-        if (!user) return false
+        if (!user) {
+            return false
+        }
 
         const { buddies, furniture, ignores, inventory, ...rest } = user
 
