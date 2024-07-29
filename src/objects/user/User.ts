@@ -26,6 +26,7 @@ export default class User implements Partial<PrismaUser> {
     waddle: Waddle | null
 
     buddyRequests: number[]
+    events: EventEmitter
 
     id!: number
     username!: string
@@ -62,6 +63,11 @@ export default class User implements Partial<PrismaUser> {
         this.waddle = null
 
         this.buddyRequests = []
+
+        // Used for temporary events
+        this.events = new EventEmitter({ captureRejections: true })
+
+        this.events.on('error', error => Logger.error(error))
     }
 
     send(...args: (number | string | object)[]) {

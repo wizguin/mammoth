@@ -132,6 +132,8 @@ export default class Handler {
         Logger.debug('Parsed args: %O', parsed)
 
         this.events.emit(parsed.action, user, ...parsed.args)
+
+        user.events.emit(parsed.action, user, ...parsed.args)
     }
 
     close(user: User) {
