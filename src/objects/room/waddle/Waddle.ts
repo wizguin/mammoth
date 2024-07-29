@@ -36,7 +36,8 @@ export default class Waddle {
     remove(user: User) {
         const seat = this.users.indexOf(user)
 
-        this.users[seat] = null
+        if (seat !== -1) this.users[seat] = null
+
         user.waddle = null
 
         this.room.send('uw', this.id, seat)
