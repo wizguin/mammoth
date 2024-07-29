@@ -1,4 +1,5 @@
 import { delimiter, makeXt } from '../../handler/packet/Packet'
+import type BaseTable from '@objects/room/table/BaseTable'
 import Database from '@Database'
 import Errors from './Errors'
 import Logger from '@Logger'
@@ -25,6 +26,8 @@ export default class User implements Partial<PrismaUser> {
     x: number
     y: number
     frame: number
+
+    table: BaseTable | null
     waddle: Waddle | null
     waddleRoom: WaddleRoom | null
 
@@ -63,6 +66,8 @@ export default class User implements Partial<PrismaUser> {
         this.x = 0
         this.y = 0
         this.frame = 0
+
+        this.table = null
         this.waddle = null
         this.waddleRoom = null
 

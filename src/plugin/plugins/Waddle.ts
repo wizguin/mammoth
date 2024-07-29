@@ -23,7 +23,7 @@ export default class Waddle extends BasePlugin {
     }
 
     joinWaddle(user: User, waddleId: Num) {
-        if (!user.room || user.waddle) {
+        if (!user.room || user.waddle || user.table) {
             return
         }
 

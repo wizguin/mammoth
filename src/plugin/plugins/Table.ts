@@ -5,7 +5,8 @@ import type User from '@objects/user/User'
 export default class Table extends BasePlugin {
 
     events = {
-        gt: this.getTables
+        gt: this.getTables,
+        jt: this.joinTable
     }
 
     getTables(user: User) {
@@ -17,6 +18,16 @@ export default class Table extends BasePlugin {
 
         if (tables.length) {
             user.send('gt', ...tables)
+        }
+    }
+
+    joinTable(user: User, tableId: Num) {
+        if (!user.room || user.table || user.waddle) {
+            return
+        }
+
+        if (tableId in user.room.tables) {
+            user.room.tables[tableId].add(user)
         }
     }
 

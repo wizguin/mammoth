@@ -20,6 +20,15 @@ export default class BaseTable {
         return this.users.slice(0, 2)
     }
 
+    add(user: User) {
+        this.users.push(user)
+
+        const seat = this.users.length
+
+        user.send('jt', this.id, seat)
+        this.room.send('ut', this.id, seat)
+    }
+
     toString() {
         return `${this.id}|${this.playingUsers.length}`
     }
