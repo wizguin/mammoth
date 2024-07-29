@@ -103,12 +103,17 @@ export default class User implements Partial<PrismaUser> {
             return
         }
 
-        if (this.room) this.room.remove(this)
+        this.leaveRoom()
 
         this.setPosition(x, y)
 
-        this.room = room
-        this.room.add(this)
+        room.add(this)
+    }
+
+    leaveRoom() {
+        if (this.room) {
+            this.room.remove(this)
+        }
     }
 
     setPosition(x: number, y: number) {
@@ -230,7 +235,7 @@ export default class User implements Partial<PrismaUser> {
     }
 
     close() {
-        if (this.room) this.room.remove(this)
+        this.leaveRoom()
         if (this.waddle) this.waddle.remove(this)
     }
 

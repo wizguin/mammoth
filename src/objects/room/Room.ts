@@ -23,6 +23,8 @@ export default class Room {
     }
 
     add(user: User) {
+        user.room = this
+
         this.users.push(user)
 
         if (this.game) {
@@ -35,6 +37,8 @@ export default class Room {
     }
 
     remove(user: User) {
+        user.room = null
+
         this.users = this.users.filter(u => u !== user)
 
         if (!this.game) this.send('rp', user.id)
