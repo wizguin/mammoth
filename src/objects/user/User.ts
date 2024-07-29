@@ -11,6 +11,7 @@ import IgnoreCollection from '@collections/IgnoreCollection'
 import InventoryCollection from '@collections/InventoryCollection'
 
 import type { Prisma, User as PrismaUser } from '@prisma/client'
+import EventEmitter from 'events'
 import { nanoid } from 'nanoid'
 import type { Socket } from 'net'
 
