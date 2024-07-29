@@ -4,6 +4,7 @@ import Errors from './Errors'
 import Logger from '@Logger'
 import type Room from '@objects/room/Room'
 import type Waddle from '@objects/room/waddle/Waddle'
+import type WaddleRoom from '@objects/room/waddle/WaddleRoom'
 
 import BuddyCollection from '@collections/BuddyCollection'
 import FurnitureCollection from '@collections/FurnitureCollection'
@@ -25,6 +26,7 @@ export default class User implements Partial<PrismaUser> {
     y: number
     frame: number
     waddle: Waddle | null
+    waddleRoom: WaddleRoom | null
 
     buddyRequests: number[]
     events: EventEmitter
@@ -62,6 +64,7 @@ export default class User implements Partial<PrismaUser> {
         this.y = 0
         this.frame = 0
         this.waddle = null
+        this.waddleRoom = null
 
         this.buddyRequests = []
 
@@ -96,7 +99,7 @@ export default class User implements Partial<PrismaUser> {
     }
 
     joinRoom(room: Room, x = 0, y = 0) {
-        if (!room || this.waddle) return
+        if (!room) return
 
         if (room.isFull) {
             this.sendError(Errors.RoomFull)
@@ -111,9 +114,11 @@ export default class User implements Partial<PrismaUser> {
     }
 
     leaveRoom() {
-        if (this.room) {
-            this.room.remove(this)
-        }
+        if (this.room) this.room.remove(this)
+
+        if (this.waddle) this.waddle.remove(this)
+
+        if (this.waddleRoom) this.waddleRoom.remove(this)
     }
 
     setPosition(x: number, y: number) {
@@ -236,7 +241,6 @@ export default class User implements Partial<PrismaUser> {
 
     close() {
         this.leaveRoom()
-        if (this.waddle) this.waddle.remove(this)
     }
 
     toString() {
