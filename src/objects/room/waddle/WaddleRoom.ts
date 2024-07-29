@@ -18,6 +18,8 @@ export default class WaddleRoom {
         this.handleJoinInstance = this.handleJoinInstance.bind(this)
         this.handleJoinGame = this.handleJoinGame.bind(this)
         this.handleSendMove = this.handleSendMove.bind(this)
+        this.handleGameOver = this.handleGameOver.bind(this)
+        this.handleAddCoin = this.handleAddCoin.bind(this)
 
         users.forEach(user => this.init(user))
     }
@@ -26,12 +28,16 @@ export default class WaddleRoom {
         user.events.once('jx', this.handleJoinInstance)
         user.events.once('jz', this.handleJoinGame)
         user.events.on('zm', this.handleSendMove)
+        user.events.once('zo', this.handleGameOver)
+        user.events.once('ac', this.handleAddCoin)
     }
 
     removeListeners(user: User) {
         user.events.off('jx', this.handleJoinInstance)
         user.events.off('jz', this.handleJoinGame)
         user.events.off('zm', this.handleSendMove)
+        user.events.off('zo', this.handleGameOver)
+        user.events.off('ac', this.handleAddCoin)
     }
 
     handleJoinInstance(user: User) {
@@ -51,6 +57,21 @@ export default class WaddleRoom {
         if (playerId !== this.ready.indexOf(user)) return
 
         this.send('zm', playerId, x, y, time)
+    }
+
+    async handleGameOver(user: User) {
+        const coinsEarned = this.coins.shift() || 5
+        const newCoins = user.coins + coinsEarned
+
+        await user.update({ coins: newCoins })
+
+        user.send('zo')
+    }
+
+    handleAddCoin(user: User) {
+        this.remove(user)
+
+        user.send('ac', user.coins)
     }
 
     init(user: User) {
