@@ -7,6 +7,7 @@ import type { Assert } from 'ts-runtime-checks'
 interface Config {
     allowedVersions: string[],
     logLevel: keyof typeof levels,
+    preferredSpawn?: number,
     rateLimit: RateLimit,
     worlds: Worlds
 }
@@ -30,5 +31,6 @@ const config: Config = loadJson('config/config') as Assert<Config>
 Logger.level = config.logLevel
 
 export const allowedVersions = config.allowedVersions
+export const preferredSpawn = config.preferredSpawn
 export const rateLimit = config.rateLimit
 export const worlds = config.worlds

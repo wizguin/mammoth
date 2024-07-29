@@ -1,6 +1,7 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
 import { handleOnce } from '@Decorators'
+import { preferredSpawn } from '@Config'
 import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'
 
@@ -17,13 +18,7 @@ export default class Join extends BasePlugin {
     joinServer(user: User) {
         user.send('js')
 
-        let spawns = this.getSpawns(room => room.spawn && !room.isFull)
-
-        if (!spawns.length) {
-            spawns = this.getSpawns(room => !room.game && !room.isFull)
-        }
-
-        const spawn = spawns[Math.floor(Math.random() * spawns.length)]
+        const spawn = this.getSpawn()
 
         user.joinRoom(spawn)
     }
@@ -43,6 +38,22 @@ export default class Join extends BasePlugin {
 
     async joinPlayerRoom(user: User, userId: Num) {
         user.joinRoom(await this.playerRooms.get(userId))
+    }
+
+    getSpawn() {
+        if (preferredSpawn && preferredSpawn in this.rooms) {
+            const room = this.rooms[preferredSpawn]
+
+            if (!room.isFull) return room
+        }
+
+        let spawns = this.getSpawns(room => room.spawn && !room.isFull)
+
+        if (!spawns.length) {
+            spawns = this.getSpawns(room => !room.game && !room.isFull)
+        }
+
+        return spawns[Math.floor(Math.random() * spawns.length)]
     }
 
     getSpawns(filter: (room: Room) => boolean) {
