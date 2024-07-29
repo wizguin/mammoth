@@ -1,5 +1,6 @@
 import type Room from '../Room'
 import type User from '@objects/user/User'
+import WaddleRoom from './WaddleRoom'
 
 export default class Waddle {
 
@@ -7,15 +8,15 @@ export default class Waddle {
 
     constructor(
         public id: number,
-        public seats: number,
+        seats: number,
         public room: Room,
         public game: Room
     ) {
         this.users = new Array(seats).fill(null)
     }
 
-    get isNotFull() {
-        return this.users.includes(null)
+    get isFull() {
+        return !this.users.includes(null)
     }
 
     add(user: User) {
@@ -26,6 +27,10 @@ export default class Waddle {
 
         user.send('jw', seat)
         this.room.send('uw', this.id, seat, user.username)
+
+        if (this.isFull) {
+            this.start()
+        }
     }
 
     remove(user: User) {
@@ -35,6 +40,19 @@ export default class Waddle {
         user.waddle = null
 
         this.room.send('uw', this.id, seat)
+    }
+
+    start() {
+        // Copy users array
+        const users = [...this.users] as User[]
+
+        new WaddleRoom(this.game.id, users)
+
+        for (const user of users) {
+            this.remove(user)
+
+            user.send('sw', this.game.id, this.room.id, users.length)
+        }
     }
 
     toString() {

@@ -28,7 +28,7 @@ export default class Waddle extends BasePlugin {
 
         const waddle = user.room.waddles[waddleId]
 
-        if (waddle.isNotFull) {
+        if (!waddle.isFull) {
             waddle.add(user)
         }
     }
