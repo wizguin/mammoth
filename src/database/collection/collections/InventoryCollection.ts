@@ -1,10 +1,11 @@
 import BaseCollection from '../BaseCollection'
 
+import { items, whitelist } from '@Data'
 import Database from '@Database'
 import Errors from '@objects/user/Errors'
-import { items } from '@Data'
 import Logger from '@Logger'
 import type User from '@objects/user/User'
+import { whitelistEnabled } from '@Config'
 
 interface InventoryRecord {
     userId: number,
@@ -31,6 +32,11 @@ export default class InventoryCollection extends BaseCollection<InventoryRecord>
         }
 
         if (!(itemId in items)) {
+            this.user.sendError(Errors.ItemNotFound)
+            return
+        }
+
+        if (whitelistEnabled && !whitelist.items.includes(itemId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }

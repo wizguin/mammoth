@@ -41,8 +41,15 @@ interface Waddle {
     gameId: number
 }
 
+interface Whitelist {
+    items: number[]
+    furniture: number[],
+    playerRooms: number[]
+}
+
 export const furniture: Furniture = loadData('furniture') as Assert<Furniture>
 export const items: Items = loadData('items') as Assert<Items>
 export const playerRooms: PlayerRooms = loadData('player_rooms') as Assert<PlayerRooms>
 export const rooms: Rooms = loadData('rooms') as Assert<Rooms>
 export const waddles: Waddles = loadData('waddles') as Assert<Waddles>
+export const whitelist: Whitelist = loadData('whitelist') as Assert<Whitelist>

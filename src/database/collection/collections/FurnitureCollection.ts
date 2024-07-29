@@ -1,10 +1,11 @@
 import BaseCollection from '../BaseCollection'
 
+import { furniture, whitelist } from '@Data'
 import Database from '@Database'
 import Errors from '@objects/user/Errors'
-import { furniture } from '@Data'
 import Logger from '@Logger'
 import type User from '@objects/user/User'
+import { whitelistEnabled } from '@Config'
 
 interface FurnitureRecord {
     userId: number,
@@ -27,6 +28,11 @@ export default class FurnitureCollection extends BaseCollection<FurnitureRecord>
 
     async add(furnitureId: number) {
         if (!(furnitureId in furniture)) {
+            this.user.sendError(Errors.ItemNotFound)
+            return
+        }
+
+        if (whitelistEnabled && !whitelist.furniture.includes(furnitureId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }

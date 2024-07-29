@@ -10,6 +10,7 @@
         "addressEventsPerSecond": 50,
         "userEventsPerSecond": 10
     },
+    "whitelistEnabled": false,
     "worlds": {
         "Blizzard": {
             "port": 6114

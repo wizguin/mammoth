@@ -1,9 +1,10 @@
 import BasePlugin, { type Num, type StrArray } from '../BasePlugin'
 
+import { playerRooms, whitelist } from '@Data'
 import Database from '@Database'
 import Errors from '@objects/user/Errors'
-import { playerRooms } from '@Data'
 import type User from '@objects/user/User'
+import { whitelistEnabled } from '@Config'
 
 const furnitureStringRegex = /^(\d+\|){4}\d+$/
 
@@ -73,6 +74,11 @@ export default class PlayerRoom extends BasePlugin {
         if (!this.playerRooms.includes(user.id)) return
 
         if (!(roomId in playerRooms)) {
+            user.sendError(Errors.ItemNotFound)
+            return
+        }
+
+        if (whitelistEnabled && !whitelist.playerRooms.includes(roomId)) {
             user.sendError(Errors.ItemNotFound)
             return
         }

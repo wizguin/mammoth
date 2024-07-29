@@ -9,6 +9,7 @@ interface Config {
     logLevel: keyof typeof levels,
     preferredSpawn?: number,
     rateLimit: RateLimit,
+    whitelistEnabled: boolean,
     worlds: Worlds
 }
 
@@ -33,4 +34,5 @@ Logger.level = config.logLevel
 export const allowedVersions = config.allowedVersions
 export const preferredSpawn = config.preferredSpawn
 export const rateLimit = config.rateLimit
+export const whitelistEnabled = config.whitelistEnabled
 export const worlds = config.worlds
