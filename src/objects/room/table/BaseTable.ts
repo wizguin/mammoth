@@ -91,8 +91,10 @@ export default abstract class BaseTable {
         user.table = null
     }
 
-    reset(quittingUser: User) {
-        this.send('cz', quittingUser.username)
+    reset(quittingUser: User | null = null) {
+        if (quittingUser) {
+            this.send('cz', quittingUser.username)
+        }
 
         for (const user of this.users) {
             this.remove(user)

@@ -47,6 +47,11 @@ export default class MancalaTable extends BaseTable {
 
         this.send('zm', this.currentTurn, hole, move)
 
+        if (this.isGameOver()) {
+            this.sendGameOver()
+            return
+        }
+
         if (move !== TurnCommand.FreeTurn) {
             this.currentTurn = this.currentTurn === 0 ? 1 : 0
         }
@@ -127,6 +132,31 @@ export default class MancalaTable extends BaseTable {
         return ''
     }
 
+    isGameOver() {
+        // Sums not including mancalas
+        const player0Sum = this.sum(this.map.slice(0, 6))
+        const player1Sum = this.sum(this.map.slice(7, -1))
+
+        return player0Sum === 0 || player1Sum === 0
+    }
+
+    sendGameOver() {
+        // Sums including mancalas
+        const player0Sum = this.sum(this.map.slice(0, 7))
+        const player1Sum = this.sum(this.map.slice(7, 14))
+
+        const player0 = this.users[0]
+        const player1 = this.users[1]
+
+        player0.update({ coins: player0.coins + player0Sum })
+        player1.update({ coins: player1.coins + player1Sum })
+
+        player0.send('zo')
+        player1.send('zo')
+
+        this.reset()
+    }
+
     isTurn0Side(hole: number) {
         return hole >= 0 && hole <= 5
     }
@@ -135,7 +165,13 @@ export default class MancalaTable extends BaseTable {
         return hole >= 7 && hole <= 12
     }
 
-    reset(quittingUser: User) {
+    sum(array: number[]) {
+        return array.reduce((previousValue, currentValue) => {
+            return previousValue + currentValue
+        }, 0)
+    }
+
+    reset(quittingUser: User | null = null) {
         super.reset(quittingUser)
 
         this.map = [
