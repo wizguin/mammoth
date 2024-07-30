@@ -20,7 +20,7 @@ export default class Ball extends BasePlugin {
         user.send('gz', this.ballX, this.ballY)
     }
 
-    sendMove(user: User, x: Num, y: Num) {
+    sendMove(user: User, x: Num = this.ballX, y: Num = this.ballY) {
         if (user.room?.name !== 'Rink') {
             return
         }

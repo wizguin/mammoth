@@ -20,13 +20,19 @@ export default abstract class BaseTable {
         this.events = new TemporaryEvents(this, {
             once: {
                 gz: this.handleGetGame,
-                jz: this.handleJoinGame
+                jz: this.handleJoinGame,
+                lz: this.handleLeaveGame,
+                lt: this.handleLeaveTable
             }
         })
     }
 
     get playingUsers() {
         return this.users.slice(0, 2)
+    }
+
+    isPlayingUser(user: User) {
+        return this.playingUsers.includes(user)
     }
 
     abstract gameString: string
@@ -52,6 +58,19 @@ export default abstract class BaseTable {
         }
     }
 
+    handleLeaveGame(user: User) {
+        user.send('lz')
+    }
+
+    handleLeaveTable(user: User) {
+        if (this.started && this.isPlayingUser(user)) {
+            this.reset(user)
+
+        } else {
+            this.remove(user)
+        }
+    }
+
     add(user: User) {
         this.events.addListeners(user)
 
@@ -62,6 +81,27 @@ export default abstract class BaseTable {
 
         user.send('jt', this.id, seat)
         this.room.send('ut', this.id, seat)
+    }
+
+    remove(user: User) {
+        this.events.removeListeners(user)
+
+        this.users = this.users.filter(u => u !== user)
+
+        user.table = null
+    }
+
+    reset(quittingUser: User) {
+        this.send('cz', quittingUser.username)
+
+        for (const user of this.users) {
+            this.remove(user)
+        }
+
+        this.started = false
+        this.currentTurn = 1
+
+        this.room.send('ut', this.id, this.users.length)
     }
 
     toString() {
