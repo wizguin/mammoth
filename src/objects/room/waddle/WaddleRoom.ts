@@ -1,4 +1,5 @@
 import type { Num } from '../../../plugin/ArgTypes'
+import TemporaryEvents from '@objects/user/events/TemporaryEvents'
 import type User from '@objects/user/User'
 
 export default class WaddleRoom {
@@ -6,6 +7,7 @@ export default class WaddleRoom {
     ready: (User | null)[]
     coins: number[]
     started: boolean
+    events: TemporaryEvents
 
     constructor(
         public id: number,
@@ -15,29 +17,19 @@ export default class WaddleRoom {
         this.coins = [20, 10, 5, 5]
         this.started = false
 
-        this.handleJoinInstance = this.handleJoinInstance.bind(this)
-        this.handleJoinGame = this.handleJoinGame.bind(this)
-        this.handleSendMove = this.handleSendMove.bind(this)
-        this.handleGameOver = this.handleGameOver.bind(this)
-        this.handleAddCoin = this.handleAddCoin.bind(this)
+        this.events = new TemporaryEvents(this, {
+            on: {
+                zm: this.handleSendMove
+            },
+            once: {
+                jx: this.handleJoinInstance,
+                jz: this.handleJoinGame,
+                zo: this.handleGameOver,
+                ac: this.handleAddCoin
+            }
+        })
 
         users.forEach(user => this.init(user))
-    }
-
-    addListeners(user: User) {
-        user.events.once('jx', this.handleJoinInstance)
-        user.events.once('jz', this.handleJoinGame)
-        user.events.on('zm', this.handleSendMove)
-        user.events.once('zo', this.handleGameOver)
-        user.events.once('ac', this.handleAddCoin)
-    }
-
-    removeListeners(user: User) {
-        user.events.off('jx', this.handleJoinInstance)
-        user.events.off('jz', this.handleJoinGame)
-        user.events.off('zm', this.handleSendMove)
-        user.events.off('zo', this.handleGameOver)
-        user.events.off('ac', this.handleAddCoin)
     }
 
     handleJoinInstance(user: User) {
@@ -81,14 +73,14 @@ export default class WaddleRoom {
     }
 
     init(user: User) {
-        this.addListeners(user)
+        this.events.addListeners(user)
 
         user.leaveRoom()
         user.waddleRoom = this
     }
 
     remove(user: User) {
-        this.removeListeners(user)
+        this.events.removeListeners(user)
 
         // Remove from users
         this.users = this.users.filter(u => u !== user)
