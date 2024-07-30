@@ -19,7 +19,8 @@ export default abstract class BaseTable {
 
         this.events = new TemporaryEvents(this, {
             once: {
-                'gz': this.handleGetGame
+                gz: this.handleGetGame,
+                jz: this.handleJoinGame
             }
         })
     }
@@ -32,6 +33,23 @@ export default abstract class BaseTable {
 
     handleGetGame(user: User) {
         user.send('gz', this.gameString)
+    }
+
+    handleJoinGame(user: User) {
+        if (this.started) {
+            return
+        }
+
+        const seat = this.users.indexOf(user)
+
+        user.send('jz', seat)
+        this.send('uz', seat, user.username)
+
+        if (this.users.length === 2) {
+            this.started = true
+
+            this.send('sz', this.currentTurn)
+        }
     }
 
     add(user: User) {
@@ -48,6 +66,10 @@ export default abstract class BaseTable {
 
     toString() {
         return `${this.id}|${this.playingUsers.length}`
+    }
+
+    send(...args: (number | string | object)[]) {
+        this.users.forEach(user => user.send(...args))
     }
 
 }
