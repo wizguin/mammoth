@@ -32,10 +32,6 @@ export default class Minigame extends BasePlugin {
     }
 
     addCoin(user: User) {
-        if (!user.room?.game) {
-            return
-        }
-
         user.send('ac', user.coins)
     }
 

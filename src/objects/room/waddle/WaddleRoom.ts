@@ -24,8 +24,7 @@ export default class WaddleRoom {
             once: {
                 jx: this.handleJoinInstance,
                 jz: this.handleJoinGame,
-                zo: this.handleGameOver,
-                ac: this.handleAddCoin
+                zo: this.handleGameOver
             }
         })
 
@@ -64,12 +63,8 @@ export default class WaddleRoom {
         await user.update({ coins: newCoins })
 
         user.send('zo')
-    }
 
-    handleAddCoin(user: User) {
         this.remove(user)
-
-        user.send('ac', user.coins)
     }
 
     init(user: User) {
