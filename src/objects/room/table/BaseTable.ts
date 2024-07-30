@@ -15,7 +15,7 @@ export default abstract class BaseTable {
     ) {
         this.users = []
         this.started = false
-        this.currentTurn = 1
+        this.currentTurn = 0
 
         this.events = new TemporaryEvents(this, {
             once: {
@@ -99,7 +99,7 @@ export default abstract class BaseTable {
         }
 
         this.started = false
-        this.currentTurn = 1
+        this.currentTurn = 0
 
         this.room.send('ut', this.id, this.users.length)
     }
