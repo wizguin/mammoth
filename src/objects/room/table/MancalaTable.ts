@@ -145,14 +145,10 @@ export default class MancalaTable extends BaseTable {
         const player0Sum = this.sum(this.map.slice(0, 7))
         const player1Sum = this.sum(this.map.slice(7, 14))
 
-        const player0 = this.users[0]
-        const player1 = this.users[1]
+        this.users[0].update({ coins: this.users[0].coins + player0Sum })
+        this.users[1].update({ coins: this.users[1].coins + player1Sum })
 
-        player0.update({ coins: player0.coins + player0Sum })
-        player1.update({ coins: player1.coins + player1Sum })
-
-        player0.send('zo')
-        player1.send('zo')
+        this.send('zo')
 
         this.reset()
     }
