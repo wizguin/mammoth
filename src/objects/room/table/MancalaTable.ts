@@ -22,8 +22,13 @@ export default class MancalaTable extends BaseTable {
         }
 
         const map = this.map.join(',')
+        const strings = [...usernames, map]
 
-        return [...usernames, map].join('%')
+        if (this.started) {
+            strings.push(this.currentTurn)
+        }
+
+        return strings.join('%')
     }
 
 }
