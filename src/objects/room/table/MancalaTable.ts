@@ -135,6 +135,15 @@ export default class MancalaTable extends BaseTable {
         return hole >= 7 && hole <= 12
     }
 
+    reset(quittingUser: User) {
+        super.reset(quittingUser)
+
+        this.map = [
+            4, 4, 4, 4, 4, 4, 0,
+            4, 4, 4, 4, 4, 4, 0
+        ]
+    }
+
     get gameString() {
         const usernames = new Array(2).fill('')
 
