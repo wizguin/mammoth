@@ -1,0 +1,38 @@
+{
+    "0": {
+        "name": "Blue",
+        "maxHealth": 100,
+        "maxHunger": 100,
+        "maxRest": 100
+    },
+    "1": {
+        "name": "Pink",
+        "maxHealth": 100,
+        "maxHunger": 120,
+        "maxRest": 80
+    },
+    "2": {
+        "name": "Black",
+        "maxHealth": 120,
+        "maxHunger": 80,
+        "maxRest": 100
+    },
+    "3": {
+        "name": "Green",
+        "maxHealth": 80,
+        "maxHunger": 100,
+        "maxRest": 120
+    },
+    "4": {
+        "name": "Purple",
+        "maxHealth": 80,
+        "maxHunger": 120,
+        "maxRest": 80
+    },
+    "5": {
+        "name": "Red",
+        "maxHealth": 100,
+        "maxHunger": 80,
+        "maxRest": 120
+    }
+}

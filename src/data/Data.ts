@@ -5,6 +5,7 @@ import type { Assert } from 'ts-runtime-checks'
 
 type Furniture = Record<string, FurnitureItem>
 type Items = Record<string, Item>
+type Pets = Record<string, Pet>
 type PlayerRooms = Record<string, PlayerRoom>
 type Rooms = Room[]
 type Tables = Table[]
@@ -20,6 +21,13 @@ interface Item {
     type: number,
     cost: number,
     member: boolean
+}
+
+interface Pet {
+    name: string,
+    maxHealth: number,
+    maxHunger: number,
+    maxRest: number
 }
 
 interface PlayerRoom {
@@ -52,11 +60,13 @@ interface Waddle {
 interface Whitelist {
     items: number[]
     furniture: number[],
+    pets: number[]
     playerRooms: number[]
 }
 
 export const furniture: Furniture = loadData('furniture') as Assert<Furniture>
 export const items: Items = loadData('items') as Assert<Items>
+export const pets: Pets = loadData('pets') as Assert<Pets>
 export const playerRooms: PlayerRooms = loadData('player_rooms') as Assert<PlayerRooms>
 export const rooms: Rooms = loadData('rooms') as Assert<Rooms>
 export const tables: Tables = loadData('tables') as Assert<Tables>
