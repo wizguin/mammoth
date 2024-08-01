@@ -70,8 +70,8 @@ model Pet {
     typeId       Int
     name         String   @db.VarChar(12)
     adoptionDate DateTime @default(now()) @db.Timestamp(0)
-    energy       Int      @default(100)
     health       Int      @default(100)
+    hunger       Int      @default(100)
     rest         Int      @default(100)
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_pets_users")

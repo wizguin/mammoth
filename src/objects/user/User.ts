@@ -11,6 +11,7 @@ import BuddyCollection from '@collections/BuddyCollection'
 import FurnitureCollection from '@collections/FurnitureCollection'
 import IgnoreCollection from '@collections/IgnoreCollection'
 import InventoryCollection from '@collections/InventoryCollection'
+import PetCollection from '@collections/PetCollection'
 
 import type { Prisma, User as PrismaUser } from '@prisma/client'
 import EventEmitter from 'events'
@@ -56,6 +57,7 @@ export default class User implements Partial<PrismaUser> {
     furniture!: FurnitureCollection
     ignores!: IgnoreCollection
     inventory!: InventoryCollection
+    pets!: PetCollection
 
     constructor(socket: Socket) {
         this.socket = socket
@@ -216,7 +218,9 @@ export default class User implements Partial<PrismaUser> {
                     }
                 },
 
-                inventory: true
+                inventory: true,
+
+                pets: true
             }
         })
 
@@ -224,7 +228,7 @@ export default class User implements Partial<PrismaUser> {
             return false
         }
 
-        const { buddies, furniture, ignores, inventory, ...rest } = user
+        const { buddies, furniture, ignores, inventory, pets, ...rest } = user
 
         Object.assign(this, rest)
 
@@ -232,6 +236,7 @@ export default class User implements Partial<PrismaUser> {
         this.furniture = new FurnitureCollection(this, furniture)
         this.ignores = new IgnoreCollection(this, ignores)
         this.inventory = new InventoryCollection(this, inventory)
+        this.pets = new PetCollection(this, pets)
 
         return true
     }
