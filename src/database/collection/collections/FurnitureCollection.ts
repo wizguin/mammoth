@@ -7,19 +7,15 @@ import Logger from '@Logger'
 import type User from '@objects/user/User'
 import { whitelistEnabled } from '@Config'
 
-interface FurnitureRecord {
-    userId: number,
-    furnitureId: number,
-    quantity: number
-}
+import type { Furniture } from '@prisma/client'
 
-export default class FurnitureCollection extends BaseCollection<FurnitureRecord> {
+export default class FurnitureCollection extends BaseCollection<Furniture> {
 
-    constructor(user: User, records: FurnitureRecord[]) {
+    constructor(user: User, records: Furniture[]) {
         super(user, records, 'furnitureId')
     }
 
-    collect(records: FurnitureRecord[]) {
+    collect(records: Furniture[]) {
         // Filter out items that don't exist
         const exists = records.filter(r => r.furnitureId in furniture)
 

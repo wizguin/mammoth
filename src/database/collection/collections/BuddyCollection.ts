@@ -3,17 +3,17 @@ import BaseCollection from '../BaseCollection'
 import Database from '@Database'
 import type User from '@objects/user/User'
 
-interface BuddyRecord {
-    userId: number,
-    buddyId: number,
+import type { Buddy as PrismaBuddy } from '@prisma/client'
+
+interface Buddy extends PrismaBuddy {
     buddy: {
         username: string
     }
 }
 
-export default class BuddyCollection extends BaseCollection<BuddyRecord> {
+export default class BuddyCollection extends BaseCollection<Buddy> {
 
-    constructor(user: User, records: BuddyRecord[]) {
+    constructor(user: User, records: Buddy[]) {
         super(user, records, 'buddyId')
     }
 

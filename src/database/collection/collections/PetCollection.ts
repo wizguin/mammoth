@@ -3,11 +3,11 @@ import BaseCollection from '../BaseCollection'
 import Pet from '@objects/pet/Pet'
 import type User from '@objects/user/User'
 
-import type { Pet as PetRecord } from '@prisma/client'
+import type { Pet as PrismaPet } from '@prisma/client'
 
 export default class PetCollection extends BaseCollection<Pet> {
 
-    constructor(user: User, records: PetRecord[]) {
+    constructor(user: User, records: PrismaPet[]) {
         const pets = records.map(record => createPet(record))
 
         super(user, pets, 'id')
@@ -23,7 +23,7 @@ export default class PetCollection extends BaseCollection<Pet> {
 
 }
 
-function createPet(record: PetRecord) {
+function createPet(record: PrismaPet) {
     const { id, userId, typeId, name, adoptionDate, health, hunger, rest } = record
 
     return new Pet(id, userId, typeId, name, adoptionDate, health, hunger, rest)

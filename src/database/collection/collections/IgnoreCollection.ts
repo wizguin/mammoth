@@ -3,17 +3,17 @@ import BaseCollection from '../BaseCollection'
 import Database from '@Database'
 import type User from '@objects/user/User'
 
-interface IgnoreRecord {
-    userId: number,
-    ignoreId: number,
+import type { Ignore as PrismaIgnore } from '@prisma/client'
+
+interface Ignore extends PrismaIgnore {
     ignore: {
         username: string
     }
 }
 
-export default class IgnoreCollection extends BaseCollection<IgnoreRecord> {
+export default class IgnoreCollection extends BaseCollection<Ignore> {
 
-    constructor(user: User, records: IgnoreRecord[]) {
+    constructor(user: User, records: Ignore[]) {
         super(user, records, 'ignoreId')
     }
 
