@@ -9,7 +9,6 @@ export default class Join extends BasePlugin {
 
     events = {
         js: this.joinServer,
-        il: this.getItemList,
         jr: this.joinRoom,
         jp: this.joinPlayerRoom
     }
@@ -21,15 +20,6 @@ export default class Join extends BasePlugin {
         const spawn = this.getSpawn()
 
         user.joinRoom(spawn)
-    }
-
-    @handleOnce
-    getItemList(user: User) {
-        if (user.inventory.count) {
-            user.send('gi', user.inventory)
-        } else {
-            user.send('gi')
-        }
     }
 
     joinRoom(user: User, roomId: Num, x: Num, y: Num) {
