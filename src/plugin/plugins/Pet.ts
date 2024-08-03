@@ -18,7 +18,9 @@ export default class Pet extends BasePlugin {
     }
 
     checkWord(user: User, word: Str) {
-        user.send('cw', word, 1)
+        const result = Number(user.pets.checkName(word))
+
+        user.send('cw', word, result)
     }
 
     namePet(user: User, typeId: Num, name: Str) {

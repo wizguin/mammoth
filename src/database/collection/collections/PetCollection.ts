@@ -5,6 +5,8 @@ import type User from '@objects/user/User'
 
 import type { Pet as PrismaPet } from '@prisma/client'
 
+const nameRegex = /^[a-z ]+$/i
+
 export default class PetCollection extends BaseCollection<Pet> {
 
     constructor(user: User, records: PrismaPet[]) {
@@ -19,6 +21,10 @@ export default class PetCollection extends BaseCollection<Pet> {
 
     toString() {
         return this.values.join('%')
+    }
+
+    checkName(name: string) {
+        return name.length >= 3 && name.length <= 12 && nameRegex.test(name)
     }
 
 }
