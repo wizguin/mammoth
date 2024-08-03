@@ -158,6 +158,10 @@ export default class User implements Partial<PrismaUser> {
         this.furniture.add(furnitureId)
     }
 
+    addPet(typeId: number, name: string) {
+        this.pets.add(typeId, name)
+    }
+
     addBuddyRequest(userId: number, username: string) {
         if (userId === this.id) {
             return

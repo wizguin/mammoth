@@ -27,7 +27,9 @@ interface Pet {
     name: string,
     maxHealth: number,
     maxHunger: number,
-    maxRest: number
+    maxRest: number,
+    cost: number,
+    member: boolean
 }
 
 interface PlayerRoom {

@@ -7,7 +7,6 @@ export default class Pet extends BasePlugin {
     events = {
         cw: this.checkWord,
         n: this.namePet,
-        a: this.addPet,
         g: this.getPets,
         r: this.sendRest,
         p: this.sendPlay,
@@ -24,11 +23,7 @@ export default class Pet extends BasePlugin {
     }
 
     namePet(user: User, typeId: Num, name: Str) {
-
-    }
-
-    addPet(user: User) {
-
+        user.addPet(typeId, name)
     }
 
     getPets(user: User, userId: number) {
