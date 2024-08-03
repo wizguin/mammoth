@@ -49,6 +49,10 @@ export default abstract class BaseCollection<R> {
         }
     }
 
+    get(key: number | string) {
+        return this.collection[key]
+    }
+
     includes(key: number | string) {
         return key in this.collection
     }
