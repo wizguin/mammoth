@@ -54,12 +54,17 @@ export default class PetCollection extends BaseCollection<Pet> {
             return
         }
 
+        const { maxHealth, maxHunger, maxRest } = pets[typeId]
+
         try {
             const record = await Database.pet.create({
                 data: {
                     userId: this.user.id,
                     typeId: typeId,
-                    name: name
+                    name: name,
+                    health: maxHealth,
+                    hunger: maxHunger,
+                    rest: maxRest
                 }
             })
 
