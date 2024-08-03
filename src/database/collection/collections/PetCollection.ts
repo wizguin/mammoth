@@ -71,17 +71,13 @@ export default class PetCollection extends BaseCollection<Pet> {
         }
     }
 
-    toString() {
-        return this.values.join('%')
-    }
-
     checkName(name: string) {
         return name.length >= 3 && name.length <= 12 && nameRegex.test(name)
     }
 
 }
 
-function createPet(record: PrismaPet) {
+export function createPet(record: PrismaPet) {
     const { id, userId, typeId, name, adoptionDate, health, hunger, rest } = record
 
     return new Pet(id, userId, typeId, name, adoptionDate, health, hunger, rest)

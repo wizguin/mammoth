@@ -1,5 +1,8 @@
 import BasePlugin, { type Num, type Str } from '../BasePlugin'
 
+import { createPet } from '@collections/PetCollection'
+import Database from '@Database'
+import type PetObject from '@objects/pet/Pet'
 import type User from '@objects/user/User'
 
 export default class Pet extends BasePlugin {
@@ -26,8 +29,21 @@ export default class Pet extends BasePlugin {
         user.addPet(typeId, name)
     }
 
-    getPets(user: User, userId: number) {
-        user.send('p', 'g', user.pets)
+    async getPets(user: User, userId: number) {
+        let pets: PetObject[]
+
+        if (userId in this.usersById) {
+            pets = user.pets.values
+
+        } else {
+            const records = await Database.pet.findMany({
+                where: { userId: userId }
+            })
+
+            pets = records.map(record => createPet(record))
+        }
+
+        user.send('p', 'g', ...pets)
     }
 
     sendRest(user: User) {
