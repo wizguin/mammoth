@@ -67,7 +67,15 @@ export default class Pet extends BasePlugin {
     }
 
     sendMovePet(user: User, petId: Num, x: Num, y: Num) {
-        user.room?.send('p', 'm', petId, x, y)
+        if (!user.room) {
+            return
+        }
+
+        if (user.pets.includes(petId)) {
+            user.pets.get(petId).setPosition(x, y)
+
+            user.room.send('p', 'm', petId, x, y)
+        }
     }
 
 }

@@ -36,6 +36,11 @@ export default class Pet implements PrismaPet {
         return Math.round(statTotal / maxTotal * 100)
     }
 
+    setPosition(x: number, y: number) {
+        this.x = x
+        this.y = y
+    }
+
     async decreaseStats() {
         const newStats = {
             health: this.decreaseStat(this.health),
