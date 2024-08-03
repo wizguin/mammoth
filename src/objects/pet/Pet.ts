@@ -35,8 +35,8 @@ export default class Pet implements PrismaPet {
     async decreaseStats() {
         const newStats = {
             health: this.decreaseStat(this.health),
-            hunger: this.decreaseStat(this.health),
-            rest: this.decreaseStat(this.health)
+            hunger: this.decreaseStat(this.hunger),
+            rest: this.decreaseStat(this.rest)
         }
 
         try {
