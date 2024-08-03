@@ -1,3 +1,5 @@
+import Database from '@Database'
+import Logger from '@Logger'
 import { pets } from '@Data'
 
 import type { Pet as PrismaPet } from '@prisma/client'
@@ -28,6 +30,36 @@ export default class Pet implements PrismaPet {
         this.maxRest = data.maxRest
 
         this.happy = 100
+    }
+
+    async decreaseStats() {
+        const newStats = {
+            health: this.decreaseStat(this.health),
+            hunger: this.decreaseStat(this.health),
+            rest: this.decreaseStat(this.health)
+        }
+
+        try {
+            await Database.pet.update({
+                where: {
+                    id: this.id
+                },
+                data: newStats
+            })
+
+            this.health = newStats.health
+            this.hunger = newStats.hunger
+            this.rest = newStats.rest
+
+        } catch (error) {
+            if (error instanceof Error) {
+                Logger.error(`Could not update pet: ${this.id}, data: %O, error: ${error.stack}`, newStats)
+            }
+        }
+    }
+
+    decreaseStat(stat: number) {
+        return Math.max(0, stat - 1)
     }
 
     toString() {

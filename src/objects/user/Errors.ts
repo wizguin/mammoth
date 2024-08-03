@@ -4,7 +4,7 @@ enum Errors {
     ItemOwned = 400,
     InsufficientCoins = 401,
     ItemNotFound = 402,
-    MaxPuffles = 440,
+    MaxPets = 440,
     InvalidName = 441
 }
 

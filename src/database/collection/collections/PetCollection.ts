@@ -11,14 +11,19 @@ import { whitelistEnabled } from '@Config'
 import type { Pet as PrismaPet } from '@prisma/client'
 
 const nameRegex = /^[a-z ]+$/i
-const maxPuffles = 8
+const maxPets = 8
+const updateInterval = 36000
 
 export default class PetCollection extends BaseCollection<Pet> {
+
+    petUpdate: NodeJS.Timeout
 
     constructor(user: User, records: PrismaPet[]) {
         const pets = records.map(record => createPet(record))
 
         super(user, pets, 'id')
+
+        this.petUpdate = setTimeout(() => this.updatePets(), 1)
     }
 
     async add(typeId: number, name: string) {
@@ -32,8 +37,8 @@ export default class PetCollection extends BaseCollection<Pet> {
             return
         }
 
-        if (this.count >= maxPuffles) {
-            this.user.sendError(Errors.MaxPuffles)
+        if (this.count >= maxPets) {
+            this.user.sendError(Errors.MaxPets)
             return
         }
 
@@ -69,6 +74,15 @@ export default class PetCollection extends BaseCollection<Pet> {
         } catch (error) {
             Logger.error(error)
         }
+    }
+
+    updatePets() {
+        for (const pet of this.values) {
+            pet.decreaseStats()
+        }
+
+        // Schedule next update
+        this.petUpdate = setTimeout(() => this.updatePets(), updateInterval)
     }
 
     checkName(name: string) {
