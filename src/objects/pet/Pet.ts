@@ -11,7 +11,6 @@ export default class Pet implements PrismaPet {
     maxHealth: number
     maxHunger: number
     maxRest: number
-    happy: number
 
     constructor(
         public id: number,
@@ -28,8 +27,13 @@ export default class Pet implements PrismaPet {
         this.maxHealth = data.maxHealth
         this.maxHunger = data.maxHunger
         this.maxRest = data.maxRest
+    }
 
-        this.happy = 100
+    get happy() {
+        const statTotal = this.health + this.hunger + this.rest
+        const maxTotal = this.maxHealth + this.maxHunger + this.maxRest
+
+        return Math.round(statTotal / maxTotal * 100)
     }
 
     async decreaseStats() {
