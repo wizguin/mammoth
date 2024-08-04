@@ -4,6 +4,12 @@ import { pets } from '@Data'
 
 import type { Pet as PrismaPet } from '@prisma/client'
 
+export interface Updates {
+    health?: number,
+    hunger?: number,
+    rest?: number
+}
+
 export default class Pet implements PrismaPet {
 
     x = 0
@@ -41,34 +47,44 @@ export default class Pet implements PrismaPet {
         this.y = y
     }
 
-    async decreaseStats() {
-        const newStats = {
-            health: this.decreaseStat(this.health),
-            hunger: this.decreaseStat(this.hunger),
-            rest: this.decreaseStat(this.rest)
-        }
+    async updateStats(updates: Updates) {
+        this.health = this.getNewStat(this.health, updates.health, this.maxHealth)
+        this.hunger = this.getNewStat(this.hunger, updates.hunger, this.maxHunger)
+        this.rest = this.getNewStat(this.rest, updates.rest, this.maxRest)
 
         try {
             await Database.pet.update({
                 where: {
                     id: this.id
                 },
-                data: newStats
+                data: {
+                    health: this.health,
+                    hunger: this.hunger,
+                    rest: this.rest
+                }
             })
-
-            this.health = newStats.health
-            this.hunger = newStats.hunger
-            this.rest = newStats.rest
 
         } catch (error) {
             if (error instanceof Error) {
-                Logger.error(`Could not update pet: ${this.id}, data: %O, error: ${error.stack}`, newStats)
+                Logger.error(`Could not update pet: ${this.id}, data: %O, error: ${error.stack}`, updates)
             }
         }
     }
 
-    decreaseStat(stat: number) {
-        return Math.max(0, stat - 1)
+    getNewStat(currentValue: number, update: number | undefined, maxValue: number) {
+        if (!update) {
+            return currentValue
+        }
+
+        return Math.min(Math.max(0, currentValue + update), maxValue)
+    }
+
+    async decreaseStats() {
+        await this.updateStats({
+            health: -1,
+            hunger: -1,
+            rest: -1
+        })
     }
 
     toString() {

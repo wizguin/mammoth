@@ -3,7 +3,15 @@ import BasePlugin, { type Num, type Str } from '../BasePlugin'
 import { createPet } from '@collections/PetCollection'
 import Database from '@Database'
 import type PetObject from '@objects/pet/Pet'
+import type { Updates } from '@objects/pet/Pet'
 import type User from '@objects/user/User'
+
+enum Interactions {
+    Rest = 'r',
+    Play = 'p',
+    Feed = 'f',
+    Treat = 't'
+}
 
 export default class Pet extends BasePlugin {
 
@@ -46,36 +54,65 @@ export default class Pet extends BasePlugin {
         user.send('p', 'g', ...pets)
     }
 
-    sendRest(user: User) {
-
+    sendRest(user: User, petId: Num) {
+        this.sendInteraction(user, petId, Interactions.Rest, {
+            hunger: -10,
+            rest: 200
+        })
     }
 
-    sendPlay(user: User) {
-
+    sendPlay(user: User, petId: Num) {
+        this.sendInteraction(user, petId, Interactions.Play, {
+            health: 200,
+            hunger: -10,
+            rest: -10
+        })
     }
 
-    sendFeed(user: User) {
+    sendFeed(user: User, petId: Num) {
+        this.sendInteraction(user, petId, Interactions.Feed, {
+            hunger: 200
+        })
 
+        user.update({ coins: user.coins - 10 })
     }
 
-    sendTreat(user: User) {
+    sendTreat(user: User, petId: Num, treatId: Num) {
+        this.sendInteraction(user, petId, Interactions.Treat, {
+            health: -10
+        }, treatId)
 
+        user.update({ coins: user.coins - 5 })
     }
 
-    sendPetFrame(user: User) {
-
-    }
-
-    sendMovePet(user: User, petId: Num, x: Num, y: Num) {
-        if (!user.room) {
+    sendPetFrame(user: User, petId: Num, frame: Num) {
+        if (!user.room || !user.pets.includes(petId)) {
             return
         }
 
-        if (user.pets.includes(petId)) {
-            user.pets.get(petId).setPosition(x, y)
+        user.sendRoom('p', 's', petId, frame)
+    }
 
-            user.room.send('p', 'm', petId, x, y)
+    sendMovePet(user: User, petId: Num, x: Num, y: Num) {
+        if (!user.room || !user.pets.includes(petId)) {
+            return
         }
+
+        user.pets.get(petId).setPosition(x, y)
+
+        user.sendRoom('p', 'm', petId, x, y)
+    }
+
+    sendInteraction(user: User, petId: number, type: Interactions, updates: Updates, ...args: (number | string)[]) {
+        if (!user.room || !user.pets.includes(petId)) {
+            return
+        }
+
+        const pet = user.pets.get(petId)
+
+        pet.updateStats(updates)
+
+        user.sendRoom('p', type, pet, ...args)
     }
 
 }
