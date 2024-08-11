@@ -2,10 +2,11 @@ import { Server, type Socket } from 'net'
 
 import './utils/Setup'
 
-import { rateLimit, worlds } from '@Config'
+import { host, maxUsers, port } from './args/Args'
 import Errors from '@objects/user/Errors'
 import Handler from './handler/Handler'
 import Logger from '@Logger'
+import { rateLimit } from '@Config'
 import RateLimiter from './ratelimit/RateLimiter'
 import User from '@objects/user/User'
 
@@ -16,8 +17,9 @@ export default class World extends Server {
     rateLimiter?: RateLimiter
 
     constructor(
+        private host: string,
         private port: number,
-        private maxUsers: number = 300
+        private maxUsers: number
     ) {
         super()
 
@@ -30,7 +32,7 @@ export default class World extends Server {
 
         this.on('listening', () => this.onListening())
 
-        this.listen(this.port)
+        this.listen(this.port, this.host)
     }
 
     onListening() {
@@ -99,10 +101,4 @@ export default class World extends Server {
 
 }
 
-const id = process.argv[2]
-
-if (id in worlds) {
-    const { port, maxUsers } = worlds[id]
-
-    new World(port, maxUsers)
-}
+new World(host, port, maxUsers)

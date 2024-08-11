@@ -3,9 +3,9 @@
     "version": "1.0.0-beta",
     "description": "Pre-CPIP server emulator",
     "scripts": {
-        "dev": "nodemon --watch src --watch config --watch data -r tsconfig-paths/register src/World.ts Blizzard",
+        "dev": "nodemon --watch src --watch config --watch data -r tsconfig-paths/register src/World.ts -n Blizzard -p 6114",
         "build": "rimraf dist && tsc && tsc-alias",
-        "start": "node dist/World.js Blizzard",
+        "start": "node dist/World.js",
         "eslint": "eslint src",
         "eslint:fix": "eslint src --fix",
         "prepare": "ts-patch install"
@@ -21,6 +21,7 @@
         "@typescript-eslint/eslint-plugin": "^5.59.7",
         "@typescript-eslint/parser": "^5.59.7",
         "bcrypt": "^5.1.1",
+        "commander": "^12.1.0",
         "elementtree": "^0.1.7",
         "eslint": "^8.41.0",
         "mysql2": "^3.3.3",

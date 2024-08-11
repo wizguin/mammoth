@@ -9,8 +9,7 @@ interface Config {
     logLevel: keyof typeof levels,
     preferredSpawn?: number,
     rateLimit: RateLimit,
-    whitelistEnabled: boolean,
-    worlds: Worlds
+    whitelistEnabled: boolean
 }
 
 interface RateLimit {
@@ -18,13 +17,6 @@ interface RateLimit {
     addressConnectsPerSecond: number,
     addressEventsPerSecond: number,
     userEventsPerSecond: number
-}
-
-interface Worlds {
-    [key: string]: {
-        port: number,
-        maxUsers?: number
-    }
 }
 
 const config: Config = loadJson('config/config') as Assert<Config>
@@ -35,4 +27,3 @@ export const allowedVersions = config.allowedVersions
 export const preferredSpawn = config.preferredSpawn
 export const rateLimit = config.rateLimit
 export const whitelistEnabled = config.whitelistEnabled
-export const worlds = config.worlds

@@ -1,9 +1,8 @@
 import { colors, type CustomLogger, levels } from './LoggerLevels'
 import { defaultFormat, formatConsole, formatFile } from './LoggerFormats'
+import { name } from '../args/Args'
 
 import { addColors, createLogger, transports } from 'winston'
-
-const id = process.argv[2]
 
 const options = {
     levels: levels,
@@ -13,12 +12,12 @@ const options = {
     transports: [
         new transports.File({
             level: 'error',
-            filename: `${id}.error.log`,
+            filename: `${name}.error.log`,
             dirname: 'logs',
             format: formatFile
         }),
         new transports.File({
-            filename: `${id}.combined.log`,
+            filename: `${name}.combined.log`,
             dirname: 'logs',
             format: formatFile
         }),

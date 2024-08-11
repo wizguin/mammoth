@@ -1,8 +1,8 @@
+import { name } from '../args/Args'
+
 import { format } from 'winston'
 
 const { colorize, combine, printf, timestamp, splat } = format
-
-const id = process.argv[2]
 
 export const defaultFormat = combine(
     timestamp({
@@ -10,7 +10,7 @@ export const defaultFormat = combine(
     }),
     splat(),
     printf(message => {
-        return `${message.timestamp} [${id}] ${message.message}`
+        return `${message.timestamp} [${name}] ${message.message}`
     })
 )
 
