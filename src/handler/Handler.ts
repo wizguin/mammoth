@@ -66,7 +66,7 @@ export default class Handler {
             const { id, roomId, type } = table
 
             if (!(roomId in this.rooms)) {
-                Logger.error('Could not create table: %O', table)
+                Logger.error('Could not create table', { table })
                 continue
             }
 
@@ -79,7 +79,7 @@ export default class Handler {
             const { id, roomId, seats, gameId } = waddle
 
             if (!(roomId in this.rooms) || !(gameId in this.rooms)) {
-                Logger.error('Could not create waddle: %O', waddle)
+                Logger.error('Could not create waddle', { waddle })
                 continue
             }
 
@@ -104,9 +104,7 @@ export default class Handler {
             }
 
         } catch (error) {
-            if (error instanceof Error) {
-                Logger.error(error.stack)
-            }
+            Logger.error(error)
         }
     }
 
@@ -151,7 +149,7 @@ export default class Handler {
             return
         }
 
-        Logger.debug('Parsed args: %O', parsed)
+        Logger.debug('Parsed args', { parsed })
 
         this.events.emit(parsed.action, user, ...parsed.args)
 

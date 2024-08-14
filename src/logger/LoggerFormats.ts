@@ -1,26 +1,34 @@
-import { name } from '../args/Args'
-
 import { format } from 'winston'
 
-const { colorize, combine, printf, timestamp, splat } = format
+const { combine, colorize, errors, json, printf, timestamp } = format
 
-export const defaultFormat = combine(
+export const formatDev = combine(
+    errors({ stack: true }),
     timestamp({
         format: 'HH:mm:ss'
     }),
-    splat(),
-    printf(message => {
-        return `${message.timestamp} [${name}] ${message.message}`
-    })
-)
+    printf(({ timestamp, message, level, stack, ...meta }) => {
+        // Error stack
+        if (stack) {
+            return `[${timestamp}] ${stack}`
+        }
 
-export const formatFile = combine(
-    timestamp({
-        format: 'YYYY-MM-DD HH:mm:ss'
+        const log = `[${timestamp}] ${message}`
+
+        const hasMeta = Object.keys(meta).length > 0
+
+        // Metadata
+        if (hasMeta) {
+            return `${log} ${JSON.stringify(meta)}`
+        }
+
+        return log
     }),
-    printf(message => {
-        return `${message.timestamp} [${message.level}] ${message.message}`
-    })
+    colorize({ all: true })
 )
 
-export const formatConsole = combine(colorize({ all: true }))
+export const formatProd = combine(
+    errors({ stack: true }),
+    timestamp(),
+    json()
+)

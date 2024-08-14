@@ -3,7 +3,6 @@
         "097",
         "130"
     ],
-    "logLevel": "debug",
     "rateLimit": {
         "enabled": true,
         "addressConnectsPerSecond": 5,

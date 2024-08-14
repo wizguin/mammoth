@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import { Server, type Socket } from 'net'
 
 import './utils/Setup'
@@ -56,7 +58,7 @@ export default class World extends Server {
             this.createUser(socket)
 
         } catch (res) {
-            Logger.warn(`Rate limiting connection from: ${socket.remoteAddress}, response: ${res}`)
+            Logger.warn(`Rate limiting connection from: ${socket.remoteAddress}`, { res })
 
             socket.destroy()
         }
@@ -95,7 +97,7 @@ export default class World extends Server {
             this.handler.handle(data, user)
 
         } catch (res) {
-            Logger.warn(`Rate limiting data from: ${user.socket.remoteAddress}, response: ${res}`)
+            Logger.warn(`Rate limiting data from: ${user.socket.remoteAddress}`, { res })
         }
     }
 

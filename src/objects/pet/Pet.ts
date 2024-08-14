@@ -65,9 +65,7 @@ export default class Pet implements PrismaPet {
             })
 
         } catch (error) {
-            if (error instanceof Error) {
-                Logger.error(`Could not update pet: ${this.id}, data: %O, error: ${error.stack}`, updates)
-            }
+            Logger.error(error)
         }
     }
 

@@ -1,29 +1,17 @@
 import { colors, type CustomLogger, levels } from './LoggerLevels'
-import { defaultFormat, formatConsole, formatFile } from './LoggerFormats'
-import { name } from '../args/Args'
+import { formatDev, formatProd } from './LoggerFormats'
 
 import { addColors, createLogger, transports } from 'winston'
 
 const options = {
     levels: levels,
-    level: 'info',
-    format: defaultFormat,
+    level: process.env.LOG_LEVEL || 'info',
+    format: process.env.NODE_ENV === 'production'
+        ? formatProd
+        : formatDev,
 
     transports: [
-        new transports.File({
-            level: 'error',
-            filename: `${name}.error.log`,
-            dirname: 'logs',
-            format: formatFile
-        }),
-        new transports.File({
-            filename: `${name}.combined.log`,
-            dirname: 'logs',
-            format: formatFile
-        }),
-        new transports.Console({
-            format: formatConsole
-        })
+        new transports.Console()
     ]
 }
 

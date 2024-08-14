@@ -256,12 +256,10 @@ export default class User implements Partial<PrismaUser> {
 
             Object.assign(this, data)
 
-            Logger.debug(`Updated user: ${this.username}, data: %O`, data)
+            Logger.debug(`Updated user: ${this.username}`, { data })
 
         } catch (error) {
-            if (error instanceof Error) {
-                Logger.error(`Could not update user: ${this.username}, data: %O, error: ${error.stack}`, data)
-            }
+            Logger.error(error)
         }
     }
 
