@@ -8,7 +8,7 @@ import { host, maxUsers, port } from './args/Args'
 import Errors from '@objects/user/Errors'
 import Handler from './handler/Handler'
 import Logger from '@Logger'
-import { rateLimit } from '@Config'
+import { rateLimitEnabled } from '@Config'
 import RateLimiter from './ratelimit/RateLimiter'
 import User from '@objects/user/User'
 
@@ -28,7 +28,7 @@ export default class World extends Server {
         this.users = []
         this.handler = new Handler(this)
 
-        if (rateLimit.enabled) {
+        if (rateLimitEnabled) {
             this.rateLimiter = new RateLimiter()
         }
 

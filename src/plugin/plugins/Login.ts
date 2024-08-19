@@ -1,6 +1,6 @@
 import BasePlugin from '../BasePlugin'
 
-import { allowedVersions } from '@Config'
+import { clientVersion } from '@Config'
 import { handleOnce } from '@Decorators'
 import type User from '@objects/user/User'
 
@@ -24,7 +24,7 @@ export default class Login extends BasePlugin {
 
         const v = ver.get('v')
 
-        if (v && allowedVersions.includes(v)) {
+        if (v && clientVersion === v) {
             user.sendXml('<msg t="sys"><body action="apiOK" r="0"></body></msg>')
         }
     }

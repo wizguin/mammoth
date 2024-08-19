@@ -1,24 +1,13 @@
-import loadJson from '../utils/LoadJson'
+const env = process.env
 
-import type { Assert } from 'ts-runtime-checks'
+export const clientVersion = env.CLIENT_VERSION || '097'
 
-interface Config {
-    allowedVersions: string[],
-    preferredSpawn?: number,
-    rateLimit: RateLimit,
-    whitelistEnabled: boolean
-}
+export const rateLimitEnabled = env.RATELIMIT_ENABLED === 'true'
 
-interface RateLimit {
-    enabled: boolean,
-    addressConnectsPerSecond: number,
-    addressEventsPerSecond: number,
-    userEventsPerSecond: number
-}
+export const addressConnectsPerSecond = parseInt(env.ADDRESS_CONNECTS_PER_SECOND || '5')
+export const addressEventsPerSecond = parseInt(env.ADDRESS_EVENTS_PER_SECOND || '50')
+export const userEventsPerSecond = parseInt(env.USER_EVENTS_PER_SECOND || '10')
 
-const config: Config = loadJson('config/config') as Assert<Config>
+export const whitelistEnabled = env.WHITELIST_ENABLED === 'true'
 
-export const allowedVersions = config.allowedVersions
-export const preferredSpawn = config.preferredSpawn
-export const rateLimit = config.rateLimit
-export const whitelistEnabled = config.whitelistEnabled
+export const preferredSpawn = parseInt(env.PREFERRED_SPAWN || '') || null

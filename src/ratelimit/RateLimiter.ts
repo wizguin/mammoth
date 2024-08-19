@@ -1,5 +1,5 @@
+import { addressConnectsPerSecond, addressEventsPerSecond, userEventsPerSecond } from '@Config'
 import Logger from '@Logger'
-import { rateLimit } from '@Config'
 
 import { RateLimiterMemory } from 'rate-limiter-flexible'
 
@@ -12,9 +12,9 @@ export default class RateLimiter {
     constructor() {
         Logger.success('Enabling rate limiting')
 
-        this.addressConnects = this.createLimiter(rateLimit.addressConnectsPerSecond)
-        this.addressEvents = this.createLimiter(rateLimit.addressEventsPerSecond)
-        this.userEvents = this.createLimiter(rateLimit.userEventsPerSecond)
+        this.addressConnects = this.createLimiter(addressConnectsPerSecond)
+        this.addressEvents = this.createLimiter(addressEventsPerSecond)
+        this.userEvents = this.createLimiter(userEventsPerSecond)
     }
 
     createLimiter(points: number) {
