@@ -90,6 +90,10 @@ export default class PetCollection extends BaseCollection<Pet> {
         this.petUpdate = setTimeout(() => this.updatePets(), updateInterval)
     }
 
+    stopPetUpdate() {
+        clearTimeout(this.petUpdate)
+    }
+
     checkName(name: string) {
         return name.length >= 3 && name.length <= 12 && nameRegex.test(name)
     }

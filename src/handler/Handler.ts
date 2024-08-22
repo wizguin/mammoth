@@ -159,9 +159,13 @@ export default class Handler {
     close(user: User) {
         Logger.info(`Closing: ${user.socket.remoteAddress}`)
 
-        user.close()
+        user.leaveRoom()
 
         this.playerRooms.closeRoom(user)
+
+        if (user.pets) {
+            user.pets.stopPetUpdate()
+        }
 
         if (this.usersById[user.id] === user) {
             delete this.usersById[user.id]
