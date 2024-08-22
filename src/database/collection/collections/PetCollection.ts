@@ -12,7 +12,10 @@ import type { Pet as PrismaPet } from '@prisma/client'
 
 const nameRegex = /^[a-z ]+$/i
 const maxPets = 8
-const updateInterval = 36000
+
+const updateMultiplier = 5
+// -1 * multiplier every 36 * multiplier seconds from all stats
+const updateInterval = 36000 * updateMultiplier
 
 export default class PetCollection extends BaseCollection<Pet> {
 
@@ -23,7 +26,7 @@ export default class PetCollection extends BaseCollection<Pet> {
 
         super(user, pets, 'id')
 
-        this.petUpdate = setTimeout(() => this.updatePets(), 1)
+        this.petUpdate = setTimeout(() => this.updatePets(), updateInterval)
     }
 
     async add(typeId: number, name: string) {
@@ -83,7 +86,7 @@ export default class PetCollection extends BaseCollection<Pet> {
 
     updatePets() {
         for (const pet of this.values) {
-            pet.decreaseStats()
+            pet.decreaseStats(updateMultiplier)
         }
 
         // Schedule next update

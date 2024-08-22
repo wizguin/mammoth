@@ -77,11 +77,15 @@ export default class Pet implements PrismaPet {
         return Math.min(Math.max(0, currentValue + update), maxValue)
     }
 
-    async decreaseStats() {
+    async decreaseStats(updateMultiplier = 1) {
+        if (this.health === 0 && this.hunger === 0 && this.rest === 0) {
+            return
+        }
+
         await this.updateStats({
-            health: -1,
-            hunger: -1,
-            rest: -1
+            health: -1 * updateMultiplier,
+            hunger: -1 * updateMultiplier,
+            rest: -1 * updateMultiplier
         })
     }
 
