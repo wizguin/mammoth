@@ -40,8 +40,8 @@ export default class Pet extends BasePlugin {
     async getPets(user: User, userId: number) {
         let pets: PetObject[]
 
-        if (userId in this.usersById) {
-            pets = this.usersById[userId].pets.values
+        if (userId in this.users) {
+            pets = this.users[userId].pets.values
 
         } else {
             const records = await Database.pet.findMany({

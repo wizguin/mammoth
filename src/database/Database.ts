@@ -1,20 +1,14 @@
-import Logger from '../logger/Logger'
+import Logger from '@Logger'
 
 import { PrismaClient } from '@prisma/client'
 
 class Database extends PrismaClient {
 
-    constructor() {
-        super()
-
-        this.authenticate()
-    }
-
-    async authenticate() {
+    async connect() {
         try {
             await this.$queryRaw`SELECT 1`
 
-            Logger.success('Sucessfully connected to database')
+            Logger.success('Connected to database')
 
         } catch (error) {
             Logger.error(error)

@@ -4,28 +4,25 @@ import { Server, type Socket } from 'net'
 
 import './utils/Setup'
 
-import { host, maxUsers, port } from './args/Args'
-import Errors from '@objects/user/Errors'
+import { host, id, port } from '@Args'
+import Database from '@Database'
 import Handler from './handler/Handler'
 import Logger from '@Logger'
 import { rateLimitEnabled } from '@Config'
 import RateLimiter from './ratelimit/RateLimiter'
+import Redis from './redis/Redis'
 import User from '@objects/user/User'
 
 export default class World extends Server {
 
-    users: User[]
+    users: Record<number, User>
     handler: Handler
     rateLimiter?: RateLimiter
 
-    constructor(
-        private host: string,
-        private port: number,
-        private maxUsers: number
-    ) {
+    constructor() {
         super()
 
-        this.users = []
+        this.users = {}
         this.handler = new Handler(this)
 
         if (rateLimitEnabled) {
@@ -34,13 +31,13 @@ export default class World extends Server {
 
         this.on('listening', () => this.onListening())
 
-        this.listen(this.port, this.host)
+        this.listen(port, host)
     }
 
     onListening() {
         this.on('connection', (socket: Socket) => this.onConnection(socket))
 
-        Logger.success(`Listening on port ${this.port}`)
+        Logger.success(`Listening on port ${port}`)
     }
 
     async onConnection(socket: Socket) {
@@ -66,15 +63,6 @@ export default class World extends Server {
 
     createUser(socket: Socket) {
         const user = new User(socket)
-
-        if (this.users.length >= this.maxUsers) {
-            user.sendError(Errors.ServerFull)
-            user.disconnect()
-
-            return
-        }
-
-        this.users.push(user)
 
         socket.setEncoding('utf8')
 
@@ -103,4 +91,15 @@ export default class World extends Server {
 
 }
 
-new World(host, port, maxUsers)
+export async function updateWorldPopulation(population: number) {
+    await Redis.hSet('population', id, population)
+}
+
+(async () => {
+    await Database.connect()
+    await Redis.connect()
+
+    await updateWorldPopulation(0)
+
+    new World()
+})()

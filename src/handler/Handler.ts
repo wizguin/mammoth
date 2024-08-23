@@ -4,14 +4,14 @@ import Logger from '@Logger'
 import PlayerRooms from '@objects/room/PlayerRooms'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
+import { updateWorldPopulation } from '../World'
 import type User from '@objects/user/User'
 import type World from '../World'
 
 import type { Element } from 'elementtree'
 import EventEmitter from 'events'
 
-export type Users = User[]
-export type UsersById = Record<string, User>
+type Users = Record<number, User>
 export type Rooms = Record<number, Room>
 
 const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
@@ -19,7 +19,6 @@ const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" 
 export default class Handler {
 
     world: World
-    usersById: UsersById
     rooms: Rooms
     playerRooms: PlayerRooms
     events: EventEmitter
@@ -28,7 +27,6 @@ export default class Handler {
     constructor(world: World) {
         this.world = world
 
-        this.usersById = {}
         this.rooms = this.setRooms()
         this.playerRooms = new PlayerRooms()
 
@@ -47,6 +45,10 @@ export default class Handler {
 
     set users(users: Users) {
         this.world.users = users
+    }
+
+    get usersLength() {
+        return Object.keys(this.users).length
     }
 
     setRooms() {
@@ -167,11 +169,11 @@ export default class Handler {
             user.pets.stopPetUpdate()
         }
 
-        if (this.usersById[user.id] === user) {
-            delete this.usersById[user.id]
+        if (user.id && this.users[user.id] === user) {
+            delete this.users[user.id]
         }
 
-        this.users = this.users.filter(u => u !== user)
+        updateWorldPopulation(this.usersLength)
     }
 
 }

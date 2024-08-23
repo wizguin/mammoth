@@ -1,7 +1,9 @@
 import BasePlugin from '../BasePlugin'
 
-import { clientVersion } from '@Config'
+import { clientVersion, maxUsers } from '@Config'
+import Errors from '@objects/user/Errors'
 import { handleOnce } from '@Decorators'
+import { updateWorldPopulation } from '../../World'
 import type User from '@objects/user/User'
 
 import { compare } from 'bcrypt'
@@ -31,16 +33,23 @@ export default class Login extends BasePlugin {
 
     @handleOnce
     async login(user: User, body: Element) {
-        const isAuthenticated = await this.authenticateUser(user, body)
+        if (this.usersLength >= maxUsers) {
+            user.sendError(Errors.ServerFull)
+            user.disconnect()
 
-        user.update({ loginKey: null })
+            return
+        }
+
+        const isAuthenticated = await this.authenticateUser(user, body)
 
         if (!isAuthenticated) {
             user.disconnect()
             return
         }
 
-        this.updateUsersById(user)
+        this.updateUsers(user)
+
+        user.update({ loginKey: null })
         user.send('l')
     }
 
@@ -64,16 +73,17 @@ export default class Login extends BasePlugin {
             return false
         }
 
-        // Swap bcrypt prefix
-        return compare(pword.toString(), user.loginKey.replace('$2y$', '$2a$'))
+        return compare(pword.toString(), user.loginKey)
     }
 
-    updateUsersById(user: User) {
-        if (user.id in this.usersById) {
-            this.usersById[user.id].disconnect()
+    updateUsers(user: User) {
+        if (user.id in this.users) {
+            this.users[user.id].disconnect()
         }
 
-        this.usersById[user.id] = user
+        this.users[user.id] = user
+
+        updateWorldPopulation(this.usersLength)
     }
 
 }

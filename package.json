@@ -3,7 +3,7 @@
     "version": "1.0.0-beta",
     "description": "Pre-CPIP server emulator",
     "scripts": {
-        "dev": "nodemon --watch src --watch config --watch data -r tsconfig-paths/register src/World.ts -n Blizzard -p 6114",
+        "dev": "nodemon --watch src --watch config --watch data -r tsconfig-paths/register src/World.ts -- -i 100 -n Blizzard -p 6114",
         "build": "rimraf dist && tsc && tsc-alias",
         "start": "node dist/World.js",
         "eslint": "eslint src",
@@ -30,6 +30,7 @@
         "nodemon": "^3.1.4",
         "prisma": "^4.15.0",
         "rate-limiter-flexible": "^5.0.3",
+        "redis": "^4.7.0",
         "rimraf": "^5.0.1",
         "ts-node": "^10.9.2",
         "ts-patch": "^3.1.2",

@@ -27,17 +27,17 @@ export default class Buddy extends BasePlugin {
     }
 
     getBuddyOnlineList(user: User) {
-        const online = user.buddies.keys.filter(buddyId => buddyId in this.usersById)
+        const online = user.buddies.keys.filter(buddyId => buddyId in this.users)
 
         user.send('go', ...online)
     }
 
     getPlayer(user: User, playerId: Num) {
-        if (!(playerId in this.usersById)) {
+        if (!(playerId in this.users)) {
             return
         }
 
-        const player = this.usersById[playerId]
+        const player = this.users[playerId]
 
         if (player.room) {
             user.send('gp', player, player.room.id)
@@ -47,11 +47,11 @@ export default class Buddy extends BasePlugin {
     }
 
     buddyRequest(user: User, buddyId: Num) {
-        if (!(buddyId in this.usersById)) {
+        if (!(buddyId in this.users)) {
             return
         }
 
-        const buddy = this.usersById[buddyId]
+        const buddy = this.users[buddyId]
 
         if (buddy.ignores.includes(user.id)) {
             return
@@ -68,8 +68,8 @@ export default class Buddy extends BasePlugin {
         user.removeBuddyRequest(buddyId)
         user.addBuddy(buddyId)
 
-        if (buddyId in this.usersById) {
-            const buddy = this.usersById[buddyId]
+        if (buddyId in this.users) {
+            const buddy = this.users[buddyId]
 
             buddy.addBuddy(user.id)
             buddy.send('ba', user.id, user.username)
@@ -92,19 +92,19 @@ export default class Buddy extends BasePlugin {
 
         user.removeBuddyRequest(user.id)
 
-        if (!(buddyId in this.usersById)) {
+        if (!(buddyId in this.users)) {
             return
         }
 
-        this.usersById[buddyId].send('bd', user.id, user.username)
+        this.users[buddyId].send('bd', user.id, user.username)
     }
 
     buddyMessage(user: User, buddyId: Num, messageId: Num) {
-        if (!(buddyId in this.usersById)) {
+        if (!(buddyId in this.users)) {
             return
         }
 
-        this.usersById[buddyId].send('bm', user.id, user.username, messageId)
+        this.users[buddyId].send('bm', user.id, user.username, messageId)
     }
 
     async buddyRemove(user: User, buddyId: Num) {
@@ -114,8 +114,8 @@ export default class Buddy extends BasePlugin {
 
         user.removeBuddy(buddyId)
 
-        if (buddyId in this.usersById) {
-            const buddy = this.usersById[buddyId]
+        if (buddyId in this.users) {
+            const buddy = this.users[buddyId]
 
             buddy.removeBuddy(user.id)
             buddy.send('br', user.id, user.username)
