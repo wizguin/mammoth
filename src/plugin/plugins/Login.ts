@@ -3,6 +3,7 @@ import BasePlugin from '../BasePlugin'
 import { clientVersion, maxUsers } from '@Config'
 import Errors from '@objects/user/Errors'
 import { handleOnce } from '@Decorators'
+import Redis from '../../redis/Redis'
 import { updateWorldPopulation } from '../../World'
 import type User from '@objects/user/User'
 
@@ -49,7 +50,8 @@ export default class Login extends BasePlugin {
 
         this.updateUsers(user)
 
-        user.update({ loginKey: null })
+        await Redis.del(`${user.id}:loginkey`)
+
         user.send('l')
     }
 
@@ -69,11 +71,17 @@ export default class Login extends BasePlugin {
 
         const isLoaded = await user.load(nick.toString())
 
-        if (!isLoaded || !user.loginKey) {
+        if (!isLoaded) {
             return false
         }
 
-        return compare(pword.toString(), user.loginKey)
+        const loginKey = await Redis.get(`${user.id}:loginkey`)
+
+        if (!loginKey) {
+            return false
+        }
+
+        return compare(pword.toString(), loginKey)
     }
 
     updateUsers(user: User) {

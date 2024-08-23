@@ -39,7 +39,6 @@ export default class User implements Partial<PrismaUser> {
     username!: string
     email!: string | null
     password!: string
-    loginKey!: string | null
     rank!: number
     joinTime!: Date
     coins!: number

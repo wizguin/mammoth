@@ -109,7 +109,6 @@ model User {
     username String   @unique() @db.VarChar(12)
     email    String?  @db.VarChar(254)
     password String   @db.Char(60)
-    loginKey String?  @db.Text
     rank     Int      @default(1)
     joinTime DateTime @default(now()) @db.Timestamp(0)
     coins    Int      @default(500)
