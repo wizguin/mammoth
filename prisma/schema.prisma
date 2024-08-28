@@ -64,6 +64,17 @@ model Inventory {
     @@map("inventories")
 }
 
+model ParentPassword {
+    userId   Int
+    password String  @db.Char(60)
+    hint     String? @db.VarChar(48)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_parent_passwords_users")
+
+    @@id([userId])
+    @@map("parent_passwords")
+}
+
 model Pet {
     id           Int      @id @default(autoincrement())
     userId       Int
@@ -111,6 +122,7 @@ model User {
     password String   @db.Char(60)
     rank     Int      @default(1)
     joinTime DateTime @default(now()) @db.Timestamp(0)
+    safeMode Int      @default(0)
     coins    Int      @default(500)
     head     Int      @default(0)
     face     Int      @default(0)
@@ -130,6 +142,7 @@ model User {
     ignores             Ignore[]              @relation("Ignores")
     ignoresOf           Ignore[]              @relation("IgnoresOf")
     inventory           Inventory[]
+    parentPassword      ParentPassword?
     pets                Pet[]
     playerRoom          PlayerRoom?
     playerRoomFurniture PlayerRoomFurniture[]
