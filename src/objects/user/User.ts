@@ -13,7 +13,7 @@ import IgnoreCollection from '@collections/IgnoreCollection'
 import InventoryCollection from '@collections/InventoryCollection'
 import PetCollection from '@collections/PetCollection'
 
-import type { Prisma, User as PrismaUser } from '@prisma/client'
+import type { Ban, Prisma, User as PrismaUser } from '@prisma/client'
 import EventEmitter from 'events'
 import { nanoid } from 'nanoid'
 import type { Socket } from 'net'
@@ -53,6 +53,7 @@ export default class User implements Partial<PrismaUser> {
     photo!: number
     flag!: number
 
+    bans!: Ban[]
     buddies!: BuddyCollection
     furniture!: FurnitureCollection
     ignores!: IgnoreCollection
@@ -79,6 +80,13 @@ export default class User implements Partial<PrismaUser> {
         this.events = new EventEmitter({ captureRejections: true })
 
         this.events.on('error', error => Logger.error(error))
+    }
+
+    get isBanned() {
+        const now = new Date()
+
+        return this.bans.length > 3
+            || this.bans.some(b => !b.end || b.end > now)
     }
 
     send(...args: (number | string | object)[]) {
@@ -208,6 +216,8 @@ export default class User implements Partial<PrismaUser> {
                 username: username
             },
             include: {
+                bans: true,
+
                 buddies: {
                     include: {
                         buddy: { select: { username: true } }

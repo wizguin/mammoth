@@ -71,7 +71,7 @@ export default class Login extends BasePlugin {
 
         const isLoaded = await user.load(nick.toString())
 
-        if (!isLoaded) {
+        if (!isLoaded || user.isBanned) {
             return false
         }
 
