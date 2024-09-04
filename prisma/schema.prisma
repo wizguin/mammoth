@@ -8,15 +8,15 @@ datasource db {
 }
 
 model Ban {
-    id          Int      @id @default(autoincrement())
+    id          Int       @id @default(autoincrement())
     userId      Int
-    issued      DateTime @default(now()) @db.Timestamp(0)
-    expires     DateTime @default(now()) @db.Timestamp(0)
-    moderatorId Int
-    message     String?  @db.VarChar(200)
+    issued      DateTime  @default(now()) @db.Timestamp(0)
+    end         DateTime? @db.Timestamp(0)
+    moderatorId Int?
+    comment     String?   @db.VarChar(200)
 
-    user      User @relation("Bans", fields: [userId], references: [id], onDelete: Cascade, map: "fk_bans_users_1")
-    moderator User @relation("BansOf", fields: [moderatorId], references: [id], onDelete: Cascade, map: "fk_bans_users_2")
+    user      User  @relation("Bans", fields: [userId], references: [id], onDelete: Cascade, map: "fk_bans_users_1")
+    moderator User? @relation("BansOf", fields: [moderatorId], references: [id], onDelete: Cascade, map: "fk_bans_users_2")
 
     @@map("bans")
 }
@@ -64,14 +64,26 @@ model Inventory {
     @@map("inventories")
 }
 
+model Membership {
+    id        Int      @id @default(autoincrement())
+    userId    Int
+    start     DateTime @default(now()) @db.Timestamp(0)
+    end       DateTime @default(now()) @db.Timestamp(0)
+    autoRenew Boolean  @default(false)
+    expired   Boolean  @default(false)
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_memberships_users")
+
+    @@map("memberships")
+}
+
 model ParentPassword {
-    userId   Int
+    userId   Int     @id
     password String  @db.Char(60)
     hint     String? @db.VarChar(48)
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fk_parent_passwords_users")
 
-    @@id([userId])
     @@map("parent_passwords")
 }
 
@@ -121,7 +133,7 @@ model User {
     email    String?  @db.VarChar(254)
     password String   @db.Char(60)
     rank     Int      @default(1)
-    joinTime DateTime @default(now()) @db.Timestamp(0)
+    joinDate DateTime @default(now()) @db.Timestamp(0)
     safeMode Int      @default(0)
     coins    Int      @default(500)
     head     Int      @default(0)
@@ -142,6 +154,7 @@ model User {
     ignores             Ignore[]              @relation("Ignores")
     ignoresOf           Ignore[]              @relation("IgnoresOf")
     inventory           Inventory[]
+    memberships         Membership[]
     parentPassword      ParentPassword?
     pets                Pet[]
     playerRoom          PlayerRoom?

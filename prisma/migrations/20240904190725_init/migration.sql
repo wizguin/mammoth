@@ -3,9 +3,9 @@ CREATE TABLE `bans` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `userId` INTEGER NOT NULL,
     `issued` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-    `expires` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-    `moderatorId` INTEGER NOT NULL,
-    `message` VARCHAR(200) NULL,
+    `end` TIMESTAMP(0) NULL,
+    `moderatorId` INTEGER NULL,
+    `comment` VARCHAR(200) NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -41,6 +41,27 @@ CREATE TABLE `inventories` (
     `itemId` INTEGER NOT NULL,
 
     PRIMARY KEY (`userId`, `itemId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `memberships` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `userId` INTEGER NOT NULL,
+    `start` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `end` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `autoRenew` BOOLEAN NOT NULL DEFAULT false,
+    `expired` BOOLEAN NOT NULL DEFAULT false,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `parent_passwords` (
+    `userId` INTEGER NOT NULL,
+    `password` CHAR(60) NOT NULL,
+    `hint` VARCHAR(48) NULL,
+
+    PRIMARY KEY (`userId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -86,9 +107,9 @@ CREATE TABLE `users` (
     `username` VARCHAR(12) NOT NULL,
     `email` VARCHAR(254) NULL,
     `password` CHAR(60) NOT NULL,
-    `loginKey` TEXT NULL,
     `rank` INTEGER NOT NULL DEFAULT 1,
-    `joinTime` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `joinDate` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `safeMode` INTEGER NOT NULL DEFAULT 0,
     `coins` INTEGER NOT NULL DEFAULT 500,
     `head` INTEGER NOT NULL DEFAULT 0,
     `face` INTEGER NOT NULL DEFAULT 0,
@@ -127,6 +148,12 @@ ALTER TABLE `ignores` ADD CONSTRAINT `fk_ignores_users_2` FOREIGN KEY (`ignoreId
 
 -- AddForeignKey
 ALTER TABLE `inventories` ADD CONSTRAINT `fk_inventories_users` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `memberships` ADD CONSTRAINT `fk_memberships_users` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `parent_passwords` ADD CONSTRAINT `fk_parent_passwords_users` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `pets` ADD CONSTRAINT `fk_pets_users` FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
