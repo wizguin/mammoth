@@ -3,6 +3,7 @@ import type BaseTable from '@objects/room/table/BaseTable'
 import Database from '@Database'
 import Errors from './Errors'
 import Logger from '@Logger'
+import type PlayerRoom from '@objects/room/PlayerRoom'
 import type Room from '@objects/room/Room'
 import type Waddle from '@objects/room/waddle/Waddle'
 import type WaddleRoom from '@objects/room/waddle/WaddleRoom'
@@ -23,7 +24,7 @@ export default class User implements Partial<PrismaUser> {
     socket: Socket
     rateLimitKey: string
 
-    room: Room | null
+    room: Room | PlayerRoom | null
     x: number
     y: number
     frame: number
