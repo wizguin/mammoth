@@ -1,5 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
+import { inRoom } from '@Decorators'
 import type User from '@objects/user/User'
 
 export default class Ball extends BasePlugin {
@@ -12,19 +13,13 @@ export default class Ball extends BasePlugin {
     ballX = 397
     ballY = 240
 
+    @inRoom('rink')
     getGame(user: User) {
-        if (user.room?.name !== 'Rink') {
-            return
-        }
-
         user.send('gz', this.ballX, this.ballY)
     }
 
-    sendMove(user: User, x: Num = this.ballX, y: Num = this.ballY) {
-        if (user.room?.name !== 'Rink') {
-            return
-        }
-
+    @inRoom('rink')
+    sendMove(user: User, x: Num, y: Num) {
         this.ballX = x
         this.ballY = y
 
