@@ -1,11 +1,12 @@
 import BasePlugin from '../BasePlugin'
 
-import { clientVersion, maxUsers } from '@Config'
 import Errors from '@objects/user/Errors'
 import { handleOnce } from '@Decorators'
+import { maxUsers } from '@Config'
 import Redis from '../../redis/Redis'
 import { updateWorldPopulation } from '../../World'
 import type User from '@objects/user/User'
+import { version } from '@Data'
 
 import { compare } from 'bcrypt'
 import type { Element } from 'elementtree'
@@ -21,15 +22,11 @@ export default class Login extends BasePlugin {
     verChk(user: User, body: Element) {
         const ver = body.find('ver')
 
-        if (!ver) {
-            return
-        }
+        const response = ver && ver.get('v') === version
+            ? 'apiOK'
+            : 'apiKO'
 
-        const v = ver.get('v')
-
-        if (v && clientVersion === v) {
-            user.sendXml('<msg t="sys"><body action="apiOK" r="0"></body></msg>')
-        }
+        user.sendXml(`<msg t="sys"><body action="${response}" r="0"></body></msg>`)
     }
 
     @handleOnce
