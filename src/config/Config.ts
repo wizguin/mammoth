@@ -2,8 +2,6 @@ const env = process.env
 
 export const redisUrl = env.REDIS_URL || 'redis://localhost:6379'
 
-export const clientVersion = env.CLIENT_VERSION || '097'
-
 export const rateLimitEnabled = env.RATELIMIT_ENABLED === 'true'
 
 export const addressConnectsPerSecond = parseInt(env.ADDRESS_CONNECTS_PER_SECOND || '5')

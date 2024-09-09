@@ -52,6 +52,10 @@ interface Table {
     type: TableType
 }
 
+interface Version {
+    version: '097' | '130'
+}
+
 interface Waddle {
     id: number,
     seats: number,
@@ -66,11 +70,17 @@ interface Whitelist {
     playerRooms: number[]
 }
 
-export const furniture: Furniture = loadData('furniture') as Assert<Furniture>
-export const items: Items = loadData('items') as Assert<Items>
-export const pets: Pets = loadData('pets') as Assert<Pets>
-export const playerRooms: PlayerRooms = loadData('player_rooms') as Assert<PlayerRooms>
-export const rooms: Rooms = loadData('rooms') as Assert<Rooms>
-export const tables: Tables = loadData('tables') as Assert<Tables>
-export const waddles: Waddles = loadData('waddles') as Assert<Waddles>
+export const furniture = loadData('furniture') as Assert<Furniture>
+export const items = loadData('items') as Assert<Items>
+export const pets = loadData('pets') as Assert<Pets>
+
+export const playerRooms = loadData('player_rooms') as Assert<PlayerRooms>
+export const rooms = loadData('rooms') as Assert<Rooms>
+
+export const tables = loadData('tables') as Assert<Tables>
+export const waddles = loadData('waddles') as Assert<Waddles>
+
+export const version = (loadData('version') as Assert<Version>).version
+export const isVersion130 = version === '130'
+
 export const whitelist: Whitelist = loadData('whitelist') as Assert<Whitelist>
