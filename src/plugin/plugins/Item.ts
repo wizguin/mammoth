@@ -1,12 +1,15 @@
 import BasePlugin, { type Num, type NumArray } from '../BasePlugin'
 
 import { handleOnce } from '@Decorators'
+import { isVersion130 } from '@Data'
 import type User from '@objects/user/User'
+
+const il = isVersion130 ? 'gi' : 'il'
 
 export default class Item extends BasePlugin {
 
     events = {
-        il: this.getItemList,
+        [il]: this.getItemList,
         ai: this.addItem,
         up: this.updatePlayer,
         spy: this.addSpyPhone

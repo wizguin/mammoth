@@ -2,19 +2,24 @@ import BasePlugin, { type Num } from '../BasePlugin'
 
 import Database from '@Database'
 import { handleOnce } from '@Decorators'
+import { isVersion130 } from '@Data'
 import type User from '@objects/user/User'
+
+const bl = isVersion130 ? 'gb' : 'bl'
+const bq = isVersion130 ? 'br' : 'bq'
+const br = isVersion130 ? 'rb' : 'br'
 
 export default class Buddy extends BasePlugin {
 
     events = {
-        bl: this.getBuddyList,
+        [bl]: this.getBuddyList,
         go: this.getBuddyOnlineList,
         gp: this.getPlayer,
-        bq: this.buddyRequest,
+        [bq]: this.buddyRequest,
         ba: this.buddyAccept,
         bd: this.buddyDecline,
         bm: this.buddyMessage,
-        br: this.buddyRemove
+        [br]: this.buddyRemove
     }
 
     @handleOnce
@@ -118,7 +123,7 @@ export default class Buddy extends BasePlugin {
             const buddy = this.users[buddyId]
 
             buddy.removeBuddy(user.id)
-            buddy.send('br', user.id, user.username)
+            buddy.send(br, user.id, user.username)
 
             return
         }

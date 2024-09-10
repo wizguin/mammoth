@@ -1,12 +1,15 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
 import { handleOnce } from '@Decorators'
+import { isVersion130 } from '@Data'
 import type User from '@objects/user/User'
+
+const nl = isVersion130 ? 'gn' : 'nl'
 
 export default class Ignore extends BasePlugin {
 
     events = {
-        nl: this.getIgnoreList,
+        [nl]: this.getIgnoreList,
         an: this.addIgnore,
         rn: this.removeIgnore
     }

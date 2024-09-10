@@ -2,6 +2,7 @@ import { delimiter, makeXt } from '../../handler/packet/Packet'
 import type BaseTable from '@objects/room/table/BaseTable'
 import Database from '@Database'
 import Errors from './Errors'
+import { isVersion130 } from '@Data'
 import Logger from '@Logger'
 import type PlayerRoom from '@objects/room/PlayerRoom'
 import type Room from '@objects/room/Room'
@@ -188,7 +189,7 @@ export default class User implements Partial<PrismaUser> {
             this.buddyRequests.push(userId)
         }
 
-        this.send('bq', userId, username)
+        this.send(isVersion130 ? 'br' : 'bq', userId, username)
     }
 
     removeBuddyRequest(userId: number) {
