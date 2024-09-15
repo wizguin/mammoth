@@ -18,6 +18,7 @@ export default class PlayerRoom extends BasePlugin {
         au: this.addUpgrade,
         or: this.openRoom,
         cr: this.closeRoom,
+        gm: this.getRoom,
         um: this.updateMusic
     }
 
@@ -91,6 +92,17 @@ export default class PlayerRoom extends BasePlugin {
     closeRoom(user: User) {
         this.playerRooms.closeRoom(user)
     }
+
+    async getRoom(user: User, userId: Num) {
+        const room = await this.playerRooms.findRoom(userId)
+
+        if (room) {
+            const furniture = await this.playerRooms.findFurniture(userId)
+
+            user.send('gm', userId, room.roomId, room.musicId, room.floorId, getFurnitureString(furniture))
+        }
+    }
+
     async updateMusic(user: User, musicId: Num) {
         if (this.playerRooms.includes(user.id)) {
             const playerRoom = await this.playerRooms.get(user.id)
