@@ -14,6 +14,12 @@ interface Furniture {
 
 const playerRoomIdOffset = 1000
 
+export function getFurnitureString(furniture: Furniture[]) {
+    return furniture
+        .map(f => [f.furnitureId, f.x, f.y, f.rotation, f.frame].join('|'))
+        .join(',')
+}
+
 export default class PlayerRoom extends Room {
 
     constructor(
@@ -28,19 +34,18 @@ export default class PlayerRoom extends Room {
     }
 
     get furnitureString() {
-        return this.furniture.map(({ furnitureId, x, y, rotation, frame }) =>
-            [furnitureId, x, y, rotation, frame].join('|')
-        ).join(',')
+        // 097 client shifts first element
+        return `,${getFurnitureString(this.furniture)}`
     }
 
     add(user: User) {
-        if (this.furniture.length) {
-            // Add , because 2006 client shifts first element
-            user.send('jp', this.userId, this.roomId, `,${this.furnitureString}`)
+        const props: (number | string)[] = [this.userId, this.roomId]
 
-        } else {
-            user.send('jp', this.userId, this.roomId)
+        if (this.furniture.length) {
+            props.push(this.furnitureString)
         }
+
+        user.send('jp', ...props)
 
         super.add(user)
     }
@@ -53,8 +58,14 @@ export default class PlayerRoom extends Room {
         }
     }
 
-    addFurniture(furniture: Furniture) {
-        this.furniture.push(furniture)
+    async setFurniture(furniture: Furniture[]) {
+        await this.clearFurniture()
+
+        await Database.playerRoomFurniture.createMany({
+            data: furniture
+        })
+
+        this.furniture = furniture
     }
 
     async clearFurniture() {
@@ -65,4 +76,14 @@ export default class PlayerRoom extends Room {
         this.furniture = []
     }
 
+    async setRoom(roomId: number) {
+        await Database.playerRoom.update({
+            data: { roomId },
+            where: { userId: this.userId }
+        })
+
+        this.roomId = roomId
+
+        await this.clearFurniture()
+    }
 }

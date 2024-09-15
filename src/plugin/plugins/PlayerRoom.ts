@@ -1,8 +1,9 @@
-import BasePlugin, { type Num, type StrArray } from '../BasePlugin'
+import BasePlugin, { type Num } from '../BasePlugin'
 
 import { playerRooms, whitelist } from '@Data'
 import Database from '@Database'
 import Errors from '@objects/user/Errors'
+import { getFurnitureString } from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
 import { whitelistEnabled } from '@Config'
 
@@ -11,15 +12,13 @@ const furnitureStringRegex = /^(\d+\|){4}\d+$/
 export default class PlayerRoom extends BasePlugin {
 
     events = {
-        // gm: this.getPlayerRoom,
-        // g: this.getPets,
         gf: this.getFurnitureList,
         gr: this.getRoomList,
         af: this.addFurniture,
-        ur: this.updatePlayerRoom,
-        au: this.addPlayerRoomUpgrade,
-        or: this.openPlayerRoom,
-        cr: this.closePlayerRoom
+        ur: this.updateRoom,
+        au: this.addUpgrade,
+        or: this.openRoom,
+        cr: this.closeRoom,
     }
 
     getFurnitureList(user: User) {
@@ -38,47 +37,20 @@ export default class PlayerRoom extends BasePlugin {
         user.addFurniture(furnitureId)
     }
 
-    async updatePlayerRoom(user: User, roomId: Num, ...furniture: StrArray) {
+    async updateRoom(user: User, ...args: (number | string)[]) {
         if (!this.playerRooms.includes(user.id)) {
             return
         }
 
         const playerRoom = await this.playerRooms.get(user.id)
-        const quantities: Record<number, number> = {}
+        const [_roomId, _musicId]: (number | undefined)[] = args.filter(this.isNumber)
 
-        await playerRoom.clearFurniture()
+        const furniture = this.parseFurniture(user, args)
 
-        for (const f of furniture) {
-            if (!furnitureStringRegex.test(f)) {
-                continue
-            }
-
-            const [id, x, y, rotation, frame] = f.split('|').map(i => parseInt(i))
-
-            // Check furniture inventory
-            if (!user.furniture.includes(id)) {
-                continue
-            }
-
-            // Update quantity
-            quantities[id] = id in quantities
-                ? quantities[id] + 1
-                : 1
-
-            // Check quantity
-            if (quantities[id] > user.furniture.getQuantity(id)) {
-                continue
-            }
-
-            playerRoom.addFurniture({ userId: user.id, furnitureId: id, x, y, rotation, frame })
-        }
-
-        await Database.playerRoomFurniture.createMany({
-            data: playerRoom.furniture
-        })
+        playerRoom.setFurniture(furniture)
     }
 
-    async addPlayerRoomUpgrade(user: User, roomId: Num) {
+    async addUpgrade(user: User, roomId: Num) {
         if (!this.playerRooms.includes(user.id)) {
             return
         }
@@ -100,31 +72,53 @@ export default class PlayerRoom extends BasePlugin {
             return
         }
 
-        await Database.playerRoom.update({
-            data: {
-                roomId: roomId
-            },
-            where: {
-                userId: user.id
-            }
-        })
-
-        await user.update({ coins: user.coins - cost })
-
         const playerRoom = await this.playerRooms.get(user.id)
 
-        await playerRoom.clearFurniture()
-        playerRoom.roomId = roomId
+        await playerRoom.setRoom(roomId)
+        await user.update({ coins: user.coins - cost })
 
         user.send('au', roomId, user.coins)
     }
 
-    openPlayerRoom(user: User) {
+    openRoom(user: User) {
         this.playerRooms.openRoom(user)
     }
 
-    closePlayerRoom(user: User) {
+    closeRoom(user: User) {
         this.playerRooms.closeRoom(user)
+    }
+
+    parseFurniture(user: User, args: (number | string)[]) {
+        const furniture = []
+        const quantities: Record<number, number> = {}
+
+        for (const arg of args) {
+            if (!this.isFurnitureString(arg)) {
+                continue
+            }
+
+            const [id, x, y, rotation, frame] = arg.split('|').map(i => parseInt(i))
+
+            if (!user.furniture.includes(id)) {
+                continue
+            }
+
+            quantities[id] = (quantities[id] || 0) + 1
+
+            if (quantities[id] <= user.furniture.getQuantity(id)) {
+                furniture.push({ userId: user.id, furnitureId: id, x, y, rotation, frame })
+            }
+        }
+
+        return furniture
+    }
+
+    isNumber(value: number | string): value is number {
+        return typeof value === 'number'
+    }
+
+    isFurnitureString(value: number | string): value is string {
+        return typeof value === 'string' && furnitureStringRegex.test(value)
     }
 
 }
