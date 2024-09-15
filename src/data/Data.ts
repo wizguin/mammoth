@@ -72,6 +72,7 @@ interface Whitelist {
 
 export const furniture = loadData('furniture') as Assert<Furniture>
 export const items = loadData('items') as Assert<Items>
+export const music = loadData('music') as Assert<number[]>
 export const pets = loadData('pets') as Assert<Pets>
 
 export const playerRooms = loadData('player_rooms') as Assert<PlayerRooms>

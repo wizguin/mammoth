@@ -1,4 +1,5 @@
 import Database from '@Database'
+import { music } from '@Data'
 import type PlayerRooms from './PlayerRooms'
 import Room from './Room'
 import type User from '@objects/user/User'
@@ -40,6 +41,10 @@ export default class PlayerRoom extends Room {
 
     add(user: User) {
         const props: (number | string)[] = [this.userId, this.roomId]
+
+        if (this.musicId && music.includes(this.musicId)) {
+            props.push(this.musicId)
+        }
 
         if (this.furniture.length) {
             props.push(this.furnitureString)
@@ -86,4 +91,16 @@ export default class PlayerRoom extends Room {
 
         await this.clearFurniture()
     }
+
+    async setMusic(musicId: number) {
+        if (music.includes(musicId)) {
+            await Database.playerRoom.update({
+                data: { musicId },
+                where: { userId: this.userId }
+            })
+
+            this.musicId = musicId
+        }
+    }
+
 }

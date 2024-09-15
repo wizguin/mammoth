@@ -1,7 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
 import { playerRooms, whitelist } from '@Data'
-import Database from '@Database'
 import Errors from '@objects/user/Errors'
 import { getFurnitureString } from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
@@ -19,6 +18,7 @@ export default class PlayerRoom extends BasePlugin {
         au: this.addUpgrade,
         or: this.openRoom,
         cr: this.closeRoom,
+        um: this.updateMusic
     }
 
     getFurnitureList(user: User) {
@@ -43,7 +43,11 @@ export default class PlayerRoom extends BasePlugin {
         }
 
         const playerRoom = await this.playerRooms.get(user.id)
-        const [_roomId, _musicId]: (number | undefined)[] = args.filter(this.isNumber)
+        const [_roomId, musicId]: (number | undefined)[] = args.filter(this.isNumber)
+
+        if (musicId !== undefined) {
+            await playerRoom.setMusic(musicId)
+        }
 
         const furniture = this.parseFurniture(user, args)
 
@@ -86,6 +90,13 @@ export default class PlayerRoom extends BasePlugin {
 
     closeRoom(user: User) {
         this.playerRooms.closeRoom(user)
+    }
+    async updateMusic(user: User, musicId: Num) {
+        if (this.playerRooms.includes(user.id)) {
+            const playerRoom = await this.playerRooms.get(user.id)
+
+            playerRoom.setMusic(musicId)
+        }
     }
 
     parseFurniture(user: User, args: (number | string)[]) {
