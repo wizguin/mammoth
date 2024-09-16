@@ -157,7 +157,9 @@ export default class User implements Partial<PrismaUser> {
     }
 
     async updatePlayer(items: number[]) {
-        const [color, head, face, neck, body, hand, feet, flag, photo] = items
+        const [color, head, face, neck, body, hand, feet, flag, photo] = items.map(
+            item => this.inventory.includes(item) ? item : 0
+        )
 
         await this.update({ color, head, face, neck, body, hand, feet, flag, photo })
 
