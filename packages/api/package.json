@@ -1,0 +1,17 @@
+{
+    "name": "vanilla-api",
+    "version": "1.0.0",
+    "description": "Vanilla API",
+    "scripts": {
+        "dev": "nodemon --watch src -r tsconfig-paths/register src/Api.ts",
+        "build": "tsc",
+        "start": "node dist/Api.js"
+    },
+    "author": "wizguin",
+    "license": "MIT",
+    "devDependencies": {
+        "@fastify/formbody": "^7.4.0",
+        "fastify": "^4.28.1",
+        "joi": "^17.13.3"
+    }
+}
