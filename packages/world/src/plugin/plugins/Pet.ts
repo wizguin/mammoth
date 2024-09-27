@@ -2,6 +2,7 @@ import BasePlugin, { type Num, type Str } from '../BasePlugin'
 
 import { createPet } from '@collections/PetCollection'
 import Database from '@Database'
+import { inOwnedRoom } from '@Decorators'
 import type PetObject from '@objects/pet/Pet'
 import type { Updates } from '@objects/pet/Pet'
 import type User from '@objects/user/User'
@@ -54,6 +55,7 @@ export default class Pet extends BasePlugin {
         user.send('p', 'g', ...pets)
     }
 
+    @inOwnedRoom
     sendRest(user: User, petId: Num) {
         this.sendInteraction(user, petId, Interactions.Rest, {
             hunger: -10,
@@ -61,6 +63,7 @@ export default class Pet extends BasePlugin {
         })
     }
 
+    @inOwnedRoom
     sendPlay(user: User, petId: Num) {
         this.sendInteraction(user, petId, Interactions.Play, {
             health: 200,
@@ -69,32 +72,32 @@ export default class Pet extends BasePlugin {
         })
     }
 
+    @inOwnedRoom
     sendFeed(user: User, petId: Num) {
         this.sendInteraction(user, petId, Interactions.Feed, {
             hunger: 200
-        })
-
-        user.update({ coins: user.coins - 10 })
+        }, 10)
     }
 
+    @inOwnedRoom
     sendTreat(user: User, petId: Num, treatId: Num) {
         this.sendInteraction(user, petId, Interactions.Treat, {
             health: -10
-        }, treatId)
-
-        user.update({ coins: user.coins - 5 })
+        }, 5, treatId)
     }
 
+    @inOwnedRoom
     sendPetFrame(user: User, petId: Num, frame: Num) {
-        if (!user.room || !user.pets.includes(petId)) {
+        if (!user.pets.includes(petId)) {
             return
         }
 
         user.sendRoom('p', 's', petId, frame)
     }
 
+    @inOwnedRoom
     sendMovePet(user: User, petId: Num, x: Num, y: Num) {
-        if (!user.room || !user.pets.includes(petId)) {
+        if (!user.pets.includes(petId)) {
             return
         }
 
@@ -103,8 +106,8 @@ export default class Pet extends BasePlugin {
         user.sendRoom('p', 'm', petId, x, y)
     }
 
-    sendInteraction(user: User, petId: number, type: Interactions, updates: Updates, ...args: (number | string)[]) {
-        if (!user.room || !user.pets.includes(petId)) {
+    sendInteraction(user: User, petId: number, type: Interactions, updates: Updates, cost = 0, ...args: (number | string)[]) {
+        if (!user.pets.includes(petId)) {
             return
         }
 
@@ -113,6 +116,10 @@ export default class Pet extends BasePlugin {
         pet.updateStats(updates)
 
         user.sendRoom('p', type, pet, ...args)
+
+        if (cost > 0) {
+            user.update({ coins: user.coins - cost })
+        }
     }
 
 }

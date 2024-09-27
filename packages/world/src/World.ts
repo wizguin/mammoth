@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import '@shared/env/Env'
 
 import { Server, type Socket } from 'net'
 

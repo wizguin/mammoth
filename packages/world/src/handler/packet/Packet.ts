@@ -51,8 +51,7 @@ function parseType(value: number | string) {
         return value
     }
 
-    // Check if the string contains only numbers
-    const isNumeric = /^[0-9]+$/.test(value)
+    const parsed = Number(value)
 
-    return isNumeric ? parseInt(value) : value
+    return isNaN(parsed) ? value : parsed
 }
