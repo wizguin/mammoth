@@ -2,16 +2,19 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "paths": {
+            "@shared/*": ["../../shared/*"],
+
+            "@Database": ["../../shared/database/Database"],
+            "@Logger": ["../../shared/logger/Logger"],
+            "@Redis": ["../../shared/redis/Redis"],
+
             "@Args": ["./src/args/Args"],
             "@Config": ["./src/config/Config"],
             "@Data": ["./src/data/Data"],
-            "@Database": ["./src/database/Database"],
             "@Decorators": ["./src/decorators/Decorators"],
-            "@Logger": ["./src/logger/Logger"],
 
-            "@collections/*": ["./src/database/collection/collections/*"],
-            "@objects/*": ["./src/objects/*"],
-            "@shared/*": ["../../shared/*"]
+            "@collections/*": ["./src/database/collections/*"],
+            "@objects/*": ["./src/objects/*"]
         }
     }
 }

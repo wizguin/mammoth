@@ -10,7 +10,7 @@ import Handler from './handler/Handler'
 import Logger from '@Logger'
 import { rateLimitEnabled } from '@Config'
 import RateLimiter from './ratelimit/RateLimiter'
-import Redis from './redis/Redis'
+import Redis from '@Redis'
 import User from '@objects/user/User'
 
 export default class World extends Server {

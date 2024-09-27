@@ -1,10 +1,10 @@
 import * as schema from '../schema/JoinSchema'
 import { authenticateUser, getExpiryDate, getParentHint, type User } from '../user/User'
 import { buildError, buildResponse } from '../response/Response'
-import Database from '../database/Database'
+import Database from '@Database'
 import { dateString } from '../utils/Utils'
 import Errors from '../errors/Errors'
-import Logger from '../logger/Logger'
+import Logger from '@Logger'
 
 import { compare, hash } from 'bcrypt'
 import type { FastifyInstance, FastifyReply } from 'fastify'

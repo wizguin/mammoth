@@ -2,7 +2,7 @@ import { type Body, schema } from '../schema/JoinSchema'
 import { checkUserExists, createUser } from '../user/User'
 import { buildError } from '../response/Response'
 import Errors from '../errors/Errors'
-import Logger from '../logger/Logger'
+import Logger from '@Logger'
 
 import type { FastifyInstance } from 'fastify'
 

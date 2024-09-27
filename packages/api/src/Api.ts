@@ -5,9 +5,9 @@ import Get from './routes/Get'
 import Join from './routes/Join'
 import Login from './routes/Login'
 
-import Database from './database/Database'
-import Logger from './logger/Logger'
-import Redis from './redis/Redis'
+import Database from '@Database'
+import Logger from '@Logger'
+import Redis from '@Redis'
 
 import fastify from 'fastify'
 import fastifyFormBody from '@fastify/formbody'

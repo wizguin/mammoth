@@ -1,6 +1,6 @@
 import { getCrumb, getUserById } from '../user/User'
 import { buildResponse } from '../response/Response'
-import Logger from '../logger/Logger'
+import Logger from '@Logger'
 
 import type { FastifyInstance } from 'fastify'
 

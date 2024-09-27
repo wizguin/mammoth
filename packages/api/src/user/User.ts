@@ -1,5 +1,5 @@
 import { dateString, maxDate, titleCase } from '../utils/Utils'
-import Database from '../database/Database'
+import Database from '@Database'
 import Errors from '../errors/Errors'
 
 import { compare, hash } from 'bcrypt'

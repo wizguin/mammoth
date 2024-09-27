@@ -2,7 +2,11 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "paths": {
-            "@shared/*": ["../../shared/*"]
+            "@shared/*": ["../../shared/*"],
+
+            "@Database": ["../../shared/database/Database"],
+            "@Logger": ["../../shared/logger/Logger"],
+            "@Redis": ["../../shared/redis/Redis"]
         }
     }
 }
