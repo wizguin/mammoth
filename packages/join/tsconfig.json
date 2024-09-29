@@ -1,0 +1,11 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            "@shared/*": ["../../shared/*"],
+
+            "@Database": ["../../shared/database/Database"],
+            "@Logger": ["../../shared/logger/Logger"]
+        }
+    }
+}

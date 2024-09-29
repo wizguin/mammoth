@@ -1,0 +1,10 @@
+{
+    "name": "vanilla-join",
+    "version": "1.0.0",
+    "description": "Vanilla join server",
+    "scripts": {
+        "dev": "nodemon --watch src --watch ../../shared -r tsconfig-paths/register src/Join.ts"
+    },
+    "author": "wizguin",
+    "license": "MIT"
+}
