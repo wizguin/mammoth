@@ -1,0 +1,10 @@
+{
+    "name": "vanilla-policy",
+    "version": "1.0.0",
+    "description": "Vanilla policy server",
+    "scripts": {
+        "dev": "nodemon --watch src -r tsconfig-paths/register src/Policy.ts"
+    },
+    "author": "wizguin",
+    "license": "MIT"
+}
