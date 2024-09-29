@@ -1,11 +1,13 @@
-import { delimiter, makeXt } from '../../handler/packet/Packet'
-import type BaseTable from '@objects/room/table/BaseTable'
+import { delimiter, makeXt } from '@shared/server/packet/Packet'
 import Database from '@Database'
 import Errors from './Errors'
 import { isVersion130 } from '@Data'
 import Logger from '@Logger'
+
+import type BaseTable from '@objects/room/table/BaseTable'
 import type PlayerRoom from '@objects/room/PlayerRoom'
 import type Room from '@objects/room/Room'
+import type { Socket } from '@shared/server/BaseServer'
 import type Waddle from '@objects/room/waddle/Waddle'
 import type WaddleRoom from '@objects/room/waddle/WaddleRoom'
 
@@ -17,13 +19,10 @@ import PetCollection from '@collections/PetCollection'
 
 import type { Ban, Prisma, User as PrismaUser } from '@prisma/client'
 import EventEmitter from 'events'
-import { nanoid } from 'nanoid'
-import type { Socket } from 'net'
 
 export default class User implements Partial<PrismaUser> {
 
     socket: Socket
-    rateLimitKey: string
 
     room: Room | PlayerRoom | null
     x: number
@@ -64,8 +63,6 @@ export default class User implements Partial<PrismaUser> {
 
     constructor(socket: Socket) {
         this.socket = socket
-
-        this.rateLimitKey = nanoid()
 
         this.room = null
         this.x = 0

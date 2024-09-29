@@ -1,4 +1,4 @@
-import * as schema from '../schema/JoinSchema'
+import * as schema from '@shared/schema/JoinSchema'
 import { authenticateUser, getExpiryDate, getParentHint, type User } from '../user/User'
 import { buildError, buildResponse } from '../response/Response'
 import Database from '@Database'

@@ -1,50 +1,31 @@
+import BaseHandler, { policy } from '@shared/server//BaseHandler'
+
 import * as Data from '@Data'
-import { delimiter, parseXml, parseXt } from './packet/Packet'
 import Logger from '@Logger'
 import PlayerRooms from '@objects/room/PlayerRooms'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'
 import { updateWorldPopulation } from '../World'
 import type User from '@objects/user/User'
-import type World from '../World'
 
-import type { Element } from 'elementtree'
-import EventEmitter from 'events'
-
-type Users = Record<number, User>
 export type Rooms = Record<number, Room>
 
-const policy = '<cross-domain-policy><allow-access-from domain="*" to-ports="*" /></cross-domain-policy>'
+export default class Handler extends BaseHandler<User> {
 
-export default class Handler {
-
-    world: World
+    users: Record<number, User> = {}
     rooms: Rooms
     playerRooms: PlayerRooms
-    events: EventEmitter
     plugins: PluginLoader
 
-    constructor(world: World) {
-        this.world = world
+    constructor() {
+        super()
 
         this.rooms = this.setRooms()
         this.playerRooms = new PlayerRooms()
-
-        this.events = new EventEmitter({ captureRejections: true })
         this.plugins = new PluginLoader(this)
-
-        this.events.on('error', error => Logger.error(error))
 
         this.setTables()
         this.setWaddles()
-    }
-
-    get users() {
-        return this.world.users
-    }
-
-    set users(users: Users) {
-        this.world.users = users
     }
 
     get usersLength() {
@@ -89,73 +70,14 @@ export default class Handler {
         }
     }
 
-    handle(data: string, user: User) {
-        try {
-            const packets = data.split(delimiter).filter(Boolean)
+    emitXtEvent(action: string, user: User, args: (string | number)[]) {
+        super.emitXtEvent(action, user, args)
 
-            for (const packet of packets) {
-                Logger.info(`Received: ${packet}`)
-
-                if (packet.startsWith('<')) {
-                    this.handleXml(packet, user)
-                }
-
-                if (packet.startsWith('%')) {
-                    this.handleXt(packet, user)
-                }
-            }
-
-        } catch (error) {
-            Logger.error(error)
-        }
+        user.events.emit(action, user, ...args)
     }
 
-    handleXml(data: string, user: User) {
-        const parsed = parseXml(data)
-
-        if (!parsed) {
-            Logger.warn(`Invalid XML data: ${data}`)
-            return
-        }
-
-        switch (parsed.tag) {
-            case 'policy-file-request':
-                user.sendXml(policy)
-                break
-
-            case 'msg':
-                this.handleXmlMsg(parsed, user)
-                break
-        }
-    }
-
-    handleXmlMsg(parsed: Element, user: User) {
-        const body = parsed.find('body')
-
-        if (!body) {
-            return
-        }
-
-        const action = body.get('action')
-
-        if (action) {
-            this.events.emit(action, user, body)
-        }
-    }
-
-    handleXt(data: string, user: User) {
-        const parsed = parseXt(data)
-
-        if (!parsed) {
-            Logger.warn(`Invalid XT data: ${data}`)
-            return
-        }
-
-        Logger.debug('Parsed args', { parsed })
-
-        this.events.emit(parsed.action, user, ...parsed.args)
-
-        user.events.emit(parsed.action, user, ...parsed.args)
+    sendPolicyResponse(user: User) {
+        user.sendXml(policy)
     }
 
     close(user: User) {

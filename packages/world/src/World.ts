@@ -1,6 +1,6 @@
 import '@shared/env/Env'
 
-import { Server, type Socket } from 'net'
+import BaseServer, { type Socket } from '@shared/server/BaseServer'
 
 import './utils/Setup'
 
@@ -8,78 +8,31 @@ import { host, id, port } from '@Args'
 import Database from '@Database'
 import Handler from './handler/Handler'
 import Logger from '@Logger'
-import { rateLimitEnabled } from '@Config'
-import RateLimiter from './ratelimit/RateLimiter'
 import Redis from '@Redis'
 import User from '@objects/user/User'
 
-export default class World extends Server {
+export default class World extends BaseServer<User> {
 
-    users: Record<number, User>
-    handler: Handler
-    rateLimiter?: RateLimiter
+    handler = new Handler()
 
     constructor() {
-        super()
-
-        this.users = {}
-        this.handler = new Handler(this)
-
-        if (rateLimitEnabled) {
-            this.rateLimiter = new RateLimiter()
-        }
-
-        this.on('listening', () => this.onListening())
-
-        this.listen(port, host)
+        super(host, port)
     }
 
-    onListening() {
-        this.on('connection', (socket: Socket) => this.onConnection(socket))
-
-        Logger.success(`Listening on port ${port}`)
-    }
-
-    async onConnection(socket: Socket) {
-        if (!socket.remoteAddress) {
-            return
-        }
-
-        Logger.info(`New connection from: ${socket.remoteAddress}`)
-
-        try {
-            if (this.rateLimiter) {
-                await this.rateLimiter.addressConnects.consume(socket.remoteAddress)
-            }
-
-            this.createUser(socket)
-
-        } catch (res) {
-            Logger.warn(`Rate limiting connection from: ${socket.remoteAddress}`, { res })
-
-            socket.destroy()
-        }
-    }
-
-    createUser(socket: Socket) {
-        const user = new User(socket)
-
-        socket.setEncoding('utf8')
-
-        socket.on('data', (data: string) => this.onData(data, user))
-        socket.on('close', () => this.handler.close(user))
-        socket.on('error', error => Logger.error(error))
+    createClient(socket: Socket) {
+        return new User(socket)
     }
 
     async onData(data: string, user: User) {
         if (!user.socket.remoteAddress) {
+            user.socket.destroy()
             return
         }
 
         try {
             if (this.rateLimiter) {
                 await this.rateLimiter.addressEvents.consume(user.socket.remoteAddress)
-                await this.rateLimiter.userEvents.consume(user.id || user.rateLimitKey)
+                await this.rateLimiter.socketEvents.consume(user.socket.id)
             }
 
             this.handler.handle(data, user)
@@ -87,6 +40,10 @@ export default class World extends Server {
         } catch (res) {
             Logger.warn(`Rate limiting data from: ${user.socket.remoteAddress}`, { res })
         }
+    }
+
+    onClose(user: User) {
+        this.handler.close(user)
     }
 
 }

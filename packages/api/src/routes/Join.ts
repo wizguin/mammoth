@@ -1,4 +1,4 @@
-import { type Body, schema } from '../schema/JoinSchema'
+import { type Body, schema } from '@shared/schema/JoinSchema'
 import { checkUserExists, createUser } from '../user/User'
 import { buildError } from '../response/Response'
 import Errors from '../errors/Errors'
