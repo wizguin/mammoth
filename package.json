@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Pre-CPIP server emulator",
     "scripts": {
-
+        "dev": "node scripts/dev.js",
     },
     "author": "wizguin",
     "license": "MIT",
