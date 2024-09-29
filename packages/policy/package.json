@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "description": "Vanilla policy server",
     "scripts": {
-        "dev": "nodemon --watch src -r tsconfig-paths/register src/Policy.ts"
+        "dev": "nodemon --watch src --watch ../../shared -r tsconfig-paths/register src/Policy.ts",
+        "build": "tsc && tsc-alias"
     },
     "author": "wizguin",
     "license": "MIT"

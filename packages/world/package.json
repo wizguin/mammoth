@@ -3,19 +3,14 @@
     "version": "1.0.0",
     "description": "Vanilla world server",
     "scripts": {
-        "dev": "nodemon --watch src --watch config --watch data -r tsconfig-paths/register src/World.ts -- -i 100 -n Blizzard -p 6114",
-        "build": "rimraf dist && tsc && tsc-alias",
-        "start": "node dist/World.js",
+        "dev": "nodemon --watch src --watch ../../shared --watch config --watch data -r tsconfig-paths/register src/World.ts -- -i 100 -n Blizzard -p 6114",
+        "build": "tsc && tsc-alias",
         "prepare": "ts-patch install"
     },
     "author": "wizguin",
     "license": "MIT",
     "devDependencies": {
-        "@types/elementtree": "^0.1.1",
         "commander": "^12.1.0",
-        "elementtree": "^0.1.7",
-        "nanoid": "^3.3.7",
-        "rate-limiter-flexible": "^5.0.3",
         "ts-patch": "^3.1.2",
         "ts-runtime-checks": "^0.5.1"
     }
