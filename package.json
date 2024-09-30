@@ -4,7 +4,9 @@
     "description": "Pre-CPIP server emulator",
     "scripts": {
         "dev": "node scripts/dev.js",
-        "build": "npm run build --workspaces"
+        "build": "npm run build --workspaces",
+        "eslint": "eslint packages/*/src/**/*",
+        "eslint:fix": "eslint packages/*/src/**/* --fix"
     },
     "author": "wizguin",
     "license": "MIT",
