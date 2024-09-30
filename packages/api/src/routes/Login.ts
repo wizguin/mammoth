@@ -1,10 +1,8 @@
 import { authenticateUser, getCrumb, getExpiryDate, getParentHint, type User } from '../user/User'
 import { buildError, buildResponse } from '../response/Response'
-import Database from '@Database'
+import { Database, Logger, Redis } from '@vanilla/shared'
 import { dateString } from '../utils/Utils'
 import Errors from '../errors/Errors'
-import Logger from '@Logger'
-import Redis from '@Redis'
 
 import type { FastifyInstance } from 'fastify'
 import { hash } from 'bcrypt'

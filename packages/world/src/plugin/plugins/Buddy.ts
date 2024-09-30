@@ -1,6 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
-import Database from '@Database'
+import { Database } from '@vanilla/shared'
 import { handleOnce } from '@Decorators'
 import { isVersion130 } from '@Data'
 import type User from '@objects/user/User'

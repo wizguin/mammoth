@@ -1,9 +1,8 @@
 import BaseCollection from '../BaseCollection'
 
+import { Database, Logger } from '@vanilla/shared'
 import { pets, whitelist } from '@Data'
-import Database from '@Database'
 import Errors from '@objects/user/Errors'
-import Logger from '@Logger'
 import Pet from '@objects/pet/Pet'
 import type User from '@objects/user/User'
 import { whitelistEnabled } from '@Config'

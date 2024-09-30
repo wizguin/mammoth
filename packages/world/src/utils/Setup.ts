@@ -1,4 +1,4 @@
-import Logger from '@Logger'
+import { Logger } from '@vanilla/shared'
 
 process.on('uncaughtException', (error: Error) => {
     Logger.error(error)

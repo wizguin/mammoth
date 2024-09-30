@@ -1,5 +1,4 @@
-import Database from '@Database'
-import Logger from '@Logger'
+import { Database, Logger } from '@vanilla/shared'
 import PlayerRoom from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
 

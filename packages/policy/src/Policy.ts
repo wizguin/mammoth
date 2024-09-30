@@ -1,8 +1,6 @@
-import '@shared/env/Env'
-
-import SimpleServer from '@shared/server/simple/SimpleServer'
+import { SimpleServer } from '@vanilla/shared'
 
 const host = '0.0.0.0'
-const port = 843
+const port = parseInt(process.env.POLICY_PORT || '843')
 
 new SimpleServer(host, port)

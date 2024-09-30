@@ -4,7 +4,7 @@
     "description": "Pre-CPIP server emulator",
     "scripts": {
         "dev": "node scripts/dev.js",
-        "build": "rimraf dist && npm run build --workspaces"
+        "build": "npm run build --workspaces"
     },
     "author": "wizguin",
     "license": "MIT",

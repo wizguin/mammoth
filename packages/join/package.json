@@ -1,11 +1,15 @@
 {
-    "name": "vanilla-join",
+    "name": "@vanilla/join",
     "version": "1.0.0",
     "description": "Vanilla join server",
     "scripts": {
-        "dev": "nodemon --watch src --watch ../../shared -r tsconfig-paths/register src/Join.ts",
-        "build": "tsc && tsc-alias"
+        "dev": "nodemon src/Join.ts",
+        "build": "rimraf dist && tsc",
+        "start": "node dist/Join.js"
     },
     "author": "wizguin",
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "@vanilla/shared": "1.0.0"
+    }
 }

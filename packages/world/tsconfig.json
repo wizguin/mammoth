@@ -1,13 +1,9 @@
 {
     "extends": "../../tsconfig.json",
     "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
         "paths": {
-            "@shared/*": ["../../shared/*"],
-
-            "@Database": ["../../shared/database/Database"],
-            "@Logger": ["../../shared/logger/Logger"],
-            "@Redis": ["../../shared/redis/Redis"],
-
             "@Args": ["./src/args/Args"],
             "@Config": ["./src/config/Config"],
             "@Data": ["./src/data/Data"],

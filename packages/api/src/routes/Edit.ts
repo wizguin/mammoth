@@ -1,10 +1,8 @@
-import * as schema from '@shared/schema/JoinSchema'
 import { authenticateUser, getExpiryDate, getParentHint, type User } from '../user/User'
 import { buildError, buildResponse } from '../response/Response'
-import Database from '@Database'
+import { Database, JoinSchema, Logger } from '@vanilla/shared'
 import { dateString } from '../utils/Utils'
 import Errors from '../errors/Errors'
-import Logger from '@Logger'
 
 import { compare, hash } from 'bcrypt'
 import type { FastifyInstance, FastifyReply } from 'fastify'
@@ -125,7 +123,7 @@ async function handlePassword(reply: FastifyReply, body: PasswordBody, user: Use
         return
     }
 
-    const password = schema.password.validate(body.NewPassword)
+    const password = JoinSchema.password.validate(body.NewPassword)
 
     if (password.error) {
         reply.send(buildError(Errors.IncorrectPassword))
@@ -147,7 +145,7 @@ async function handlePassword(reply: FastifyReply, body: PasswordBody, user: Use
 }
 
 async function handleIsSafeMode(reply: FastifyReply, body: IsSafeModeBody, user: User) {
-    const safeMode = schema.safeMode.validate(body.IsSafeMode)
+    const safeMode = JoinSchema.safeMode.validate(body.IsSafeMode)
 
     if (safeMode.error) {
         reply.send(buildError(Errors.IncorrectPassword))

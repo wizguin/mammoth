@@ -1,11 +1,15 @@
 {
-    "name": "vanilla-policy",
+    "name": "@vanilla/policy",
     "version": "1.0.0",
     "description": "Vanilla policy server",
     "scripts": {
-        "dev": "nodemon --watch src --watch ../../shared -r tsconfig-paths/register src/Policy.ts",
-        "build": "tsc && tsc-alias"
+        "dev": "nodemon src/Policy.ts",
+        "build": "rimraf dist && tsc",
+        "start": "node dist/Policy.js"
     },
     "author": "wizguin",
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "@vanilla/shared": "1.0.0"
+    }
 }

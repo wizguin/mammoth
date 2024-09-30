@@ -1,10 +1,4 @@
-import '@shared/env/Env'
-
-import Database from '@Database'
-import Logger from '@Logger'
-import { makeXt } from '@shared/server/packet/Packet'
-import SimpleServer from '@shared/server/simple/SimpleServer'
-import { username } from '@shared/schema/JoinSchema'
+import { Database, JoinSchema, Logger, makeXt, SimpleServer } from '@vanilla/shared'
 
 const host = '0.0.0.0'
 const port = parseInt(process.env.JOIN_PORT || '6113')
@@ -21,7 +15,7 @@ server.addEvent('login', socket => {
 
 server.addEvent('checkName', async (socket, name: string) => {
     try {
-        const { error, value } = username.validate(name)
+        const { error, value } = JoinSchema.username.validate(name)
 
         if (error || await checkUserExists(value)) {
             server.write(socket, makeXt(['checkName', 1]))

@@ -1,5 +1,4 @@
-import Database from '@Database'
-import Logger from '@Logger'
+import { Database, Logger } from '@vanilla/shared'
 import { pets } from '@Data'
 
 import type { Pet as PrismaPet } from '@prisma/client'

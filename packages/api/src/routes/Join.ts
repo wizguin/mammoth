@@ -1,18 +1,17 @@
-import { type Body, schema } from '@shared/schema/JoinSchema'
 import { checkUserExists, createUser } from '../user/User'
+import { JoinSchema, Logger } from '@vanilla/shared'
 import { buildError } from '../response/Response'
 import Errors from '../errors/Errors'
-import Logger from '@Logger'
 
 import type { FastifyInstance } from 'fastify'
 
 export default async function(app: FastifyInstance) {
     app.post<{
-        Body: Body
+        Body: JoinSchema.Body
 
     }>('/join.php', async (request, reply) => {
         try {
-            const { error, value } = schema.validate(request.body)
+            const { error, value } = JoinSchema.schema.validate(request.body)
 
             if (error) {
                 reply.send(buildError(Errors.InvalidUsername))

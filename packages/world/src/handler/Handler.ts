@@ -1,7 +1,6 @@
-import BaseHandler, { policy } from '@shared/server//BaseHandler'
+import { BaseHandler, Logger, policy } from '@vanilla/shared'
 
 import * as Data from '@Data'
-import Logger from '@Logger'
 import PlayerRooms from '@objects/room/PlayerRooms'
 import PluginLoader from '../plugin/PluginLoader'
 import Room from '@objects/room/Room'

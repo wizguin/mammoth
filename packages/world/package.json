@@ -1,15 +1,17 @@
 {
-    "name": "vanilla-world",
+    "name": "@vanilla/world",
     "version": "1.0.0",
     "description": "Vanilla world server",
     "scripts": {
-        "dev": "nodemon --watch src --watch ../../shared --watch config --watch data -r tsconfig-paths/register src/World.ts -- -i 100 -n Blizzard -p 6114",
-        "build": "tsc && tsc-alias",
+        "dev": "nodemon src/World.ts -- -i 100 -n Blizzard -p 6114",
+        "build": "rimraf dist && tsc && tsc-alias",
+        "start": "node dist/World.js",
         "prepare": "ts-patch install"
     },
     "author": "wizguin",
     "license": "MIT",
     "devDependencies": {
+        "@vanilla/shared": "1.0.0",
         "commander": "^12.1.0",
         "ts-patch": "^3.1.2",
         "ts-runtime-checks": "^0.5.1"

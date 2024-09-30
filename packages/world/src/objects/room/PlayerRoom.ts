@@ -1,4 +1,4 @@
-import Database from '@Database'
+import { Database } from '@vanilla/shared'
 import { music } from '@Data'
 import type PlayerRooms from './PlayerRooms'
 import Room from './Room'

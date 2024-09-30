@@ -1,13 +1,9 @@
-import '@shared/env/Env'
+import { Database, Logger, Redis } from '@vanilla/shared'
 
 import Edit from './routes/Edit'
 import Get from './routes/Get'
 import Join from './routes/Join'
 import Login from './routes/Login'
-
-import Database from '@Database'
-import Logger from '@Logger'
-import Redis from '@Redis'
 
 import fastify from 'fastify'
 import fastifyFormBody from '@fastify/formbody'

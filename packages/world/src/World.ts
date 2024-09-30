@@ -1,14 +1,9 @@
-import '@shared/env/Env'
-
-import BaseServer, { type Socket } from '@shared/server/BaseServer'
+import { BaseServer, Database, Logger, Redis, type Socket } from '@vanilla/shared'
 
 import './utils/Setup'
 
 import { host, id, port } from '@Args'
-import Database from '@Database'
 import Handler from './handler/Handler'
-import Logger from '@Logger'
-import Redis from '@Redis'
 import User from '@objects/user/User'
 
 export default class World extends BaseServer<User> {

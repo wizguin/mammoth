@@ -1,5 +1,5 @@
 import loadJson from '../utils/LoadJson'
-import Logger from '@Logger'
+import { Logger } from '@vanilla/shared'
 
 export function loadData(file: string) {
     const data = loadJson(`data/${file}`)

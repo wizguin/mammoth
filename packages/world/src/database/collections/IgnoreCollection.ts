@@ -1,6 +1,6 @@
 import BaseCollection from '../BaseCollection'
 
-import Database from '@Database'
+import { Database } from '@vanilla/shared'
 import type User from '@objects/user/User'
 
 import type { Ignore as PrismaIgnore } from '@prisma/client'
