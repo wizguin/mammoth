@@ -11,6 +11,9 @@
 
             "@collections/*": ["./src/database/collections/*"],
             "@objects/*": ["./src/objects/*"]
-        }
+        },
+        "plugins": [
+            { "transform": "ts-runtime-checks" }
+        ]
     }
 }

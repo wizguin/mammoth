@@ -3,6 +3,9 @@
     "compilerOptions": {
         "rootDir": "./src",
         "outDir": "./dist",
-        "declaration": true
+        "declaration": true,
+        "plugins": [
+            { "transform": "ts-runtime-checks" }
+        ]
     }
 }
