@@ -1,10 +1,9 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
-import { Data, Database } from '@vanilla/shared'
+import { Database } from '@vanilla/shared'
 import { handleOnce } from '@Decorators'
+import { isVersion130 } from '@vanilla/shared/data'
 import type User from '@objects/user/User'
-
-const { isVersion130 } = Data
 
 const bl = isVersion130 ? 'gb' : 'bl'
 const bq = isVersion130 ? 'br' : 'bq'

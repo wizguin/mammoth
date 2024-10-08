@@ -1,6 +1,7 @@
 import BaseCollection from '../BaseCollection'
 
-import { Data, Database, Logger } from '@vanilla/shared'
+import { Database, Logger } from '@vanilla/shared'
+import { pets, whitelist } from '@vanilla/shared/data'
 import Errors from '@objects/user/Errors'
 import Pet from '@objects/pet/Pet'
 import type User from '@objects/user/User'
@@ -28,12 +29,12 @@ export default class PetCollection extends BaseCollection<Pet> {
     }
 
     async add(typeId: number, name: string) {
-        if (!(typeId in Data.pets)) {
+        if (!(typeId in pets)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }
 
-        if (whitelistEnabled && !Data.whitelist.pets.includes(typeId)) {
+        if (whitelistEnabled && !whitelist.pets.includes(typeId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }
@@ -48,14 +49,14 @@ export default class PetCollection extends BaseCollection<Pet> {
             return
         }
 
-        const cost = Data.pets[typeId].cost
+        const cost = pets[typeId].cost
 
         if (this.user.coins < cost) {
             this.user.sendError(Errors.InsufficientCoins)
             return
         }
 
-        const { maxHealth, maxHunger, maxRest } = Data.pets[typeId]
+        const { maxHealth, maxHunger, maxRest } = pets[typeId]
 
         try {
             const record = await Database.pet.create({

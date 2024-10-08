@@ -3,6 +3,17 @@
     "version": "1.0.0",
     "description": "Vanilla shared components",
     "main": "./dist/index.js",
+    "exports": {
+        ".": "./dist/index.js",
+        "./data": "./dist/data/index.js"
+    },
+	"typesVersions": {
+        "*": {
+            "data": [
+                "dist/data/index.d.ts"
+            ]
+        }
+    },
     "scripts": {
         "dev": "nodemon src/index.ts",
         "build": "rimraf dist && tsc",

@@ -1,4 +1,5 @@
-import { Data, Database, Logger } from '@vanilla/shared'
+import { Database, Logger } from '@vanilla/shared'
+import { pets } from '@vanilla/shared/data'
 
 import type { Pet as PrismaPet } from '@prisma/client'
 
@@ -26,7 +27,7 @@ export default class Pet implements PrismaPet {
         public hunger: number,
         public rest: number
     ) {
-        const data = Data.pets[typeId]
+        const data = pets[typeId]
 
         this.maxHealth = data.maxHealth
         this.maxHunger = data.maxHunger

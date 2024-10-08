@@ -1,6 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
-import { Data } from '@vanilla/shared'
+import { playerRooms, whitelist } from '@vanilla/shared/data'
 import Errors from '@objects/user/Errors'
 import { getFurnitureString } from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
@@ -60,17 +60,17 @@ export default class PlayerRoom extends BasePlugin {
             return
         }
 
-        if (!(roomId in Data.playerRooms)) {
+        if (!(roomId in playerRooms)) {
             user.sendError(Errors.ItemNotFound)
             return
         }
 
-        if (whitelistEnabled && !Data.whitelist.playerRooms.includes(roomId)) {
+        if (whitelistEnabled && !whitelist.playerRooms.includes(roomId)) {
             user.sendError(Errors.ItemNotFound)
             return
         }
 
-        const cost = Data.playerRooms[roomId].cost
+        const cost = playerRooms[roomId].cost
 
         if (user.coins < cost) {
             user.sendError(Errors.InsufficientCoins)

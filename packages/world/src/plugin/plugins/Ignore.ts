@@ -1,10 +1,10 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
-import { Data } from '@vanilla/shared'
 import { handleOnce } from '@Decorators'
+import { isVersion130 } from '@vanilla/shared/data'
 import type User from '@objects/user/User'
 
-const nl = Data.isVersion130 ? 'gn' : 'nl'
+const nl = isVersion130 ? 'gn' : 'nl'
 
 export default class Ignore extends BasePlugin {
 
