@@ -1,12 +1,9 @@
 import { Database, Logger, Redis } from '@vanilla/shared'
 
-import Edit from './routes/Edit'
-import Get from './routes/Get'
-import Join from './routes/Join'
-import Login from './routes/Login'
-
 import fastify from 'fastify'
+import fastifyAutoload from '@fastify/autoload'
 import fastifyFormBody from '@fastify/formbody'
+import { join } from 'path'
 
 (async () => {
     const app = fastify({
@@ -16,8 +13,6 @@ import fastifyFormBody from '@fastify/formbody'
     })
 
     const port = parseInt(process.env.API_PORT || '6112')
-
-    const routes = [Edit, Get, Join, Login]
 
     app.addHook('onRequest', async req => {
         const request = {
@@ -52,9 +47,9 @@ import fastifyFormBody from '@fastify/formbody'
 
     app.register(fastifyFormBody)
 
-    for (const route of routes) {
-        app.register(route, { prefix: '/php' })
-    }
+    app.register(fastifyAutoload, {
+        dir: join(__dirname, 'routes')
+    })
 
     await Database.connect()
     await Redis.connect()
@@ -66,5 +61,6 @@ import fastifyFormBody from '@fastify/formbody'
         }
 
         Logger.success(`Listening on port ${port}`)
+        Logger.debug(`Routes:\n${app.printRoutes()}`)
     })
 })()

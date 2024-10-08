@@ -1,8 +1,8 @@
-import { authenticateUser, getExpiryDate, getParentHint, type User } from '../user/User'
-import { buildError, buildResponse } from '../response/Response'
+import { authenticateUser, getExpiryDate, getParentHint, type User } from '../../user/User'
+import { buildError, buildResponse } from '../../response/Response'
 import { Database, JoinSchema, Logger } from '@vanilla/shared'
-import { dateString } from '../utils/Utils'
-import Errors from '../errors/Errors'
+import { dateString } from '../../utils/Utils'
+import Errors from '../../errors/Errors'
 
 import { compare, hash } from 'bcrypt'
 import type { FastifyInstance, FastifyReply } from 'fastify'

@@ -10,6 +10,7 @@
     "author": "wizguin",
     "license": "MIT",
     "devDependencies": {
+        "@fastify/autoload": "^6.0.1",
         "@fastify/formbody": "^7.4.0",
         "@vanilla/shared": "1.0.0",
         "fastify": "^4.28.1"

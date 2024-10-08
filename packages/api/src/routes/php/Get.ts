@@ -1,5 +1,5 @@
-import { getCrumb, getUserById } from '../user/User'
-import { buildResponse } from '../response/Response'
+import { getCrumb, getUserById } from '../../user/User'
+import { buildResponse } from '../../response/Response'
 import { Logger } from '@vanilla/shared'
 
 import type { FastifyInstance } from 'fastify'
