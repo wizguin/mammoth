@@ -6,7 +6,6 @@
         "paths": {
             "@Args": ["./src/args/Args"],
             "@Config": ["./src/config/Config"],
-            "@Data": ["./src/data/Data"],
             "@Decorators": ["./src/decorators/Decorators"],
 
             "@collections/*": ["./src/database/collections/*"],

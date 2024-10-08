@@ -1,7 +1,6 @@
 import BaseCollection from '../BaseCollection'
 
-import { Database, Logger } from '@vanilla/shared'
-import { furniture, whitelist } from '@Data'
+import { Data, Database, Logger } from '@vanilla/shared'
 import Errors from '@objects/user/Errors'
 import type User from '@objects/user/User'
 import { whitelistEnabled } from '@Config'
@@ -16,23 +15,23 @@ export default class FurnitureCollection extends BaseCollection<Furniture> {
 
     collect(records: Furniture[]) {
         // Filter out items that don't exist
-        const exists = records.filter(r => r.furnitureId in furniture)
+        const exists = records.filter(r => r.furnitureId in Data.furniture)
 
         super.collect(exists)
     }
 
     async add(furnitureId: number) {
-        if (!(furnitureId in furniture)) {
+        if (!(furnitureId in Data.furniture)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }
 
-        if (whitelistEnabled && !whitelist.furniture.includes(furnitureId)) {
+        if (whitelistEnabled && !Data.whitelist.furniture.includes(furnitureId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }
 
-        const cost = furniture[furnitureId].cost
+        const cost = Data.furniture[furnitureId].cost
 
         if (this.user.coins < cost) {
             this.user.sendError(Errors.InsufficientCoins)

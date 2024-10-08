@@ -1,6 +1,6 @@
 import { BaseServer, Database, Logger, Redis, type Socket } from '@vanilla/shared'
 
-import './utils/Setup'
+import './setup/Setup'
 
 import { host, id, port } from '@Args'
 import Handler from './handler/Handler'

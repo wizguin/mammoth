@@ -1,6 +1,5 @@
-import { Database, delimiter, Logger, makeXt, type Socket } from '@vanilla/shared'
+import { Data, Database, delimiter, Logger, makeXt, type Socket } from '@vanilla/shared'
 import Errors from './Errors'
-import { isVersion130 } from '@Data'
 
 import type BaseTable from '@objects/room/table/BaseTable'
 import type PlayerRoom from '@objects/room/PlayerRoom'
@@ -185,7 +184,7 @@ export default class User implements Partial<PrismaUser> {
             this.buddyRequests.push(userId)
         }
 
-        this.send(isVersion130 ? 'br' : 'bq', userId, username)
+        this.send(Data.isVersion130 ? 'br' : 'bq', userId, username)
     }
 
     removeBuddyRequest(userId: number) {

@@ -1,10 +1,10 @@
 import BasePlugin, { type Num, type NumArray } from '../BasePlugin'
 
+import { Data } from '@vanilla/shared'
 import { handleOnce } from '@Decorators'
-import { isVersion130 } from '@Data'
 import type User from '@objects/user/User'
 
-const il = isVersion130 ? 'gi' : 'il'
+const il = Data.isVersion130 ? 'gi' : 'il'
 
 export default class Item extends BasePlugin {
 

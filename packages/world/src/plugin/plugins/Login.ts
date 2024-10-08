@@ -1,12 +1,11 @@
 import BasePlugin from '../BasePlugin'
 
+import { Data, Redis } from '@vanilla/shared'
 import Errors from '@objects/user/Errors'
 import { handleOnce } from '@Decorators'
 import { maxUsers } from '@Config'
-import { Redis } from '@vanilla/shared'
 import { updateWorldPopulation } from '../../World'
 import type User from '@objects/user/User'
-import { version } from '@Data'
 
 import { compare } from 'bcrypt'
 import type { Element } from 'elementtree'
@@ -22,7 +21,7 @@ export default class Login extends BasePlugin {
     verChk(user: User, body: Element) {
         const ver = body.find('ver')
 
-        const response = ver && ver.get('v') === version
+        const response = ver && ver.get('v') === Data.version
             ? 'apiOK'
             : 'apiKO'
 

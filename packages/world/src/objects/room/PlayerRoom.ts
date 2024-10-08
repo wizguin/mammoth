@@ -1,5 +1,4 @@
-import { Database } from '@vanilla/shared'
-import { music } from '@Data'
+import { Data, Database } from '@vanilla/shared'
 import type PlayerRooms from './PlayerRooms'
 import Room from './Room'
 import type User from '@objects/user/User'
@@ -42,7 +41,7 @@ export default class PlayerRoom extends Room {
     add(user: User) {
         const props: (number | string)[] = [this.userId, this.roomId]
 
-        if (this.musicId && music.includes(this.musicId)) {
+        if (this.musicId && Data.music.includes(this.musicId)) {
             props.push(this.musicId)
         }
 
@@ -93,7 +92,7 @@ export default class PlayerRoom extends Room {
     }
 
     async setMusic(musicId: number) {
-        if (music.includes(musicId)) {
+        if (Data.music.includes(musicId)) {
             await Database.playerRoom.update({
                 data: { musicId },
                 where: { userId: this.userId }
