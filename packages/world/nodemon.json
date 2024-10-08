@@ -3,7 +3,7 @@
         "./src",
         "../shared",
         "./config",
-        "./data"
+        "../../data"
     ],
     "execMap": {
         "ts": "node -r ts-node/register -r tsconfig-paths/register --env-file=../../.env"
