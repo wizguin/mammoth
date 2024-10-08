@@ -6,7 +6,8 @@
         "dev": "node scripts/dev.js",
         "build": "npm run build --workspaces",
         "eslint": "eslint packages/*/src/**/*",
-        "eslint:fix": "eslint packages/*/src/**/* --fix"
+        "eslint:fix": "eslint packages/*/src/**/* --fix",
+        "prepare": "ts-patch install"
     },
     "author": "wizguin",
     "license": "MIT",
@@ -33,6 +34,8 @@
         "redis": "^4.7.0",
         "rimraf": "^5.0.1",
         "ts-node": "^10.9.2",
+        "ts-patch": "^3.2.1",
+        "ts-runtime-checks": "^0.6.2",
         "tsc-alias": "^1.8.6",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.0.4",

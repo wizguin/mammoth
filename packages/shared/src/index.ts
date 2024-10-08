@@ -6,5 +6,6 @@ export { default as Database } from './database/Database'
 export { default as Logger } from './logger/Logger'
 export { default as Redis } from './redis/Redis'
 
+export * as Data from './data/Data'
 export * as JoinSchema from './schema/JoinSchema'
 export * from './server/packet/Packet'
