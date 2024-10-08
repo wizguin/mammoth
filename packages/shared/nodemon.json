@@ -1,0 +1,9 @@
+{
+    "watch": [
+        "./src",
+        "../../data"
+    ],
+    "execMap": {
+        "ts": "node -r ts-node/register --env-file=../../.env"
+    }
+}

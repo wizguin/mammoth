@@ -4,6 +4,7 @@
     "description": "Vanilla shared components",
     "main": "./dist/index.js",
     "scripts": {
+        "dev": "nodemon src/index.ts",
         "build": "rimraf dist && tsc",
         "postinstall": "npm run build"
     },
