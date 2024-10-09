@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "node scripts/dev.js",
         "build": "npm run build --workspaces",
+        "start": "node scripts/start.js",
         "eslint": "eslint packages/*/src/**/*",
         "eslint:fix": "eslint packages/*/src/**/* --fix",
         "prepare": "ts-patch install"

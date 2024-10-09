@@ -12,7 +12,6 @@ const { result } = concurrently(
         { command, name: 'world', cwd: path.resolve('packages/world') }
     ],
     {
-        prefix: '{name}\t|',
         prefixColors: 'auto'
     }
 )
