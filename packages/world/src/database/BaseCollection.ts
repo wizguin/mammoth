@@ -1,4 +1,4 @@
-import { Logger } from '@vanilla/shared'
+import { Logger } from '@mammoth/shared'
 import type User from '@objects/user/User'
 
 type IndexKey<R> = Extract<keyof R, string>

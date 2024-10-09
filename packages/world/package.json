@@ -1,7 +1,7 @@
 {
-    "name": "@vanilla/world",
+    "name": "@mammoth/world",
     "version": "1.0.0",
-    "description": "Vanilla world server",
+    "description": "Mammoth world server",
     "scripts": {
         "dev": "nodemon src/World.ts -- -i 100 -n Blizzard -p 6114",
         "build": "rimraf dist && tsc && tsc-alias",
@@ -10,7 +10,7 @@
     "author": "wizguin",
     "license": "MIT",
     "devDependencies": {
-        "@vanilla/shared": "1.0.0",
+        "@mammoth/shared": "1.0.0",
         "commander": "^12.1.0"
     }
 }

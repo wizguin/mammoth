@@ -1,5 +1,5 @@
 import { checkUserExists, createUser } from '../../user/User'
-import { JoinSchema, Logger } from '@vanilla/shared'
+import { JoinSchema, Logger } from '@mammoth/shared'
 import { buildError } from '../../response/Response'
 import Errors from '../../errors/Errors'
 

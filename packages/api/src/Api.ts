@@ -1,4 +1,4 @@
-import { Database, Logger, Redis } from '@vanilla/shared'
+import { Database, Logger, Redis } from '@mammoth/shared'
 
 import fastify from 'fastify'
 import fastifyAutoload from '@fastify/autoload'

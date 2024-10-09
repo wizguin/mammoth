@@ -1,7 +1,7 @@
 import BasePlugin, { type Num, type Str } from '../BasePlugin'
 
 import { createPet } from '@collections/PetCollection'
-import { Database } from '@vanilla/shared'
+import { Database } from '@mammoth/shared'
 import { inOwnedRoom } from '@Decorators'
 import type PetObject from '@objects/pet/Pet'
 import type { Updates } from '@objects/pet/Pet'

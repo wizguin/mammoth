@@ -1,7 +1,7 @@
 {
-    "name": "@vanilla/join",
+    "name": "@mammoth/join",
     "version": "1.0.0",
-    "description": "Vanilla join server",
+    "description": "Mammoth join server",
     "scripts": {
         "dev": "nodemon src/Join.ts",
         "build": "rimraf dist && tsc",
@@ -10,6 +10,6 @@
     "author": "wizguin",
     "license": "MIT",
     "devDependencies": {
-        "@vanilla/shared": "1.0.0"
+        "@mammoth/shared": "1.0.0"
     }
 }

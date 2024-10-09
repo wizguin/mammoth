@@ -1,4 +1,4 @@
-import { BaseServer, Database, Logger, Redis, type Socket } from '@vanilla/shared'
+import { BaseServer, Database, Logger, Redis, type Socket } from '@mammoth/shared'
 
 import './setup/Setup'
 

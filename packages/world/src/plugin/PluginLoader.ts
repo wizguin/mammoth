@@ -1,6 +1,6 @@
 import type BasePlugin from './BasePlugin'
 import type Handler from '../handler/Handler'
-import { Logger } from '@vanilla/shared'
+import { Logger } from '@mammoth/shared'
 
 import { join, parse } from 'path'
 import type EventEmitter from 'events'

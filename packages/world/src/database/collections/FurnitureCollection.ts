@@ -1,7 +1,7 @@
 import BaseCollection from '../BaseCollection'
 
-import { consts, furniture, whitelist } from '@vanilla/shared/data'
-import { Database, Logger } from '@vanilla/shared'
+import { consts, furniture, whitelist } from '@mammoth/shared/data'
+import { Database, Logger } from '@mammoth/shared'
 import Errors from '@objects/user/Errors'
 import type User from '@objects/user/User'
 

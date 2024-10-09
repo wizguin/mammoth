@@ -1,6 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
-import { consts } from '@vanilla/shared/data'
+import { consts } from '@mammoth/shared/data'
 import { handleOnce } from '@Decorators'
 import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'

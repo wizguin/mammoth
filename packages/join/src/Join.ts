@@ -1,4 +1,4 @@
-import { Database, JoinSchema, Logger, makeXt, SimpleServer } from '@vanilla/shared'
+import { Database, JoinSchema, Logger, makeXt, SimpleServer } from '@mammoth/shared'
 
 const host = '0.0.0.0'
 const port = parseInt(process.env.JOIN_PORT || '6113')

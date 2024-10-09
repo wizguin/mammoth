@@ -1,5 +1,5 @@
-import { Database, Logger } from '@vanilla/shared'
-import { pets } from '@vanilla/shared/data'
+import { Database, Logger } from '@mammoth/shared'
+import { pets } from '@mammoth/shared/data'
 
 import type { Pet as PrismaPet } from '@prisma/client'
 

@@ -1,4 +1,4 @@
-import { Database, Logger } from '@vanilla/shared'
+import { Database, Logger } from '@mammoth/shared'
 import PlayerRoom from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
 

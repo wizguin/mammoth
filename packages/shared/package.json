@@ -1,7 +1,7 @@
 {
-    "name": "@vanilla/shared",
+    "name": "@mammoth/shared",
     "version": "1.0.0",
-    "description": "Vanilla shared components",
+    "description": "Mammoth shared components",
     "main": "./dist/index.js",
     "exports": {
         ".": "./dist/index.js",

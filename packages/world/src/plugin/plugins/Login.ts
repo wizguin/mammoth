@@ -1,9 +1,9 @@
 import BasePlugin from '../BasePlugin'
 
-import { consts } from '@vanilla/shared/data'
+import { consts } from '@mammoth/shared/data'
 import Errors from '@objects/user/Errors'
 import { handleOnce } from '@Decorators'
-import { Redis } from '@vanilla/shared'
+import { Redis } from '@mammoth/shared'
 import { updateWorldPopulation } from '../../World'
 import type User from '@objects/user/User'
 

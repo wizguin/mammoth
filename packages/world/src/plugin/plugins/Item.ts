@@ -1,7 +1,7 @@
 import BasePlugin, { type Num, type NumArray } from '../BasePlugin'
 
 import { handleOnce } from '@Decorators'
-import { isVersion130 } from '@vanilla/shared/data'
+import { isVersion130 } from '@mammoth/shared/data'
 import type User from '@objects/user/User'
 
 const il = isVersion130 ? 'gi' : 'il'

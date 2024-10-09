@@ -1,5 +1,5 @@
-import { Database } from '@vanilla/shared'
-import { music } from '@vanilla/shared/data'
+import { Database } from '@mammoth/shared'
+import { music } from '@mammoth/shared/data'
 import type PlayerRooms from './PlayerRooms'
 import Room from './Room'
 import type User from '@objects/user/User'

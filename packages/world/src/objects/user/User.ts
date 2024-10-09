@@ -1,6 +1,6 @@
-import { Database, delimiter, Logger, makeXt, type Socket } from '@vanilla/shared'
+import { Database, delimiter, Logger, makeXt, type Socket } from '@mammoth/shared'
 import Errors from './Errors'
-import { isVersion130 } from '@vanilla/shared/data'
+import { isVersion130 } from '@mammoth/shared/data'
 
 import type BaseTable from '@objects/room/table/BaseTable'
 import type PlayerRoom from '@objects/room/PlayerRoom'

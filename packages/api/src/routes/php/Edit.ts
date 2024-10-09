@@ -1,6 +1,6 @@
 import { authenticateUser, getExpiryDate, getParentHint, type User } from '../../user/User'
 import { buildError, buildResponse } from '../../response/Response'
-import { Database, JoinSchema, Logger } from '@vanilla/shared'
+import { Database, JoinSchema, Logger } from '@mammoth/shared'
 import { dateString } from '../../utils/Utils'
 import Errors from '../../errors/Errors'
 

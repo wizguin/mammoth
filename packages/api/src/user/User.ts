@@ -1,5 +1,5 @@
 import { dateString, maxDate, titleCase } from '../utils/Utils'
-import { Database } from '@vanilla/shared'
+import { Database } from '@mammoth/shared'
 import Errors from '../errors/Errors'
 
 import { compare, hash } from 'bcrypt'

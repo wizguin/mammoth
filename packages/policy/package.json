@@ -1,7 +1,7 @@
 {
-    "name": "@vanilla/policy",
+    "name": "@mammoth/policy",
     "version": "1.0.0",
-    "description": "Vanilla policy server",
+    "description": "Mammoth policy server",
     "scripts": {
         "dev": "nodemon src/Policy.ts",
         "build": "rimraf dist && tsc",
@@ -10,6 +10,6 @@
     "author": "wizguin",
     "license": "MIT",
     "devDependencies": {
-        "@vanilla/shared": "1.0.0"
+        "@mammoth/shared": "1.0.0"
     }
 }

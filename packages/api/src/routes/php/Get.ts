@@ -1,6 +1,6 @@
 import { getCrumb, getUserById } from '../../user/User'
 import { buildResponse } from '../../response/Response'
-import { Logger } from '@vanilla/shared'
+import { Logger } from '@mammoth/shared'
 
 import type { FastifyInstance } from 'fastify'
 

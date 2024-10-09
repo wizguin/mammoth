@@ -1,6 +1,6 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
-import { consts, playerRooms, whitelist } from '@vanilla/shared/data'
+import { consts, playerRooms, whitelist } from '@mammoth/shared/data'
 import Errors from '@objects/user/Errors'
 import { getFurnitureString } from '@objects/room/PlayerRoom'
 import type User from '@objects/user/User'
