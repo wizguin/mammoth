@@ -1,12 +1,11 @@
 import BasePlugin from '../BasePlugin'
 
+import { consts } from '@vanilla/shared/data'
 import Errors from '@objects/user/Errors'
 import { handleOnce } from '@Decorators'
-import { maxUsers } from '@Config'
 import { Redis } from '@vanilla/shared'
 import { updateWorldPopulation } from '../../World'
 import type User from '@objects/user/User'
-import { version } from '@vanilla/shared/data'
 
 import { compare } from 'bcrypt'
 import type { Element } from 'elementtree'
@@ -22,7 +21,7 @@ export default class Login extends BasePlugin {
     verChk(user: User, body: Element) {
         const ver = body.find('ver')
 
-        const response = ver && ver.get('v') === version
+        const response = ver && ver.get('v') === consts.version
             ? 'apiOK'
             : 'apiKO'
 
@@ -31,7 +30,7 @@ export default class Login extends BasePlugin {
 
     @handleOnce
     async login(user: User, body: Element) {
-        if (this.usersLength >= maxUsers) {
+        if (this.usersLength >= consts.maxUsers) {
             user.sendError(Errors.ServerFull)
             user.disconnect()
 

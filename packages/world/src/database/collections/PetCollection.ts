@@ -1,11 +1,10 @@
 import BaseCollection from '../BaseCollection'
 
+import { consts, pets, whitelist } from '@vanilla/shared/data'
 import { Database, Logger } from '@vanilla/shared'
-import { pets, whitelist } from '@vanilla/shared/data'
 import Errors from '@objects/user/Errors'
 import Pet from '@objects/pet/Pet'
 import type User from '@objects/user/User'
-import { whitelistEnabled } from '@Config'
 
 import type { Pet as PrismaPet } from '@prisma/client'
 
@@ -34,7 +33,7 @@ export default class PetCollection extends BaseCollection<Pet> {
             return
         }
 
-        if (whitelistEnabled && !whitelist.pets.includes(typeId)) {
+        if (consts.whitelistEnabled && !whitelist.pets.includes(typeId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }

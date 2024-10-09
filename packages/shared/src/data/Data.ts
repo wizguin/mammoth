@@ -10,6 +10,13 @@ type Rooms = Room[]
 type Tables = Table[]
 type Waddles = Waddle[]
 
+interface Consts {
+    maxUsers: number,
+    preferredSpawn: number | false,
+    version: '097' | '130',
+    whitelistEnabled: boolean
+}
+
 interface FurnitureItem {
     name: string,
     cost: number
@@ -51,10 +58,6 @@ interface Table {
     type: 'mancala'
 }
 
-interface Version {
-    version: '097' | '130'
-}
-
 interface Waddle {
     id: number,
     seats: number,
@@ -69,6 +72,9 @@ interface Whitelist {
     playerRooms: number[]
 }
 
+export const consts: Consts = loadData('consts') as Assert<Consts>
+export const isVersion130 = consts.version === '130'
+
 export const furniture = loadData('furniture') as Assert<Furniture>
 export const items = loadData('items') as Assert<Items>
 export const music = loadData('music') as Assert<number[]>
@@ -79,8 +85,5 @@ export const rooms = loadData('rooms') as Assert<Rooms>
 
 export const tables = loadData('tables') as Assert<Tables>
 export const waddles = loadData('waddles') as Assert<Waddles>
-
-export const version = (loadData('version') as Assert<Version>).version
-export const isVersion130 = version === '130'
 
 export const whitelist: Whitelist = loadData('whitelist') as Assert<Whitelist>

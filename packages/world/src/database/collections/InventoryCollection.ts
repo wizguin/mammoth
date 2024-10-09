@@ -1,10 +1,9 @@
 import BaseCollection from '../BaseCollection'
 
+import { consts, items, whitelist } from '@vanilla/shared/data'
 import { Database, Logger } from '@vanilla/shared'
-import { items, whitelist } from '@vanilla/shared/data'
 import Errors from '@objects/user/Errors'
 import type User from '@objects/user/User'
-import { whitelistEnabled } from '@Config'
 
 import type { Inventory } from '@prisma/client'
 
@@ -32,7 +31,7 @@ export default class InventoryCollection extends BaseCollection<Inventory> {
             return
         }
 
-        if (whitelistEnabled && !whitelist.items.includes(itemId)) {
+        if (consts.whitelistEnabled && !whitelist.items.includes(itemId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }

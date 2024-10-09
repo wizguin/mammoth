@@ -1,10 +1,9 @@
 import BaseCollection from '../BaseCollection'
 
+import { consts, furniture, whitelist } from '@vanilla/shared/data'
 import { Database, Logger } from '@vanilla/shared'
-import { furniture, whitelist } from '@vanilla/shared/data'
 import Errors from '@objects/user/Errors'
 import type User from '@objects/user/User'
-import { whitelistEnabled } from '@Config'
 
 import type { Furniture } from '@prisma/client'
 
@@ -27,7 +26,7 @@ export default class FurnitureCollection extends BaseCollection<Furniture> {
             return
         }
 
-        if (whitelistEnabled && !whitelist.furniture.includes(furnitureId)) {
+        if (consts.whitelistEnabled && !whitelist.furniture.includes(furnitureId)) {
             this.user.sendError(Errors.ItemNotFound)
             return
         }

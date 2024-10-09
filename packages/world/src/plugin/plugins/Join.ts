@@ -1,7 +1,7 @@
 import BasePlugin, { type Num } from '../BasePlugin'
 
+import { consts } from '@vanilla/shared/data'
 import { handleOnce } from '@Decorators'
-import { preferredSpawn } from '@Config'
 import type Room from '@objects/room/Room'
 import type User from '@objects/user/User'
 
@@ -31,8 +31,8 @@ export default class Join extends BasePlugin {
     }
 
     getSpawn() {
-        if (preferredSpawn && preferredSpawn in this.rooms) {
-            const room = this.rooms[preferredSpawn]
+        if (consts.preferredSpawn && consts.preferredSpawn in this.rooms) {
+            const room = this.rooms[consts.preferredSpawn]
 
             if (!room.isFull) {
                 return room
