@@ -16,6 +16,7 @@
     },
     "scripts": {
         "dev": "nodemon src/index.ts",
+        "dev:data": "nodemon src/data/data.ts",
         "build": "rimraf dist && tsc",
         "postinstall": "npm run build"
     },
