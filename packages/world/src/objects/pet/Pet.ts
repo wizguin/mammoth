@@ -29,9 +29,9 @@ export default class Pet implements PrismaPet {
     ) {
         const data = pets[typeId]
 
-        this.maxHealth = data.maxHealth
-        this.maxHunger = data.maxHunger
-        this.maxRest = data.maxRest
+        this.maxHealth = data?.maxHealth || 100
+        this.maxHunger = data?.maxHunger || 100
+        this.maxRest = data?.maxRest || 100
     }
 
     get happy() {
