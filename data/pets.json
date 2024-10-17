@@ -30,21 +30,5 @@
         "maxRest": 120,
         "cost": 800,
         "member": true
-    },
-    "4": {
-        "name": "Purple",
-        "maxHealth": 80,
-        "maxHunger": 120,
-        "maxRest": 80,
-        "cost": 800,
-        "member": true
-    },
-    "5": {
-        "name": "Red",
-        "maxHealth": 100,
-        "maxHunger": 80,
-        "maxRest": 120,
-        "cost": 800,
-        "member": false
     }
 }
